@@ -17,9 +17,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = getSEOTags({
-  title: "About Us - MCP-B | Browser Model Context Protocol",
+  title: "About MCP-B | WebMCP Implementation & MCP Bridge",
   description:
-    "MCP-B brings the Model Context Protocol to browsers, enabling websites to expose tools and context to AI agents through a W3C-standard navigator.modelContext API. Open-source implementation for building AI-accessible web applications.",
+    "MCP-B is the open-source implementation of WebMCP, the W3C standard for making websites AI-accessible. Provides navigator.modelContext polyfill and bridges to Anthropic's Model Context Protocol for production-ready AI integration.",
 });
 
 export default function AboutPage() {
@@ -31,10 +31,10 @@ export default function AboutPage() {
           <div className="flex flex-col items-start justify-start">
             <Badge text="About MCP-B" />
             <Heading className="mt-4 text-left">
-              Making Websites AI-Accessible Through Open Standards
+              Bringing the W3C Standard for AI-Accessible Websites to Life
             </Heading>
             <SubHeading className="mt-6 mr-auto text-left">
-              MCP-B (Browser Model Context Protocol) is an{" "}
+              MCP-B is the{" "}
               <a
                 href="https://github.com/MiguelsPizza/WebMCP"
                 target="_blank"
@@ -43,20 +43,26 @@ export default function AboutPage() {
               >
                 open-source implementation
               </a>{" "}
-              that brings the Model Context Protocol to browsers. We enable websites
-              to expose tools and context to AI agents through a W3C-standard API,
-              making web applications directly accessible to AI without automation
-              or screen scraping.
+              of WebMCP, a W3C standard developed by the Web Machine Learning
+              Community Group. We provide the tools that make{" "}
+              <code className="text-sm">navigator.modelContext</code> work in
+              browsers today, enabling websites to expose structured tools to AI
+              agents through deterministic function calls rather than fragile UI
+              automation.
               <br /> <br />
-              Instead of AI agents navigating websites like humans—clicking buttons
-              and reading screens—MCP-B lets websites expose structured function calls
-              that agents can invoke directly. This provides deterministic, reliable,
-              and permission-based interactions between AI and the web.
+              Instead of AI agents blindly navigating websites—taking screenshots,
+              interpreting pixels, and hoping the UI hasn't changed—WebMCP enables
+              direct function invocation. This transforms unreliable automation into
+              deterministic, permission-based interactions where operations either
+              succeed or fail with clear errors. The human remains in the loop,
+              monitoring every action through the browser interface.
               <br /> <br />
-              Today, MCP-B powers AI integrations for web applications, browser
-              extensions, and local AI assistants like Claude Desktop. Whether you're
-              building AI copilots, automation tools, or intelligent web apps, MCP-B
-              provides the protocol layer for seamless AI-web integration.
+              Beyond implementing the W3C API, MCP-B bridges WebMCP tools to
+              Anthropic's Model Context Protocol, enabling your browser-based tools
+              to work seamlessly with desktop AI clients like Claude Desktop and
+              Claude Code. Whether you're building AI copilots, intelligent web apps,
+              or browser extensions, MCP-B provides the complete infrastructure for
+              production-ready AI integration.
             </SubHeading>
           </div>
           <div className="border-divide border bg-gradient-to-br from-neutral-50 to-neutral-100 p-8 dark:from-neutral-900 dark:to-neutral-800">
@@ -115,63 +121,65 @@ export default function AboutPage() {
           <div className="flex flex-col items-start justify-start">
             <Badge text="How It Works" />
             <SectionHeading className="mt-4 text-left">
-              A Better Approach to Browser AI
+              From UI Automation to Structured Tool Calling
             </SectionHeading>
             <SubHeading className="mt-6 mr-auto text-left">
-              MCP-B provides three core capabilities that transform how AI agents
-              interact with web applications:
+              MCP-B delivers a complete infrastructure for deterministic AI-web
+              interaction through three interconnected layers:
               <br /> <br />
               <strong>
-                1.{" "}
+                1. WebMCP Polyfill:{" "}
                 <a
-                  href="https://docs.mcp-b.ai/concepts/tool-registration"
+                  href="https://docs.mcp-b.ai/concepts/overview"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand hover:underline"
                 >
-                  Tool Registration
-                </a>{" "}
-                via navigator.modelContext
+                  W3C API Implementation
+                </a>
               </strong>
               <br />
-              Websites register JavaScript functions as AI-accessible tools using
-              the{" "}
+              Our polyfill implements <code className="text-sm">navigator.modelContext</code>,
+              the W3C standard API for{" "}
               <a
-                href="https://docs.mcp-b.ai/concepts/overview"
+                href="https://docs.mcp-b.ai/concepts/tool-registration"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-brand hover:underline"
               >
-                W3C Web Model Context API
-              </a>
-              . These tools appear in an agent&apos;s context, ready to be called
-              with structured parameters.
+                tool registration
+              </a>. Websites transform JavaScript functions into AI-accessible tools
+              with automatic input validation, schema generation, and lifecycle
+              management. Tools inherit the user's browser session—no OAuth flows,
+              no API keys, no authentication complexity.
               <br /> <br />
               <strong>
-                2.{" "}
+                2. Browser-Native Communication:{" "}
                 <a
                   href="https://docs.mcp-b.ai/concepts/transports"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand hover:underline"
                 >
-                  Multiple Transport Layers
+                  Transport Layer
                 </a>
               </strong>
               <br />
-              MCP-B supports TabServerTransport for browser tabs, IframeTransport
-              for embedded apps, and ExtensionServerTransport for Chrome extensions.
-              This enables AI communication across different browser contexts.
+              Purpose-built transports enable AI communication across browser
+              contexts: TabServerTransport for cross-tab coordination,
+              IframeTransport for embedded applications, and ExtensionServerTransport
+              for Chrome extensions. Each transport handles security, origin
+              validation, and message routing automatically.
               <br /> <br />
               <strong>
-                3.{" "}
+                3. Desktop Integration:{" "}
                 <a
                   href="https://docs.mcp-b.ai/native-host-setup"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand hover:underline"
                 >
-                  Native Desktop Integration
+                  MCP Protocol Bridge
                 </a>
               </strong>
               <br />
@@ -184,9 +192,10 @@ export default function AboutPage() {
               >
                 MCP-B browser extension
               </a>{" "}
-              bridges web tools to local AI clients like Claude Desktop and Claude
-              Code through HTTP-based MCP protocol, enabling desktop AI assistants
-              to interact with browser-based tools.
+              translates between WebMCP's browser-native format and Anthropic's
+              Model Context Protocol. This enables Claude Desktop, Claude Code, and
+              any MCP-compatible client to invoke your website's tools as if they
+              were local servers—no backend deployment required.
             </SubHeading>
             <div className="divide-divide mt-8 grid grid-cols-3 gap-6">
               <MetricBlock value="62+" label="Extension APIs" />

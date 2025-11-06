@@ -11,27 +11,27 @@ import {
 export const AboutInformationBlock = () => {
   const useCases = [
     {
-      title: "Open Standards",
+      title: "Standards First",
       description:
-        "Built on W3C Web Model Context API and Anthropic's Model Context Protocol specifications for maximum compatibility",
+        "Implements WebMCP (W3C Web Model Context API) developed by the Web Machine Learning Community Group, with bridge to Anthropic's Model Context Protocol",
       icon: <CloudCheckIcon className="text-brand size-6" />,
     },
     {
-      title: "Developer First",
+      title: "Zero Configuration",
       description:
-        "Simple JavaScript API with TypeScript support, React hooks, and comprehensive documentation for rapid integration",
+        "Tools inherit browser sessions automatically—no OAuth flows, no API keys, no credential management. Add AI capabilities with ~50 lines of code",
       icon: <BoltIcon className="text-brand size-6" />,
     },
     {
-      title: "Production Ready",
+      title: "Production Grade",
       description:
-        "Battle-tested with 6+ npm packages, 62+ extension APIs, and real-world implementations across web applications",
+        "Complete TypeScript SDK with 6+ npm packages, 62+ Chrome Extension API wrappers, and comprehensive schema validation via Zod",
       icon: <ShieldSplitIcon className="text-brand size-6" />,
     },
     {
-      title: "Community Driven",
+      title: "Human in the Loop",
       description:
-        "Open-source project with active development, comprehensive examples, and growing ecosystem of integrations",
+        "Browser remains the primary interface where users monitor every agent action in real-time with transparent audit trails and explicit consent",
       icon: <SparklesIcon className="text-brand size-6" />,
     },
   ];
