@@ -8,32 +8,55 @@ import { SectionHeading } from "./seciton-heading";
 import { SubHeading } from "./subheading";
 
 export const CodeExample = () => {
-  const [activeTab, setActiveTab] = useState<"vanilla" | "react">("vanilla");
+  const [polyfillTab, setPolyfillTab] = useState<"esm" | "iife">("iife");
+  const [codeTab, setCodeTab] = useState<"vanilla" | "react">("vanilla");
   const [isToolRegistered, setIsToolRegistered] = useState(false);
+  const [toolCallCount, setToolCallCount] = useState(0);
 
-  // Register the actual live tool on this page
+  // Register live tool that actually works
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const registerLiveTool = async () => {
+    const registerTool = async () => {
       if (!window.navigator?.modelContext?.registerTool) {
         return;
       }
 
       try {
         await window.navigator.modelContext.registerTool({
-          name: "sayHello",
-          description: "Says hello to a person by name",
+          name: "getPageInfo",
+          description: "Gets information about the current page",
           inputSchema: {
             type: "object",
             properties: {
-              name: { type: "string" },
+              infoType: {
+                type: "string",
+                enum: ["title", "url", "headings"],
+                description: "Type of information to retrieve",
+              },
             },
-            required: ["name"],
+            required: ["infoType"],
           },
-          async execute({ name }: { name: string }) {
+          async execute({ infoType }: { infoType: string }) {
+            setToolCallCount((prev) => prev + 1);
+
+            let result = "";
+            if (infoType === "title") {
+              result = document.title;
+            } else if (infoType === "url") {
+              result = window.location.href;
+            } else if (infoType === "headings") {
+              const headings = Array.from(
+                document.querySelectorAll("h1, h2, h3")
+              )
+                .slice(0, 5)
+                .map((h) => h.textContent || "")
+                .join(", ");
+              result = headings;
+            }
+
             return {
-              content: [{ type: "text", text: `Hello ${name}!` }],
+              content: [{ type: "text", text: result }],
             };
           },
         });
@@ -44,50 +67,74 @@ export const CodeExample = () => {
       }
     };
 
-    registerLiveTool();
+    registerTool();
   }, []);
 
+  const esmPolyfill = `import '@mcp-b/global';
+
+// Now navigator.modelContext is available
+await navigator.modelContext.registerTool({...});`;
+
+  const iifePolyfill = `<script src="https://unpkg.com/@mcp-b/global@latest/dist/index.iife.js"></script>
+
+<script>
+  // navigator.modelContext is now available
+  navigator.modelContext.registerTool({...});
+</script>`;
+
   const vanillaCode = `navigator.modelContext.registerTool({
-  name: "sayHello",
-  description: "Says hello to a person by name",
+  name: "getPageInfo",
+  description: "Gets information about the current page",
   inputSchema: {
     type: "object",
     properties: {
-      name: { type: "string" }
+      infoType: {
+        type: "string",
+        enum: ["title", "url", "headings"]
+      }
     },
-    required: ["name"]
+    required: ["infoType"]
   },
-  async execute({ name }) {
-    return {
-      content: [{ type: "text", text: \`Hello \${name}!\` }]
-    };
+  async execute({ infoType }) {
+    if (infoType === "title") {
+      return { content: [{ type: "text", text: document.title }] };
+    }
+    // ... other cases
   }
 });`;
 
-  const reactCode = `import { useEffect } from 'react';
+  const reactCode = `import { useWebMCP } from '@mcp-b/react';
 
 function MyComponent() {
+  const { registerTool, isReady } = useWebMCP();
+
   useEffect(() => {
-    const registration = navigator.modelContext.registerTool({
-      name: "sayHello",
-      description: "Says hello to a person by name",
+    if (!isReady) return;
+
+    const registration = registerTool({
+      name: "getPageInfo",
+      description: "Gets information about the current page",
       inputSchema: {
         type: "object",
         properties: {
-          name: { type: "string" }
+          infoType: {
+            type: "string",
+            enum: ["title", "url", "headings"]
+          }
         },
-        required: ["name"]
+        required: ["infoType"]
       },
-      async execute({ name }) {
-        return {
-          content: [{ type: "text", text: \`Hello \${name}!\` }]
-        };
+      async execute({ infoType }) {
+        if (infoType === "title") {
+          return { content: [{ type: "text", text: document.title }] };
+        }
+        // ... other cases
       }
     });
 
     // Cleanup on unmount
-    return () => registration.unregister?.();
-  }, []);
+    return () => registration.unregister();
+  }, [isReady, registerTool]);
 
   return <div>My AI-Ready App</div>;
 }`;
@@ -105,26 +152,60 @@ function MyComponent() {
           complex setup.
         </SubHeading>
 
-        {/* Installation step */}
+        {/* Step 1: Polyfill Installation */}
         <div className="mt-12 w-full max-w-4xl">
-          <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
+          <h3 className="mb-3 text-lg font-semibold text-charcoal-900 dark:text-white">
             Step 1: Include the Polyfill
           </h3>
           <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Add this script tag to your HTML to enable the{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-xs dark:bg-neutral-800">
+            Add the{" "}
+            <code className="rounded bg-gray-200 px-1.5 py-0.5 font-mono text-xs dark:bg-charcoal-800">
+              @mcp-b/global
+            </code>{" "}
+            polyfill to enable the{" "}
+            <code className="rounded bg-gray-200 px-1.5 py-0.5 font-mono text-xs dark:bg-charcoal-800">
               navigator.modelContext
             </code>{" "}
             API:
           </p>
-          <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
-            <div className="border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-neutral-700 dark:bg-neutral-800">
-              <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
-                HTML
-              </span>
+
+          {/* Polyfill toggle */}
+          <div className="mb-4 flex gap-2">
+            <button
+              onClick={() => setPolyfillTab("iife")}
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                polyfillTab === "iife"
+                  ? "bg-brand text-white"
+                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
+              }`}
+            >
+              IIFE (CDN)
+            </button>
+            <button
+              onClick={() => setPolyfillTab("esm")}
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                polyfillTab === "esm"
+                  ? "bg-brand text-white"
+                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
+              }`}
+            >
+              ESM (npm)
+            </button>
+          </div>
+
+          <div className="border-divide overflow-hidden rounded-lg border bg-white shadow-sm dark:border-neutral-700 dark:bg-charcoal-900">
+            <div className="border-divide flex items-center justify-between border-b bg-gray-50 px-4 py-2 dark:border-neutral-700 dark:bg-charcoal-800">
+              <div className="flex items-center gap-2">
+                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                <span className="ml-4 font-mono text-xs text-gray-500 dark:text-gray-400">
+                  {polyfillTab === "iife" ? "index.html" : "main.ts"}
+                </span>
+              </div>
             </div>
             <SyntaxHighlighter
-              language="html"
+              language={polyfillTab === "iife" ? "html" : "typescript"}
               style={oneDark}
               customStyle={{
                 margin: 0,
@@ -139,63 +220,64 @@ function MyComponent() {
                 },
               }}
             >
-              {`<script src="https://unpkg.com/@mcp-b/global@latest/dist/index.iife.js"></script>`}
+              {polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
             </SyntaxHighlighter>
           </div>
         </div>
 
-        {/* Code examples with toggle */}
+        {/* Step 2: Register Tools */}
         <div className="mt-12 w-full max-w-4xl">
-          <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
+          <h3 className="mb-3 text-lg font-semibold text-charcoal-900 dark:text-white">
             Step 2: Register Your Tools
           </h3>
 
-          {/* Tab switcher */}
+          {/* Code toggle */}
           <div className="mb-4 flex gap-2">
             <button
-              onClick={() => setActiveTab("vanilla")}
+              onClick={() => setCodeTab("vanilla")}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                activeTab === "vanilla"
-                  ? "bg-blue-600 text-white dark:bg-blue-500"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-neutral-800 dark:text-gray-300 dark:hover:bg-neutral-700"
+                codeTab === "vanilla"
+                  ? "bg-brand text-white"
+                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
               }`}
             >
               Vanilla JS
             </button>
             <button
-              onClick={() => setActiveTab("react")}
+              onClick={() => setCodeTab("react")}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                activeTab === "react"
-                  ? "bg-blue-600 text-white dark:bg-blue-500"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-neutral-800 dark:text-gray-300 dark:hover:bg-neutral-700"
+                codeTab === "react"
+                  ? "bg-brand text-white"
+                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
               }`}
             >
-              React
+              React (useWebMCP)
             </button>
           </div>
 
-          <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
+          <div className="border-divide overflow-hidden rounded-lg border bg-white shadow-sm dark:border-neutral-700 dark:bg-charcoal-900">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800">
+            <div className="border-divide flex items-center justify-between border-b bg-gray-50 px-4 py-3 dark:border-neutral-700 dark:bg-charcoal-800">
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-neutral-600"></div>
-                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-neutral-600"></div>
-                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-neutral-600"></div>
+                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-600"></div>
                 <span className="ml-4 font-mono text-xs text-gray-500 dark:text-gray-400">
-                  {activeTab === "vanilla" ? "app.js" : "MyComponent.tsx"}
+                  {codeTab === "vanilla" ? "app.js" : "MyComponent.tsx"}
                 </span>
               </div>
               {isToolRegistered && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
-                  Active
+                  Live on this page
+                  {toolCallCount > 0 && ` • ${toolCallCount} calls`}
                 </span>
               )}
             </div>
 
             {/* Code */}
             <SyntaxHighlighter
-              language={activeTab === "vanilla" ? "javascript" : "typescript"}
+              language={codeTab === "vanilla" ? "javascript" : "typescript"}
               style={oneDark}
               customStyle={{
                 margin: 0,
@@ -210,14 +292,14 @@ function MyComponent() {
                 },
               }}
             >
-              {activeTab === "vanilla" ? vanillaCode : reactCode}
+              {codeTab === "vanilla" ? vanillaCode : reactCode}
             </SyntaxHighlighter>
           </div>
 
           {/* Info cards */}
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-neutral-700 dark:bg-neutral-800">
-              <h4 className="font-semibold text-gray-900 dark:text-white">
+            <div className="border-divide rounded-lg border bg-gray-50 p-4 dark:border-neutral-700 dark:bg-charcoal-800">
+              <h4 className="font-semibold text-charcoal-900 dark:text-white">
                 Framework Agnostic
               </h4>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -225,8 +307,8 @@ function MyComponent() {
                 the same everywhere.
               </p>
             </div>
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-neutral-700 dark:bg-neutral-800">
-              <h4 className="font-semibold text-gray-900 dark:text-white">
+            <div className="border-divide rounded-lg border bg-gray-50 p-4 dark:border-neutral-700 dark:bg-charcoal-800">
+              <h4 className="font-semibold text-charcoal-900 dark:text-white">
                 W3C Standard API
               </h4>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -243,7 +325,7 @@ function MyComponent() {
                 <strong>Try it now:</strong> This tool is live on this page.
                 Open your AI assistant and say:{" "}
                 <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs dark:bg-blue-950">
-                  &quot;Use the sayHello tool to greet Alice&quot;
+                  &quot;Use the getPageInfo tool to get the page title&quot;
                 </code>
               </p>
             </div>
