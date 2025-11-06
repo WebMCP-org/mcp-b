@@ -79,9 +79,6 @@ export const Footer = () => {
             W3C standard for making websites AI-accessible. Enable AI agents to
             interact with your website through structured tools.
           </SubHeading>
-          <Button as={Link} href="/playground" className="mt-4 mb-8 lg:mb-0">
-            Try Demo
-          </Button>
         </div>
         <div className="col-span-1 mb-4 flex flex-col gap-2 md:col-span-1 md:mb-0">
           <p className="text-sm font-medium text-gray-600">Product</p>
