@@ -5,6 +5,20 @@ compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
 workers_dev = true
 
+# Environment variables for public keys
+[vars]
+NEXT_PUBLIC_WEBSITE_URL = "https://mcp-b.ai"
+# Add NEXT_PUBLIC_TURNSTILE_SITE_KEY if using Turnstile
+
+# IMPORTANT: Add sensitive environment variables via Cloudflare Dashboard
+# Go to: Workers & Pages → mcp-b → Settings → Variables
+# Add these as secrets (encrypted):
+#   - BROWSERBASE_API_KEY
+#   - BROWSERBASE_PROJECT_ID
+#   - BROWSERBASE_EXTENSION_ID
+#   - BB_REGION (optional, defaults to us-east-1)
+#   - TURNSTILE_SECRET_KEY (optional, for abuse protection)
+
 [observability]
 enabled = true
 
