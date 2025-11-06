@@ -48,11 +48,11 @@ export const Footer = () => {
     },
     {
       title: "Changelog",
-      href: "https://docs.mcp-b.ai/changelog.md",
+      href: "https://docs.mcp-b.ai/changelog",
     },
     {
       title: "Glossary",
-      href: "https://docs.mcp-b.ai/concepts/glossary.md",
+      href: "https://docs.mcp-b.ai/concepts/glossary",
     },
   ];
 
