@@ -1,0 +1,158 @@
+---
+title: "MCP-B: The Right place to build your MCP server is in your website"
+description: "With all the major security issues and data leakages the MCP ecosystem has been facing recently, the pre-authorized, user-scoped sandbox of the browser feels like more of the promised land than ever."
+image: "/blog/mcp-b-architecture.png"
+date: "2025-01-15"
+authorName: "Alex Nahas"
+authorSrc: "/avatars/alex.png"
+---
+
+# MCP-B: The Right place to build your MCP server is in your website
+
+With all the major security issues and data leakages the MCP ecosystem has been facing recently, the pre-authorized, user-scoped sandbox of the browser feels like more of the promised land than ever.
+
+Every other day I see a new Launch HN or project that gives another attempt at browser automation via LLMs. Every solution I see is banking on the same idea: these models will eventually be able to navigate and interact with the browser as well as a human.
+
+Maybe I'm just a bit more skeptical than the average AGI enthusiast, but I feel like we are building for a future that is not here yet and might not come for a while. Before we get into MCP-B, why I wrote it, and why it solves a bunch of problems with both MCP and browser automation. Let's quickly go over the current state of the ecosystem.
+
+## Browser automation is a mess
+
+When current AI tries to buy something online with browser automation, here's what actually happens:
+
+1. Take a screenshot (or parse the DOM)
+2. Ask the model: "Where's the 'Add to Cart' button?"
+3. Model responds with coordinates or element selector
+4. Click the button
+5. Wait for page to update
+6. Take another screenshot
+7. Ask: "Did that work? What happened?"
+8. Repeat for every single interaction
+
+We're using a language model as an OCR engine with a mouse. Every click requires multiple round trips through the model. The model burns tokens answering questions like "Is this button blue or gray?" and "Where is the search box?" It has to reorient itself with every page change, parse visual layouts, and hope the UI hasn't shifted by a pixel.
+
+## MCP and its limitations
+
+**MCP stands for "Model Context Protocol."** It's an attempt to standardize the way we provide both information and ways to interact with the external world to LLMs. It consists of three parts:
+
+- **A server** – This is where all the information and functions which allow the LLM to take action live
+- **A client** – This lives in the same place as the LLM (sort of) and provides a standard way to interact with the capabilities the server has
+- **Transports** – both the client and server have one of these. They allow the client to call the server even if they live in totally different places. If it's capable of transporting data, you can write transports for it
+
+Right now there are two officially supported transports:
+
+- **stdio** - allows communication between processes locally on your computer
+- **streamableHttp/SSE** – allows communication between processes over HTTP
+
+## What is MCP-B?
+
+MCP-B extends MCP with transports for intra-browser communication. The two transports are Extension Transports (for communication within and between browser extensions) and Tab Transports (for communication between scripts in the same tab).
+
+This means your website can be an MCP server and/or client and so can your browser extension.
+
+## How MCP-B Works
+
+MCP-B really only needs 1 transport to work (The TabTransports), but the current extension makes use of both. You can think of the MCP-B extension server as an MCP server which collects all the tools from other Tab MCP servers then routes requests to the proper URL and tab when one of it's tools are called. The extension layer also does some things like tool caching and opening a tab with the properly URL of the tool if one does not already exist.
+
+- **Tab Transports** - Use postMessage for in-page communication between your website's MCP server and any client in the same tab. This transport deviates from the official protocol a bit where I have added in some edge-cases to help the server and client find each other if the server loads in after the client
+- **Extension Transports** - Use Chrome's runtime messaging for communication between extension components (sidebar, popup, background)
+
+When you visit a website with an MCP server, the extension will inject an MCP client into the page which will reach out and look for any servers, register their tools with the extension MCP server, and listen for tool call requests from the extension or tool updates from the tab server.
+
+## Why would I want my website to be an MCP server?
+
+Well having your website be an MCP server isn't really that beneficial by itself. You can declare a client in the same tab and call tools on your server but that adds a layer of abstraction that is not needed when both server and client live in the same script.
+
+The true power and benefit of this is when the Website is the MCP server and the extension is the MCP client.
+
+From the website's perspective, they have just wrapped some of their existing functionality (client side APIs, forms, or whatever else they want to allow the model to read/interact with) in tools (functions with a bit of information of how to use them for LLMs). That's it.
+
+The extension injects a client into the tab when it opens up and connects to the tab server and passes along its tools to the rest of the extension. When the extension decides it wants to call a tool on the tab, it just passes that request back to the client. You get a full MCP client-server relationship with zero configuration from a user perspective. All they need to do is visit a website with an MCP server and make sure they have the extension installed!
+
+## Cross-Site Tool Composition
+
+MCP-B enables tools from different websites to work together. Each site exposes its existing functionality as MCP tools, and the extension handles routing calls between them.
+
+Here's what happens when the model wants to compare prices for items in the cart:
+
+1. The extension calls `shop_example_com_getCurrentCart` on the active tab
+2. The model receives the cart data in its context and decides to check prices
+3. When it calls `pricewatch_com_comparePrices`, the extension sees this tool belongs to a different domain
+4. It opens `pricewatch.com` in a new tab (or switches to it if already open)
+5. Waits for the MCP server to initialize on that tab
+6. Executes the tool call with the product data from step 1
+7. Returns the results to the model's context
+
+## Good websites are Context Engineering
+
+Something that has been getting a lot of attention recently is context engineering (making sure that the model only has context relevant to its task). People are beginning to realize that if you give a model 100 tools and ask it to do something where only one of them would be the right one to use, it's unlikely for things to go well.
+
+The cool thing about MCP-B is you can scope tools to different webpages on your app. So instead of giving the model all the tools of your website all at once, you can intentionally show it tools based on where it is in the website and what it has called so far.
+
+## Remote MCP vs Browser MCP
+
+At this point you might be asking, isn't this what remote MCP is supposed to solve? Why are we doing it in the browser?
+
+Well that's a fair point. Remote MCPs have the added benefit of being able to be used by remote servers that don't need a human in the loop. But the OAuth2.1 spec is required in the remote MCP server implementation and it's basically only useable by local clients like Claude desktop at the moment.
+
+The models just simply are not there yet and for any important work, humans are needed in the loop. I'm not saying that autonomous cloud agents are not the future, but they definitely aren't the present or near future.
+
+The beauty of treating the browser as both the UI for the human and LLM is the human can see exactly what the agent is doing. MCP-B does this important work where the important work is already happening.
+
+## The Auth problem
+
+At this point, the auth issues with MCP are well known. OAuth2.1 is great, but we are basically trying to re-invent auth for agents that act on behalf of the user.
+
+I think a very strong case for MCP is to limit the amount of damage the model can do and the amount of data it will ever have access to. The nice thing about client side APIs in multi-tenant apps is they are hopefully already scoped to the user. If we just give the model access to that, there's not much damage they can do.
+
+## Try it in 5 Minutes
+
+1. **Install the extension:** [Chrome Web Store](https://chromewebstore.google.com/detail/mcp-b/daohopfhkdelnpemnhlekblhnikhdhfa)
+2. **Add to your website:** `npm install @mcp-b/transports @modelcontextprotocol/sdk zod`
+3. **Expose a tool:**
+
+```typescript
+import { TabServerTransport } from '@mcp-b/transports';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+
+const server = new McpServer({
+  name: 'my-app',
+  version: '1.0.0'
+});
+
+server.tool('sayHello', 'Says hello', {
+  name: z.string()
+}, async ({ name }) => ({
+  content: [{ type: 'text', text: `Hello ${name}!` }]
+}));
+
+await server.connect(new TabServerTransport({ allowedOrigins: ['*'] }));
+```
+
+4. **Visit your site** and click the MCP-B extension, go to the MCP server tab and click on your tool
+
+## Why Not Computer Use or Browser Automation?
+
+There are several players trying to solve browser automation for AI:
+
+- [Playwright MCP](https://github.com/microsoft/playwright-mcp)
+- [BrowserMCP](https://browsermcp.io/)
+- [Dia](https://www.diabrowser.com/)
+- Anthropic's own computer use
+
+Playwright MCP is the smartest of the bunch - they use accessibility trees instead of pixels. But here's the thing: they're all betting on the same losing horse. They're assuming models will eventually be so good they can just... figure it out.
+
+This is the AGI fantasy all over again. We're building tools for the models we wish we had, not the models we actually have.
+
+Think about what these approaches are really asking:
+
+- Computer use: "Parse these pixels and figure out what to click"
+- Playwright MCP: "Here's an accessibility tree, figure out what to click"
+- MCP-B: "Here's a function called `addToCart()`, call it"
+
+One of these is not like the others.
+
+MCP-B is an admission that AGI is not happening tomorrow. If we're serious about automating parts of white collar work, we need to build out the infrastructure for it. LLMs work best with text and function calls, not pretending to be humans with mice. MCP-B lays the foundation for LLMs to automate the browser the way computers are meant to - through APIs.
+
+## Get Involved
+
+Visit [mcp-b.ai](https://mcp-b.ai) to learn more and get started with MCP-B today!
