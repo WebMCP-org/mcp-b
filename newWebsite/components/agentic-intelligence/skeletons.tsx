@@ -288,7 +288,7 @@ export const TextToWorkflowBuilderSkeleton = () => {
           onChange={(e) => setInputText(e.target.value)}
           onKeyPress={handleKeyPress}
           className="flex-1 border-none px-4 py-4 text-xs placeholder-neutral-600 focus:outline-none"
-          placeholder="Ask Notus AI"
+          placeholder="Ask MCP-B AI"
         />
         <div className="mr-4 flex items-center gap-2">
           <AttachmentIcon />

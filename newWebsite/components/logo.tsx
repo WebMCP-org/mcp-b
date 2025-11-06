@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const LogoSVG = (props: React.SVGProps<SVGSVGElement>) => {
   return (
@@ -21,8 +22,14 @@ export const LogoSVG = (props: React.SVGProps<SVGSVGElement>) => {
 export const Logo = () => {
   return (
     <Link href="/" className="flex items-center gap-2">
-      <LogoSVG />
-      <span className="text-2xl font-medium">Notus</span>
+      <Image
+        src="/images/logos/logo.png"
+        alt="MCP-B Logo"
+        width={28}
+        height={32}
+        className="shrink-0"
+      />
+      <span className="text-2xl font-medium">MCP-B</span>
     </Link>
   );
 };
