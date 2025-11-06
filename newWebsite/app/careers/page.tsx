@@ -3,7 +3,6 @@ import { Button } from "@/components/button";
 import { Container } from "@/components/container";
 import { CTA } from "@/components/cta";
 import { DivideX } from "@/components/divide";
-import { ScalesContainer } from "@/components/scales-container";
 import { SectionHeading } from "@/components/seciton-heading";
 import { SubHeading } from "@/components/subheading";
 import { CoFounderRequirements } from "@/components/careers/requirements";
@@ -11,8 +10,6 @@ import { CoFounderResponsibilities } from "@/components/careers/responsibilities
 import { WhyJoinCoFounder } from "@/components/careers/why-join";
 
 import { getSEOTags } from "@/lib/seo";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = getSEOTags({
@@ -22,33 +19,6 @@ export const metadata = getSEOTags({
 });
 
 export default function CareersPage() {
-  const images = [
-    {
-      src: "/team/1.png",
-      className: "lg:col-span-2 col-span-1",
-    },
-    {
-      src: "/team/2.png",
-      className: "lg:col-span-2 col-span-1",
-    },
-    {
-      src: "/team/3.png",
-      className: "lg:col-span-4 col-span-1",
-    },
-    {
-      src: "/team/4.png",
-      className: "lg:col-span-3 col-span-1",
-    },
-    {
-      src: "/team/5.png",
-      className: "lg:col-span-3 col-span-1",
-    },
-    {
-      src: "/team/6.png",
-      className: "lg:col-span-2 col-span-1",
-    },
-  ];
-
   return (
     <main>
       <DivideX />
@@ -71,42 +41,6 @@ export default function CareersPage() {
             </Button>
           </div>
           <CoFounderRequirements />
-        </div>
-      </Container>
-      <Container className="border-divide border-x border-b px-4 pb-20 md:px-8">
-        <div className="flex w-full flex-col items-center py-10 md:py-20 lg:flex-row">
-          <h2 className="mb-4 min-w-40 text-center font-mono text-sm tracking-tight text-neutral-500 uppercase lg:mb-0 lg:text-left dark:text-neutral-400">
-            As featured in
-          </h2>
-          <div className="flex w-full items-center justify-center lg:justify-start">
-            <Image
-              src="/logos/the-new-stack.png"
-              alt="The New Stack"
-              width={180}
-              height={180}
-              className="h-8 w-auto object-contain dark:invert dark:filter"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-8">
-          {images.map((image) => (
-            <ScalesContainer
-              className={cn("h-80 w-full", image.className)}
-              key={image.src + "careers"}
-            >
-              <Image
-                src={image.src}
-                alt="Team"
-                width={400}
-                height={400}
-                className={cn(
-                  "h-80 w-full rounded-2xl object-cover object-top",
-                  image.className,
-                )}
-              />
-            </ScalesContainer>
-          ))}
         </div>
       </Container>
       <Container className="border-divide flex flex-col items-center border-x pb-20">
