@@ -42,10 +42,10 @@ export const AgenticIntelligence = () => {
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>React Hooks</CardTitle>
+              <CardTitle>On-Device & Cloud Models</CardTitle>
             </div>
             <CardDescription>
-              @mcp-b/react-webmcp provides simple hooks to register tools declaratively. Define your functions, add schemas with Zod, and you're done.
+              Select from both on-device and cloud models. We support almost all models including Claude, GPT-4, Gemini, Llama, and local models via Ollama.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
