@@ -10,14 +10,14 @@ import Link from "next/link";
 export const Hero = () => {
   return (
     <Container className="border-divide flex flex-col items-center justify-center border-x px-4 pt-10 pb-10 md:pt-32 md:pb-20">
-      <Badge text="Introducing MCP-B" />
+      <Badge text="Building the Agentic Web" />
       <Heading className="mt-4">
-        Model Context Protocol <br /> for the{" "}
-        <span className="text-brand">Browser</span>
+        Foundational Primitives <br /> for{" "}
+        <span className="text-brand">Agentic Browsers</span>
       </Heading>
 
       <SubHeading className="mx-auto mt-6 max-w-lg">
-        Stop making AI read screens and guess where buttons are. MCP-B brings the Model Context Protocol to browsers, letting agents call your website's real functions using existing sessions. ~50 lines of code. Zero configuration. No API keys.
+        While others build products, we're building the primitives. Working with web standards bodies and browser vendors to create the foundational layer for AI-native browsers. Building UIs for LLMs, not just interfaces with LLMs.
       </SubHeading>
 
       <div className="mt-6 flex items-center gap-4">

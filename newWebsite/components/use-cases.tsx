@@ -58,13 +58,13 @@ export const UseCases = () => {
   return (
     <Container className="border-divide relative overflow-hidden border-x px-4 md:px-8">
       <div className="relative flex flex-col items-center py-20">
-        <Badge text="Use Cases" />
+        <Badge text="What Gets Built" />
         <SectionHeading className="mt-4">
-          Transform Any Web App Into an AI Platform
+          Enabling the Next Generation
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          From e-commerce to analytics, MCP-B enables AI assistants to interact with your web applications seamlessly
+          When you build the right primitives, entire ecosystems emerge. Here are just some of the experiences our infrastructure enables.
         </SubHeading>
 
         <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

@@ -30,32 +30,32 @@ export const AgenticIntelligence = () => {
   return (
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center py-16">
-        <Badge text="Features" />
+        <Badge text="Our Mission" />
         <SectionHeading className="mt-4">
-          Everything You Need for AI Integration
+          Building the Foundation for Agentic Browsers
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg px-2">
-          From React hooks to Chrome Extension APIs, MCP-B provides the complete toolkit to make your website AI-accessible
+          We're not building another AI product. We're creating the protocol-level primitives that enable the next generation of AI-native web experiences.
         </SubHeading>
         <div className="border-divide divide-divide mt-16 grid grid-cols-1 divide-y border-y md:grid-cols-2 md:divide-x">
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>On-Device & Cloud Models</CardTitle>
+              <CardTitle>W3C Web Standards</CardTitle>
             </div>
             <CardDescription>
-              Select from both on-device and cloud models. We support almost all models including Chrome's built-in AI for privacy-first, offline-capable AI interactions.
+              Working with web standards bodies to define the protocols browsers will use to communicate with AI agents. Building tomorrow's standards today.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>Works with AI Assistants</CardTitle>
+              <CardTitle>UIs for LLMs</CardTitle>
             </div>
             <CardDescription>
-              Compatible with Claude Desktop, ChatGPT, and any MCP-compatible AI assistant. Seamless integration through the browser extension.
+              Pioneering new patterns for building user interfaces that AI agents can understand and interact with. Creating the design primitives for the agentic web.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
@@ -65,10 +65,10 @@ export const AgenticIntelligence = () => {
             <div className="pointer-events-none absolute inset-0 h-full w-full bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px]"></div>
             <div className="flex items-center gap-2">
               <NativeIcon />
-              <CardTitle>62+ Chrome Extension APIs</CardTitle>
+              <CardTitle>Browser-Native Primitives</CardTitle>
             </div>
             <CardDescription>
-              @mcp-b/extension-tools wraps Chrome Extension APIs as MCP tools. Control tabs, bookmarks, history, downloads, and more through AI agents.
+              Creating the low-level APIs that browsers need to be truly agentic. Working directly with browser vendors on the infrastructure layer that powers AI-native experiences.
             </CardDescription>
             <NativeToolsIntegrationSkeleton />
           </Card>
@@ -77,28 +77,28 @@ export const AgenticIntelligence = () => {
           <Card>
             <div className="flex items-center gap-2">
               <FingerprintIcon />
-              <CardTitle>Session-Based Auth</CardTitle>
+              <CardTitle>Open Source Foundation</CardTitle>
             </div>
             <CardDescription>
-              Uses existing browser authentication automatically. No OAuth flows, no API keys to manage or rotate, no new security surface.
+              Built in the open with transparent development. Creating standards and primitives that everyone can build on top of, not proprietary walled gardens.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <RealtimeSyncIcon />
-              <CardTitle>Dynamic Tool Updates</CardTitle>
+              <CardTitle>Protocol-First Design</CardTitle>
             </div>
             <CardDescription>
-              Register tools asynchronously and update them based on app state. Extension caches tools for performance.
+              Focused on creating robust, extensible protocols that will stand the test of time. Building the infrastructure layer for the next decade of web experiences.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <SDKIcon />
-              <CardTitle>Framework Agnostic</CardTitle>
+              <CardTitle>Vendor Collaboration</CardTitle>
             </div>
             <CardDescription>
-              Works with React, Vue, Svelte, or vanilla JavaScript. Integrates with Assistant-UI, AG-UI, and custom runtimes.
+              Partnering with browser vendors, web standards groups, and the broader ecosystem to ensure our primitives become the foundation others build on.
             </CardDescription>
           </Card>
         </div>
