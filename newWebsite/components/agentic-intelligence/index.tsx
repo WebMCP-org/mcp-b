@@ -52,10 +52,10 @@ export const AgenticIntelligence = () => {
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>TypeScript SDK</CardTitle>
+              <CardTitle>Works with AI Assistants</CardTitle>
             </div>
             <CardDescription>
-              Full type safety with @mcp-b/webmcp-ts-sdk. Browser-adapted MCP implementation with tab and extension transports built in.
+              Compatible with Claude Desktop, ChatGPT, and any MCP-compatible AI assistant. Seamless integration through the browser extension.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
