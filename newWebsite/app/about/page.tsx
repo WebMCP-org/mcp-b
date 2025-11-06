@@ -59,13 +59,13 @@ export default function AboutPage() {
               provides the protocol layer for seamless AI-web integration.
             </SubHeading>
           </div>
-          <div className="border-divide rounded-3xl border p-2">
+          <div className="border-divide rounded-3xl border bg-gradient-to-br from-neutral-50 to-neutral-100 p-8 dark:from-neutral-900 dark:to-neutral-800">
             <Image
-              src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="About Us"
+              src="/illustrations/full-arch.png"
+              alt="MCP-B Architecture - Browser Model Context Protocol connecting web applications to AI agents through W3C standards"
               width={1000}
               height={1000}
-              className="h-full rounded-2xl object-cover"
+              className="h-full w-full rounded-2xl object-contain"
             />
           </div>
         </div>
