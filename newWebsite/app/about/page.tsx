@@ -3,7 +3,7 @@ import { Container } from "@/components/container";
 import { CTA } from "@/components/cta";
 import { DivideX } from "@/components/divide";
 import { Heading } from "@/components/heading";
-import { InformationBlock } from "@/components/information-block";
+import { AboutInformationBlock } from "@/components/about-information-block";
 import { ProgressiveBlur } from "@/components/progressive-blur";
 import { SectionHeading } from "@/components/seciton-heading";
 import { SubHeading } from "@/components/subheading";
@@ -194,7 +194,7 @@ export default function AboutPage() {
               <MetricBlock value="100%" label="Open Source" />
             </div>
           </div>
-          <InformationBlock />
+          <AboutInformationBlock />
         </div>
       </Container>
       {/* <DivideX />
