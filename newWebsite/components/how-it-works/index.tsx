@@ -23,27 +23,27 @@ type Tab = {
 export const HowItWorks = () => {
   const tabs = [
     {
-      title: "Design your Workflow",
+      title: "Define Your Tools",
       description:
-        "A drag-and-drop interface to create, connect, and configure agents into logical workflows",
+        "Add ~50 lines of code to register functions with schemas. Your website becomes an MCP server that AI agents can discover and use.",
       icon: FirstIcon,
-      id: "workflow",
+      id: "tools",
       skeleton: <DesignYourWorkflowSkeleton />,
     },
     {
-      title: "Connect your Tools",
+      title: "Install Extension",
       description:
-        "Agents operate independently and coordinate tasks to complete all complex goals together",
+        "The MCP-B browser extension injects an MCP client into your page, automatically discovering and registering your tools.",
       icon: SecondIcon,
-      id: "tools",
+      id: "extension",
       skeleton: <ConnectYourTooklsSkeleton />,
     },
     {
-      title: "Deploy & Scale",
+      title: "AI Agents Execute",
       description:
-        "Run agent workflows in a sandbox to preview behavior, debug logic, and test interactions",
+        "Agents call your tools directly through the extension using your existing browser session. No API keys, no OAuth, instant execution.",
       icon: ThirdIcon,
-      id: "deploy",
+      id: "execute",
       skeleton: <DeployAndScaleSkeleton />,
     },
   ];
@@ -65,11 +65,10 @@ export const HowItWorks = () => {
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center pt-16">
         <Badge text="How it works" />
-        <SectionHeading className="mt-4">Integrates easily</SectionHeading>
+        <SectionHeading className="mt-4">Three Steps to AI-Ready</SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          We empower developers and technical teams to create, simulate, and
-          manage AI-driven workflows visually
+          Browser-native MCP implementation that works with any framework. No configuration, no separate servers, no new authentication flows.
         </SubHeading>
         {/* Desktop Tabs */}
         <div className="border-divide divide-divide mt-16 hidden w-full grid-cols-2 divide-x border-t lg:grid">

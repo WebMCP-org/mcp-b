@@ -30,35 +30,32 @@ export const AgenticIntelligence = () => {
   return (
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center py-16">
-        <Badge text="Features" />
+        <Badge text="Our Mission" />
         <SectionHeading className="mt-4">
-          Built for Agentic Intelligence
+          Building the Foundation for Agentic Browsers
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg px-2">
-          Build, test and deploy AI agents with a powerful visual interface
-          designed for technical teams
+          We're not building another AI product. We're creating the protocol-level primitives that enable the next generation of AI-native web experiences.
         </SubHeading>
         <div className="border-divide divide-divide mt-16 grid grid-cols-1 divide-y border-y md:grid-cols-2 md:divide-x">
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>LLM Model Selector</CardTitle>
+              <CardTitle>W3C Web Standards</CardTitle>
             </div>
             <CardDescription>
-              Track real-time activity of agents with detailed records of
-              triggers, tools used, outcomes, and timestamps.
+              Working with web standards bodies to define the protocols browsers will use to communicate with AI agents. Building tomorrow's standards today.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>Text to workflow builder</CardTitle>
+              <CardTitle>UIs for LLMs</CardTitle>
             </div>
             <CardDescription>
-              Preview and debug workflow logic in a safe sandbox before
-              deploying, helping you iterate with confidence.
+              Pioneering new patterns for building user interfaces that AI agents can understand and interact with. Creating the design primitives for the agentic web.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
@@ -68,11 +65,10 @@ export const AgenticIntelligence = () => {
             <div className="pointer-events-none absolute inset-0 h-full w-full bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px]"></div>
             <div className="flex items-center gap-2">
               <NativeIcon />
-              <CardTitle>Native Tools Integration</CardTitle>
+              <CardTitle>Browser-Native Primitives</CardTitle>
             </div>
             <CardDescription>
-              Track real-time activity of agents with detailed records of
-              triggers, tools used, outcomes, and timestamps.
+              Creating the low-level APIs that browsers need to be truly agentic. Working directly with browser vendors on the infrastructure layer that powers AI-native experiences.
             </CardDescription>
             <NativeToolsIntegrationSkeleton />
           </Card>
@@ -81,31 +77,28 @@ export const AgenticIntelligence = () => {
           <Card>
             <div className="flex items-center gap-2">
               <FingerprintIcon />
-              <CardTitle>One Click Auth</CardTitle>
+              <CardTitle>Open Source Foundation</CardTitle>
             </div>
             <CardDescription>
-              A drag-and-drop interface to create, connect, and configure agents
-              into logical workflows
+              Built in the open with transparent development. Creating standards and primitives that everyone can build on top of, not proprietary walled gardens.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <RealtimeSyncIcon />
-              <CardTitle>Realtime Sync</CardTitle>
+              <CardTitle>Protocol-First Design</CardTitle>
             </div>
             <CardDescription>
-              Agents operate independently and coordinate tasks to complete
-              complex all goals
+              Focused on creating robust, extensible protocols that will stand the test of time. Building the infrastructure layer for the next decade of web experiences.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <SDKIcon />
-              <CardTitle>Custom Connector SDK</CardTitle>
+              <CardTitle>Vendor Collaboration</CardTitle>
             </div>
             <CardDescription>
-              Run agent workflows in a sandbox to preview behavior, debug logic,
-              and test interactions
+              Partnering with browser vendors, web standards groups, and the broader ecosystem to ensure our primitives become the foundation others build on.
             </CardDescription>
           </Card>
         </div>

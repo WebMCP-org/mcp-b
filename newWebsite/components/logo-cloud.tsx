@@ -43,7 +43,7 @@ export const LogoCloud = () => {
   return (
     <Container className="border-divide border-x">
       <h2 className="py-8 text-center font-mono text-sm tracking-tight text-neutral-500 uppercase dark:text-gray-300">
-        Trusted by Fast Growing Startups
+        Piloted by JPMorgan and Adobe • Built with Industry-Leading Tech
       </h2>
       <div className="border-divide grid grid-cols-2 border-t md:grid-cols-4">
         {displayedIndices.map((logoIndex, position) => {

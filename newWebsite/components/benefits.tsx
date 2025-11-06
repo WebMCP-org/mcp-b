@@ -64,13 +64,13 @@ export const Benefits = () => {
   return (
     <Container className="border-divide relative overflow-hidden border-x px-4 py-20 md:px-8">
       <div className="relative flex flex-col items-center">
-        <Badge text="Why MCP-B?" />
+        <Badge text="Why Primitives Matter" />
         <SectionHeading className="mt-4">
-          10,000x Performance Improvement
+          Infrastructure for the Next Era
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          Everything you need to bring AI-agent capabilities to your web application with zero configuration
+          By building at the protocol level, we create foundational pieces that enable thousands of products to be built on top. That's the power of primitives.
         </SubHeading>
       </div>
       <div className="mt-20 grid grid-cols-1 gap-4 md:grid-cols-3">

@@ -22,7 +22,7 @@ export const faqs = [
   {
     question: "How do I add MCP-B to my website?",
     answer:
-      "Adding MCP-B to your website is straightforward. Install the MCP-B package, register your tools using the window.mcp API, and define what actions your website exposes to AI agents. Check out our documentation at docs.mcp-b.ai for detailed integration guides and examples.",
+      "Adding MCP-B to your website is straightforward. Install the MCP-B package, register your tools using the navigator.modelContext API, and define what actions your website exposes to AI agents. Check out our documentation at docs.mcp-b.ai for detailed integration guides and examples.",
   },
   {
     question: "Is MCP-B open source?",

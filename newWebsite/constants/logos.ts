@@ -1,52 +1,54 @@
+// Partner and pilot customer logos
+// TODO: Replace placeholder images with actual company logos
 export const logos = [
   {
-    title: "First",
-    src: "/logos/1.png",
+    title: "JPMorgan",
+    src: "/logos/1.png", // TODO: Replace with JPMorgan logo
     className: "h-10 w-auto ",
   },
   {
-    title: "Second",
-    src: "/logos/2.png",
+    title: "Adobe",
+    src: "/logos/2.png", // TODO: Replace with Adobe logo
     className: "h-6 w-auto ",
   },
   {
-    title: "Third",
-    src: "/logos/3.png",
+    title: "Anthropic",
+    src: "/logos/3.png", // TODO: Replace with Anthropic logo (MCP creator)
     className: "h-6 w-auto ",
   },
   {
-    title: "Fourth",
-    src: "/logos/4.png",
+    title: "Cloudflare",
+    src: "/logos/4.png", // TODO: Replace with Cloudflare logo (deployment partner)
     className: "h-8 w-auto ",
   },
   {
-    title: "Fifth",
-    src: "/logos/5.png",
+    title: "OpenAI",
+    src: "/logos/5.png", // TODO: Replace with OpenAI logo
     className: "h-8 w-auto ",
   },
   {
-    title: "Sixth",
-    src: "/logos/6.png",
+    title: "GitHub",
+    src: "/logos/6.png", // TODO: Replace with GitHub logo (open source)
     className: "h-10 w-auto ",
   },
   {
-    title: "Seventh",
-    src: "/logos/7.png",
+    title: "Vercel",
+    src: "/logos/7.png", // TODO: Replace with Vercel logo
     className: "h-10 w-auto ",
   },
   {
-    title: "Eighth",
-    src: "/logos/8.png",
+    title: "React",
+    src: "/logos/8.png", // TODO: Replace with React logo
     className: "h-10 w-auto ",
   },
   {
-    title: "Ninth",
-    src: "/logos/9.png",
+    title: "TypeScript",
+    src: "/logos/9.png", // TODO: Replace with TypeScript logo
     className: "h-6 w-auto ",
   },
   {
-    title: "Tenth",
-    src: "/logos/10.png",
+    title: "Chrome",
+    src: "/logos/10.png", // TODO: Replace with Chrome logo
     className: "h-10 w-auto ",
   },
 ];
