@@ -1,0 +1,26 @@
+import { createRouter as createTanStackRouter } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
+
+/**
+ * Router creation function for TanStack Start
+ */
+export function createRouter() {
+  return createTanStackRouter({
+    routeTree,
+    // Preload routes on hover/focus for better UX
+    defaultPreload: 'intent',
+    // Don't cache preloaded data
+    defaultPreloadStaleTime: 0,
+    // Context for all routes
+    context: {
+      // Add any global context here
+    },
+  });
+}
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: ReturnType<typeof createRouter>;
+  }
+}
