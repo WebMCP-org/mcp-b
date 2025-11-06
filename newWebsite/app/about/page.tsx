@@ -59,13 +59,13 @@ export default function AboutPage() {
               provides the protocol layer for seamless AI-web integration.
             </SubHeading>
           </div>
-          <div className="border-divide rounded-3xl border bg-gradient-to-br from-neutral-50 to-neutral-100 p-8 dark:from-neutral-900 dark:to-neutral-800">
+          <div className="border-divide border bg-gradient-to-br from-neutral-50 to-neutral-100 p-8 dark:from-neutral-900 dark:to-neutral-800">
             <Image
               src="/illustrations/full-arch.png"
               alt="MCP-B Architecture - Browser Model Context Protocol connecting web applications to AI agents through W3C standards"
               width={1000}
               height={1000}
-              className="h-full w-full rounded-2xl object-contain"
+              className="h-full w-full object-contain"
             />
           </div>
         </div>
@@ -266,7 +266,7 @@ export default function AboutPage() {
                 href="https://www.npmjs.com/package/@mcp-b/global"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-neutral-200 p-4 transition-colors hover:border-brand dark:border-neutral-800 dark:hover:border-brand"
+                className="border border-neutral-200 p-4 transition-colors hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
               >
                 <code className="text-sm font-mono text-brand">@mcp-b/global</code>
                 <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
@@ -277,7 +277,7 @@ export default function AboutPage() {
                 href="https://www.npmjs.com/package/@mcp-b/react-webmcp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-neutral-200 p-4 transition-colors hover:border-brand dark:border-neutral-800 dark:hover:border-brand"
+                className="border border-neutral-200 p-4 transition-colors hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
               >
                 <code className="text-sm font-mono text-brand">
                   @mcp-b/react-webmcp
@@ -290,7 +290,7 @@ export default function AboutPage() {
                 href="https://www.npmjs.com/package/@mcp-b/transports"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-neutral-200 p-4 transition-colors hover:border-brand dark:border-neutral-800 dark:hover:border-brand"
+                className="border border-neutral-200 p-4 transition-colors hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
               >
                 <code className="text-sm font-mono text-brand">@mcp-b/transports</code>
                 <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
@@ -301,7 +301,7 @@ export default function AboutPage() {
                 href="https://www.npmjs.com/package/@mcp-b/extension-tools"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg border border-neutral-200 p-4 transition-colors hover:border-brand dark:border-neutral-800 dark:hover:border-brand"
+                className="border border-neutral-200 p-4 transition-colors hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
               >
                 <code className="text-sm font-mono text-brand">
                   @mcp-b/extension-tools
@@ -403,9 +403,9 @@ export default function AboutPage() {
               href="https://github.com/MiguelsPizza/WebMCP"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-neutral-200 p-6 transition-all hover:border-brand hover:shadow-lg dark:border-neutral-800 dark:hover:border-brand"
+              className="group border border-neutral-200 p-6 transition-all hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
             >
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-brand/10">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center border border-brand/20 bg-brand/10">
                 <svg
                   className="h-6 w-6 text-brand"
                   fill="currentColor"
@@ -426,9 +426,9 @@ export default function AboutPage() {
               href="https://github.com/WebMCP-org/examples"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-neutral-200 p-6 transition-all hover:border-brand hover:shadow-lg dark:border-neutral-800 dark:hover:border-brand"
+              className="group border border-neutral-200 p-6 transition-all hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
             >
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-brand/10">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center border border-brand/20 bg-brand/10">
                 <svg
                   className="h-6 w-6 text-brand"
                   fill="none"
@@ -455,9 +455,9 @@ export default function AboutPage() {
               href="https://docs.mcp-b.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-neutral-200 p-6 transition-all hover:border-brand hover:shadow-lg dark:border-neutral-800 dark:hover:border-brand"
+              className="group border border-neutral-200 p-6 transition-all hover:border-brand hover:bg-neutral-50 dark:border-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50"
             >
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-brand/10">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center border border-brand/20 bg-brand/10">
                 <svg
                   className="h-6 w-6 text-brand"
                   fill="none"
