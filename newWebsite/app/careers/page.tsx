@@ -157,34 +157,13 @@ export default function CareersPage() {
           <h2 className="mb-4 min-w-40 text-center font-mono text-sm tracking-tight text-neutral-500 uppercase lg:mb-0 lg:text-left dark:text-neutral-400">
             As featured in
           </h2>
-          <div className="grid w-full grid-cols-2 items-center gap-4 md:grid-cols-4">
+          <div className="flex w-full items-center justify-center lg:justify-start">
             <Image
-              src="/logos/bloomberg.png"
-              alt="Bloomberg"
-              width={140}
-              height={140}
-              className="h-6 w-full object-contain dark:invert dark:filter"
-            />
-            <Image
-              src="/logos/wired.png"
-              alt="Bloomberg"
-              width={140}
-              height={140}
-              className="h-6 w-full object-contain dark:invert dark:filter"
-            />
-            <Image
-              src="/logos/forbes.png"
-              alt="Bloomberg"
-              width={140}
-              height={140}
-              className="h-6 w-full object-contain dark:invert dark:filter"
-            />
-            <Image
-              src="/logos/the-guardian.png"
-              alt="Bloomberg"
-              width={140}
-              height={140}
-              className="h-6 w-full object-contain dark:invert dark:filter"
+              src="/logos/the-new-stack.png"
+              alt="The New Stack"
+              width={180}
+              height={180}
+              className="h-8 w-auto object-contain dark:invert dark:filter"
             />
           </div>
         </div>
