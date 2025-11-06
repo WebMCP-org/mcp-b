@@ -7,11 +7,36 @@ import { Badge } from "./badge";
 import { SectionHeading } from "./seciton-heading";
 import { SubHeading } from "./subheading";
 
+// Copy and check icons
+const CopyIcon = () => (
+  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
 export const CodeExample = () => {
   const [polyfillTab, setPolyfillTab] = useState<"esm" | "iife">("iife");
   const [codeTab, setCodeTab] = useState<"vanilla" | "react">("vanilla");
   const [isToolRegistered, setIsToolRegistered] = useState(false);
   const [toolCallCount, setToolCallCount] = useState(0);
+  const [copied, setCopied] = useState<string | null>(null);
+
+  // Handle copy to clipboard
+  const handleCopy = async (code: string, id: string) => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(id);
+      setTimeout(() => setCopied(null), 2000);
+    } catch (error) {
+      console.error("Failed to copy:", error);
+    }
+  };
 
   // Register live tool that actually works
   useEffect(() => {
@@ -103,40 +128,43 @@ await navigator.modelContext.registerTool({...});`;
   }
 });`;
 
-  const reactCode = `import { useWebMCP } from '@mcp-b/react';
+  const reactCode = `import { useWebMCP } from '@mcp-b/react-webmcp';
+import { z } from 'zod';
 
 function MyComponent() {
-  const { registerTool, isReady } = useWebMCP();
-
-  useEffect(() => {
-    if (!isReady) return;
-
-    const registration = registerTool({
-      name: "getPageInfo",
-      description: "Gets information about the current page",
-      inputSchema: {
-        type: "object",
-        properties: {
-          infoType: {
-            type: "string",
-            enum: ["title", "url", "headings"]
-          }
-        },
-        required: ["infoType"]
-      },
-      async execute({ infoType }) {
-        if (infoType === "title") {
-          return { content: [{ type: "text", text: document.title }] };
-        }
-        // ... other cases
+  const tool = useWebMCP({
+    name: "getPageInfo",
+    description: "Gets information about the current page",
+    inputSchema: {
+      infoType: z.enum(["title", "url", "headings"])
+    },
+    handler: async ({ infoType }) => {
+      if (infoType === "title") {
+        return { text: document.title };
+      } else if (infoType === "url") {
+        return { text: window.location.href };
+      } else {
+        const headings = Array.from(
+          document.querySelectorAll("h1, h2, h3")
+        ).map(h => h.textContent).join(", ");
+        return { text: headings };
       }
-    });
+    }
+  });
 
-    // Cleanup on unmount
-    return () => registration.unregister();
-  }, [isReady, registerTool]);
-
-  return <div>My AI-Ready App</div>;
+  return (
+    <div>
+      {tool.state.isExecuting && (
+        <div className="text-sm text-gray-600">Loading...</div>
+      )}
+      {tool.state.error && (
+        <div className="text-sm text-red-600">
+          Error: {tool.state.error.message}
+        </div>
+      )}
+      <div>My AI-Ready App</div>
+    </div>
+  );
 }`;
 
   return (
@@ -169,24 +197,24 @@ function MyComponent() {
             API:
           </p>
 
-          {/* Polyfill toggle */}
-          <div className="mb-4 flex gap-2">
+          {/* Aceternity-style polyfill toggle */}
+          <div className="mb-4 inline-flex rounded-lg border border-gray-300 bg-gray-100 p-1 dark:border-neutral-700 dark:bg-charcoal-800">
             <button
               onClick={() => setPolyfillTab("iife")}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`relative rounded-md px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
                 polyfillTab === "iife"
-                  ? "bg-brand text-white"
-                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
+                  ? "bg-white text-charcoal-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
+                  : "text-gray-600 hover:text-charcoal-900 dark:text-gray-400 dark:hover:text-white"
               }`}
             >
               IIFE (CDN)
             </button>
             <button
               onClick={() => setPolyfillTab("esm")}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`relative rounded-md px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
                 polyfillTab === "esm"
-                  ? "bg-brand text-white"
-                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
+                  ? "bg-white text-charcoal-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
+                  : "text-gray-600 hover:text-charcoal-900 dark:text-gray-400 dark:hover:text-white"
               }`}
             >
               ESM (npm)
@@ -203,6 +231,25 @@ function MyComponent() {
                   {polyfillTab === "iife" ? "index.html" : "main.ts"}
                 </span>
               </div>
+              <button
+                onClick={() =>
+                  handleCopy(
+                    polyfillTab === "iife" ? iifePolyfill : esmPolyfill,
+                    "polyfill"
+                  )
+                }
+                className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-charcoal-700"
+              >
+                {copied === "polyfill" ? (
+                  <>
+                    <CheckIcon /> Copied
+                  </>
+                ) : (
+                  <>
+                    <CopyIcon /> Copy
+                  </>
+                )}
+              </button>
             </div>
             <SyntaxHighlighter
               language={polyfillTab === "iife" ? "html" : "typescript"}
@@ -231,24 +278,24 @@ function MyComponent() {
             Step 2: Register Your Tools
           </h3>
 
-          {/* Code toggle */}
-          <div className="mb-4 flex gap-2">
+          {/* Aceternity-style code toggle */}
+          <div className="mb-4 inline-flex rounded-lg border border-gray-300 bg-gray-100 p-1 dark:border-neutral-700 dark:bg-charcoal-800">
             <button
               onClick={() => setCodeTab("vanilla")}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`relative rounded-md px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
                 codeTab === "vanilla"
-                  ? "bg-brand text-white"
-                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
+                  ? "bg-white text-charcoal-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
+                  : "text-gray-600 hover:text-charcoal-900 dark:text-gray-400 dark:hover:text-white"
               }`}
             >
               Vanilla JS
             </button>
             <button
               onClick={() => setCodeTab("react")}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`relative rounded-md px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
                 codeTab === "react"
-                  ? "bg-brand text-white"
-                  : "bg-gray-100 text-charcoal-700 hover:bg-gray-200 dark:bg-charcoal-800 dark:text-gray-300 dark:hover:bg-charcoal-700"
+                  ? "bg-white text-charcoal-900 shadow-sm dark:bg-charcoal-900 dark:text-white"
+                  : "text-gray-600 hover:text-charcoal-900 dark:text-gray-400 dark:hover:text-white"
               }`}
             >
               React (useWebMCP)
@@ -266,13 +313,34 @@ function MyComponent() {
                   {codeTab === "vanilla" ? "app.js" : "MyComponent.tsx"}
                 </span>
               </div>
-              {isToolRegistered && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
-                  Live on this page
-                  {toolCallCount > 0 && ` • ${toolCallCount} calls`}
-                </span>
-              )}
+              <div className="flex items-center gap-2">
+                {isToolRegistered && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
+                    Live on this page
+                    {toolCallCount > 0 && ` • ${toolCallCount} calls`}
+                  </span>
+                )}
+                <button
+                  onClick={() =>
+                    handleCopy(
+                      codeTab === "vanilla" ? vanillaCode : reactCode,
+                      "code"
+                    )
+                  }
+                  className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-charcoal-700"
+                >
+                  {copied === "code" ? (
+                    <>
+                      <CheckIcon /> Copied
+                    </>
+                  ) : (
+                    <>
+                      <CopyIcon /> Copy
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Code */}
