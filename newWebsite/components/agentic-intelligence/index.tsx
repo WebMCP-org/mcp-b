@@ -45,7 +45,7 @@ export const AgenticIntelligence = () => {
               <CardTitle>On-Device & Cloud Models</CardTitle>
             </div>
             <CardDescription>
-              Select from both on-device and cloud models. We support almost all models including Claude, GPT-4, Gemini, Llama, and local models via Ollama.
+              Select from both on-device and cloud models. We support almost all models including Chrome's built-in AI for privacy-first, offline-capable AI interactions.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
