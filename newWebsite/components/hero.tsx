@@ -20,7 +20,7 @@ export const Hero = () => {
       </Heading>
 
       <SubHeading className="mx-auto mt-6 max-w-lg">
-        Today's AI automation is like using a robot to read your screen and click buttons. MCP-B lets assistants call your site's real functions instead. Add ~50 lines of code and your website becomes AI-ready with zero configuration.
+        Stop making AI read screens and guess where buttons are. MCP-B brings the Model Context Protocol to browsers, letting agents call your website's real functions using existing sessions. ~50 lines of code. Zero configuration. No API keys.
       </SubHeading>
 
       <div className="mt-6 flex items-center gap-4">

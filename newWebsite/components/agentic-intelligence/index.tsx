@@ -32,33 +32,30 @@ export const AgenticIntelligence = () => {
       <div className="flex flex-col items-center py-16">
         <Badge text="Features" />
         <SectionHeading className="mt-4">
-          Built for Agentic Intelligence
+          Everything You Need for AI Integration
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg px-2">
-          Build, test and deploy AI agents with a powerful visual interface
-          designed for technical teams
+          From React hooks to Chrome Extension APIs, MCP-B provides the complete toolkit to make your website AI-accessible
         </SubHeading>
         <div className="border-divide divide-divide mt-16 grid grid-cols-1 divide-y border-y md:grid-cols-2 md:divide-x">
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>LLM Model Selector</CardTitle>
+              <CardTitle>React Hooks</CardTitle>
             </div>
             <CardDescription>
-              Track real-time activity of agents with detailed records of
-              triggers, tools used, outcomes, and timestamps.
+              @mcp-b/react-webmcp provides simple hooks to register tools declaratively. Define your functions, add schemas with Zod, and you're done.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>Text to workflow builder</CardTitle>
+              <CardTitle>TypeScript SDK</CardTitle>
             </div>
             <CardDescription>
-              Preview and debug workflow logic in a safe sandbox before
-              deploying, helping you iterate with confidence.
+              Full type safety with @mcp-b/webmcp-ts-sdk. Browser-adapted MCP implementation with tab and extension transports built in.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
@@ -68,11 +65,10 @@ export const AgenticIntelligence = () => {
             <div className="pointer-events-none absolute inset-0 h-full w-full bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px]"></div>
             <div className="flex items-center gap-2">
               <NativeIcon />
-              <CardTitle>Native Tools Integration</CardTitle>
+              <CardTitle>62+ Chrome Extension APIs</CardTitle>
             </div>
             <CardDescription>
-              Track real-time activity of agents with detailed records of
-              triggers, tools used, outcomes, and timestamps.
+              @mcp-b/extension-tools wraps Chrome Extension APIs as MCP tools. Control tabs, bookmarks, history, downloads, and more through AI agents.
             </CardDescription>
             <NativeToolsIntegrationSkeleton />
           </Card>
@@ -81,31 +77,28 @@ export const AgenticIntelligence = () => {
           <Card>
             <div className="flex items-center gap-2">
               <FingerprintIcon />
-              <CardTitle>One Click Auth</CardTitle>
+              <CardTitle>Session-Based Auth</CardTitle>
             </div>
             <CardDescription>
-              A drag-and-drop interface to create, connect, and configure agents
-              into logical workflows
+              Uses existing browser authentication automatically. No OAuth flows, no API keys to manage or rotate, no new security surface.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <RealtimeSyncIcon />
-              <CardTitle>Realtime Sync</CardTitle>
+              <CardTitle>Dynamic Tool Updates</CardTitle>
             </div>
             <CardDescription>
-              Agents operate independently and coordinate tasks to complete
-              complex all goals
+              Register tools asynchronously and update them based on app state. Extension caches tools for performance.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <SDKIcon />
-              <CardTitle>Custom Connector SDK</CardTitle>
+              <CardTitle>Framework Agnostic</CardTitle>
             </div>
             <CardDescription>
-              Run agent workflows in a sandbox to preview behavior, debug logic,
-              and test interactions
+              Works with React, Vue, Svelte, or vanilla JavaScript. Integrates with Assistant-UI, AG-UI, and custom runtimes.
             </CardDescription>
           </Card>
         </div>
