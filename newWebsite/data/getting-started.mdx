@@ -1,10 +1,10 @@
 ---
 title: "Getting Started with MCP-B"
 description: "A quick start guide to implementing MCP-B in your web application"
-image: "/blog/getting-started.png"
+image: "/blog/smaller.gif"
 date: "2025-02-01"
-authorName: "Mike"
-authorSrc: "/avatars/mike.png"
+authorName: "Alex Nahas"
+authorSrc: "/avatars/alex.png"
 ---
 
 # Getting Started with MCP-B
@@ -66,7 +66,7 @@ mcpServer.tool('get_greeting', 'Get a friendly greeting', {
 }, async ({ name }) => ({
   content: [{
     type: 'text',
-    text: `Hello, ${name}! Welcome to MCP-B.`
+    text: 'Hello, ' + name + '! Welcome to MCP-B.'
   }]
 }));
 
@@ -132,7 +132,7 @@ mcpServer.tool('create_todo', 'Create a new todo', {
   return {
     content: [{
       type: 'text',
-      text: `Created todo: ${text} with priority ${priority || 'medium'}`
+      text: 'Created todo: ' + text + ' with priority ' + (priority || 'medium')
     }]
   };
 });
@@ -155,7 +155,7 @@ mcpServer.tool('risky_operation', 'A tool that might fail', {
     return {
       content: [{
         type: 'text',
-        text: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
+        text: 'Error: ' + (error instanceof Error ? error.message : 'Unknown error')
       }],
       isError: true
     };

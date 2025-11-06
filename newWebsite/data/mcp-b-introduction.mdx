@@ -1,7 +1,7 @@
 ---
 title: "MCP-B: The Right place to build your MCP server is in your website"
 description: "With all the major security issues and data leakages the MCP ecosystem has been facing recently, the pre-authorized, user-scoped sandbox of the browser feels like more of the promised land than ever."
-image: "/blog/mcp-b-architecture.png"
+image: "/blog/full-arch.png"
 date: "2025-01-15"
 authorName: "Alex Nahas"
 authorSrc: "/avatars/alex.png"
@@ -122,7 +122,7 @@ const server = new McpServer({
 server.tool('sayHello', 'Says hello', {
   name: z.string()
 }, async ({ name }) => ({
-  content: [{ type: 'text', text: `Hello ${name}!` }]
+  content: [{ type: 'text', text: 'Hello ' + name + '!' }]
 }));
 
 await server.connect(new TabServerTransport({ allowedOrigins: ['*'] }));
