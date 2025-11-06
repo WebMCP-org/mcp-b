@@ -6,6 +6,8 @@ import { DivideX } from "@/components/divide";
 import { ScalesContainer } from "@/components/scales-container";
 import { SectionHeading } from "@/components/seciton-heading";
 import { SubHeading } from "@/components/subheading";
+import { CoFounderRequirements } from "@/components/careers/requirements";
+import { CoFounderResponsibilities } from "@/components/careers/responsibilities";
 import {
   BoltIcon,
   CloudCheckIcon,
@@ -18,6 +20,7 @@ import {
 import { getSEOTags } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = getSEOTags({
   title: "Looking for a Co-Founder - MCP-B",
@@ -108,48 +111,11 @@ export default function CareersPage() {
               expose tools and context to AI agents, and we need a co-founder to
               help shape this vision.
             </SubHeading>
-            <Button className="mt-4">Get in Touch</Button>
+            <Button as={Link} href="/contact" className="mt-4">
+              Get in Touch
+            </Button>
           </div>
-          <div className="divide-divide border-divide flex flex-col items-start justify-center divide-y">
-            <div className="block px-4 py-6 md:px-8">
-              <h3 className="text-brand mb-3 font-medium text-lg">
-                What We're Looking For
-              </h3>
-              <ul className="space-y-3 text-neutral-600 dark:text-neutral-400">
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1">•</span>
-                  <span>Strong technical background in web development and browser technologies</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1">•</span>
-                  <span>Passionate about AI, developer tools, and open-source</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1">•</span>
-                  <span>Experience with TypeScript, React, and modern web APIs</span>
-                </li>
-              </ul>
-            </div>
-            <div className="block px-4 py-6 md:px-8">
-              <h3 className="text-brand mb-3 font-medium text-lg">
-                What You'll Get
-              </h3>
-              <ul className="space-y-3 text-neutral-600 dark:text-neutral-400">
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1">•</span>
-                  <span>Equal equity stake and decision-making power</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1">•</span>
-                  <span>Build something meaningful in the AI ecosystem</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1">•</span>
-                  <span>Shape the future of browser-based AI interactions</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <CoFounderRequirements />
         </div>
       </Container>
       <Container className="border-divide border-x border-b px-4 pb-20 md:px-8">
@@ -193,32 +159,7 @@ export default function CareersPage() {
         <SectionHeading className="mt-4 px-4 text-center">
           Co-Founder Responsibilities
         </SectionHeading>
-        <div className="mt-12 w-full max-w-4xl space-y-8 px-4 md:px-8">
-          <div className="rounded-lg bg-gray-50 p-6 dark:bg-neutral-800">
-            <h3 className="text-brand mb-4 text-xl font-semibold">Technical Leadership</h3>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Lead the technical architecture and development of MCP-B. Make key decisions
-              about the technology stack, implementation patterns, and developer experience.
-              Contribute directly to the codebase and establish engineering best practices.
-            </p>
-          </div>
-          <div className="rounded-lg bg-gray-50 p-6 dark:bg-neutral-800">
-            <h3 className="text-brand mb-4 text-xl font-semibold">Product Vision</h3>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Help shape the product roadmap and prioritize features. Work closely with the
-              open-source community to understand developer needs and build tools that solve
-              real problems in the AI ecosystem.
-            </p>
-          </div>
-          <div className="rounded-lg bg-gray-50 p-6 dark:bg-neutral-800">
-            <h3 className="text-brand mb-4 text-xl font-semibold">Community Building</h3>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Foster a thriving open-source community around MCP-B. Engage with contributors,
-              review pull requests, write documentation, and help developers integrate MCP-B
-              into their projects.
-            </p>
-          </div>
-        </div>
+        <CoFounderResponsibilities />
       </Container>
       <Container className="border-divide flex flex-col items-center border-x border-b py-16 pb-20">
         <Badge text="Why Join" />
