@@ -7,9 +7,9 @@ import { PricingTable } from "@/components/pricing-table";
 import { getSEOTags } from "@/lib/seo";
 
 export const metadata = getSEOTags({
-  title: "Pricing - Notus | Aceternity UI Pro Template",
+  title: "Pricing - MCP-B | Browser Model Context Protocol",
   description:
-    "Notus is a platform for building agentic workflows. It allows you to design, simulate, and launch autonomous agents visually and intuitively.",
+    "MCP-B is a W3C standard for making websites AI-accessible. Enable AI agents to interact with your website through structured tools via navigator.modelContext.",
 });
 
 export default function PricingPage() {

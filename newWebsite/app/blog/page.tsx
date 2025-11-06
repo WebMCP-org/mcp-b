@@ -28,8 +28,8 @@ export default async function BlogsPage() {
         <Badge text=" All blogs" />
         <Heading>Writing for the World</Heading>
         <SubHeading className="mx-auto mt-2 max-w-sm px-4">
-          At Notus, we educate and empower developers to build better software
-          solutions for the world.
+          At MCP-B, we educate and empower developers to build AI-accessible web applications
+          for the world.
         </SubHeading>
         <div className="border-divide divide-divide mt-10 flex w-full flex-col divide-y border-y">
           <GridLayout blogs={allBlogs.slice(0, 3)} />
