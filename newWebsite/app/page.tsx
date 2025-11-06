@@ -1,5 +1,6 @@
 import { AgenticIntelligence } from "@/components/agentic-intelligence";
 import { Benefits } from "@/components/benefits";
+import { CodeExample } from "@/components/code-example";
 import { CTA, CTAOrbit } from "@/components/cta";
 import { DivideX } from "@/components/divide";
 import { FAQs } from "@/components/faqs";
@@ -21,6 +22,8 @@ export default function Home() {
       <Hero />
       <DivideX />
       <HeroImage />
+      <DivideX />
+      <CodeExample />
       <DivideX />
       <LogoCloud />
       <DivideX />
