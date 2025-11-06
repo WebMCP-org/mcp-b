@@ -1,0 +1,31 @@
+name = "mcp-b"
+main = ".open-next/worker.js"
+compatibility_date = "2025-11-06"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+workers_dev = true
+
+[observability]
+enabled = true
+
+# Static assets from Next.js build
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+# Self-referencing service binding (required for OpenNext)
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "mcp-b"
+
+# R2 bucket for Next.js Incremental Static Regeneration (ISR) cache
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "mcp-b-cache"
+preview_bucket_name = "mcp-b-cache-preview"
+
+# Uncomment and configure when ready to deploy to a custom domain
+# routes = [
+#   { pattern = "mcp-b.ai", custom_domain = true },
+#   { pattern = "www.mcp-b.ai", custom_domain = true }
+# ]

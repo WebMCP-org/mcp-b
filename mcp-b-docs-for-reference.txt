@@ -1,0 +1,59 @@
+# WebMCP Documentation
+
+## Docs
+
+- [null](https://docs.mcp-b.ai/CLAUDE.md)
+- [null](https://docs.mcp-b.ai/CODE_BLOCKS_STYLE_GUIDE.md)
+- [null](https://docs.mcp-b.ai/NPM_PACKAGES_REPO_ISSUES.md)
+- [null](https://docs.mcp-b.ai/SNIPPETS_IMPLEMENTATION_PLAN.md)
+- [null](https://docs.mcp-b.ai/USING_SNIPPETS.md)
+- [null](https://docs.mcp-b.ai/WEBMCP_ALIGNMENT_ANALYSIS.md)
+- [Advanced Patterns](https://docs.mcp-b.ai/advanced.md): Advanced WebMCP patterns including Chrome extensions, dynamic tool registration, multi-tab communication, conditional tools, and complex application architectures.
+- [AG-UI Integration](https://docs.mcp-b.ai/ai-frameworks/ag-ui.md): Integrate WebMCP tools with AG-UI agentic UI framework. Connect frontend-defined tools with AG-UI for intelligent user interface automation and interactions.
+- [Assistant-UI Integration](https://docs.mcp-b.ai/ai-frameworks/assistant-ui.md): Integrate WebMCP tools with Assistant-UI React framework. Native tool calling support with Model Context Protocol integration for building AI assistants.
+- [Best Practices](https://docs.mcp-b.ai/ai-frameworks/best-practices.md): Optimization patterns and best practices for WebMCP AI integrations including performance, security, user experience, error handling, and tool design strategies.
+- [Custom Runtime Integration](https://docs.mcp-b.ai/ai-frameworks/custom-runtime.md): Build your own AI integration with WebMCP tools using direct MCP client integration. Complete control over tool execution for any AI framework or custom runtime.
+- [AI Framework Integration](https://docs.mcp-b.ai/ai-frameworks/index.md): Integrate WebMCP tools with frontend AI frameworks including Assistant-UI, AG-UI, and custom runtimes. Build intelligent applications with AI copilots and assistants.
+- [Setup & Installation](https://docs.mcp-b.ai/ai-frameworks/setup.md): Install packages and configure MCP client for frontend AI integration. Complete setup guide for TabClientTransport and tool consumption in React applications.
+- [Best Practices for Creating Tools](https://docs.mcp-b.ai/best-practices.md): Learn best practices for designing and implementing WebMCP tools on websites you control. Tool design principles, naming conventions, security, and optimal AI integration.
+- [Building MCP-UI + WebMCP Apps](https://docs.mcp-b.ai/building-mcp-ui-apps.md): Complete guide to building interactive apps that AI agents can control. Scaffold bidirectional MCP-UI and WebMCP integration with create-webmcp-app CLI tool.
+- [Changelog](https://docs.mcp-b.ai/changelog.md): Complete changelog showing WebMCP package version history, breaking changes, migration guides, new features, bug fixes, and deprecation notices for all npm packages.
+- [Architecture Overview](https://docs.mcp-b.ai/concepts/architecture.md): Understanding WebMCP components, data flow, and how everything works together
+- [Extension Architecture](https://docs.mcp-b.ai/concepts/extension.md): Understanding the MCP-B browser extension components and architecture including background workers, content scripts, MCP transport layer, and native host integration.
+- [Glossary](https://docs.mcp-b.ai/concepts/glossary.md): Key terminology and concepts used in WebMCP documentation. Complete reference for WebMCP, MCP, W3C Web Model Context API, tools, transports, and protocol terms.
+- [MCP-UI Architecture](https://docs.mcp-b.ai/concepts/mcp-ui-integration.md): Architecture and communication flow for bidirectional AI-app integration using IframeParentTransport and IframeChildTransport for parent-child tool communication.
+- [What is WebMCP?](https://docs.mcp-b.ai/concepts/overview.md): Understanding the WebMCP standard, its design philosophy, and relationship to the Model Context Protocol
+- [Tool Schemas & Validation](https://docs.mcp-b.ai/concepts/schemas.md): Defining input schemas for WebMCP tools using JSON Schema and Zod. Enable automatic validation and help AI agents understand tool parameters with type-safe schemas.
+- [Security Model](https://docs.mcp-b.ai/concepts/security.md): Understanding authentication, authorization, and origin validation in WebMCP
+- [Tool Design Patterns](https://docs.mcp-b.ai/concepts/tool-design.md): Best practices for designing effective WebMCP tools that AI agents can use successfully
+- [Tool Registration](https://docs.mcp-b.ai/concepts/tool-registration.md): How to register, manage, and lifecycle tools using navigator.modelContext with registerTool() and provideContext() methods for dynamic tool management.
+- [Transport Layers](https://docs.mcp-b.ai/concepts/transports.md): Understanding how WebMCP communicates between browser contexts using TabServerTransport, IframeParentTransport, IframeChildTransport, and ExtensionServerTransport implementations.
+- [Connecting Agents to WebMCP](https://docs.mcp-b.ai/connecting-agents.md): Learn all the ways to connect AI agents to your WebMCP tools - from browser agents to local desktop clients
+- [Local Development](https://docs.mcp-b.ai/development.md): Set up and develop with WebMCP locally on your website. Complete development workflow guide with debugging tools, testing strategies, and HMR support.
+- [Examples](https://docs.mcp-b.ai/examples.md): Explore production-ready WebMCP implementations including React apps, vanilla JavaScript examples, and MCP-UI integrations for various frameworks and use cases.
+- [Understanding Agents](https://docs.mcp-b.ai/extension/agents.md): Learn about the specialized AI agents in the MCP-B extension and when to use each one
+- [MCP-B Extension](https://docs.mcp-b.ai/extension/index.md): Download the MCP-B browser extension for Chrome to build AI-powered userscripts, automate websites, and expose website tools to AI agents with native desktop integration.
+- [Managing Userscripts](https://docs.mcp-b.ai/extension/managing-userscripts.md): Learn how to download, upload, enable, disable, and organize your userscripts in the MCP-B extension
+- [Frontend Tool Calling](https://docs.mcp-b.ai/frontend-tools.md): Use WebMCP tools with frontend AI frameworks like Assistant-UI and AG-UI
+- [WebMCP Documentation](https://docs.mcp-b.ai/introduction.md): W3C standard for making websites AI-accessible - Enable AI agents to interact with your website through structured tools via navigator.modelContext
+- [Live WebMCP Tool Examples](https://docs.mcp-b.ai/live-tool-examples.md): Interactive examples of WebMCP tools that AI agents can call in real-time. Working demonstrations of calculator, color converter, storage, and DOM query tools.
+- [llms.txt](https://docs.mcp-b.ai/llms-txt.md): View auto-generated llms.txt and llms-full.txt files for AI assistant indexing - optimized for Claude, ChatGPT, Gemini, and other LLMs
+- [Native Host Setup](https://docs.mcp-b.ai/native-host-setup.md): Connect WebMCP to local MCP clients like Claude Code and Claude Desktop. Bridge browser tools to desktop AI assistants with HTTP-based MCP protocol support.
+- [@mcp-b/extension-tools](https://docs.mcp-b.ai/packages/extension-tools.md): MCP wrappers for 62+ Chrome Extension APIs enabling protocol-based browser control. Manifest V3 compatible with comprehensive TypeScript definitions and Zod validation.
+- [@mcp-b/global](https://docs.mcp-b.ai/packages/global.md): W3C Web Model Context API polyfill implementing navigator.modelContext. Turn JavaScript functions into AI-accessible tools with registerTool() for browser-based agent integration.
+- [@mcp-b/react-webmcp](https://docs.mcp-b.ai/packages/react-webmcp.md): React hooks for Model Context Protocol with automatic lifecycle management and Zod validation. Register AI-accessible tools with useWebMCP() hook for React 18+ applications.
+- [@mcp-b/smart-dom-reader](https://docs.mcp-b.ai/packages/smart-dom-reader.md): Token-efficient DOM extraction library for AI-powered browser automation. Extracts interactive elements, forms, and semantic content in compact AI-readable format.
+- [@mcp-b/transports](https://docs.mcp-b.ai/packages/transports.md): Browser-specific transport implementations for Model Context Protocol including TabServerTransport, IframeTransport, and ExtensionServerTransport for web and extension MCP communication.
+- [@mcp-b/webmcp-ts-sdk](https://docs.mcp-b.ai/packages/webmcp-ts-sdk.md): Browser-adapted Model Context Protocol TypeScript SDK supporting dynamic tool registration after connection. Modified MCP SDK for W3C Web Model Context API compatibility.
+- [Quick Start](https://docs.mcp-b.ai/quickstart.md): Add AI agent support to your website in minutes with WebMCP. Turn JavaScript functions into AI-accessible tools using React hooks, vanilla JS, or script tags.
+- [Security Best Practices](https://docs.mcp-b.ai/security.md): Comprehensive security best practices for WebMCP tools including authentication, authorization, input validation, prompt injection protection, and defending against malicious agents.
+- [Claude Code](https://docs.mcp-b.ai/tools/claude-code.md): Configure Claude Code to help write, review, and update your WebMCP documentation
+- [Troubleshooting](https://docs.mcp-b.ai/troubleshooting.md): Troubleshooting guide for WebMCP setup issues, tool registration errors, native host connection problems, extension detection, and debugging MCP client connections.
+- [Why WebMCP?](https://docs.mcp-b.ai/why-webmcp.md): Understand why WebMCP provides a better approach to browser AI than automation, remote APIs, or computer use. Compare deterministic function calls vs UI navigation.
+
+
+## Optional
+
+- [Live Demo](https://mcp-b.ai)
+- [NPM Package](https://www.npmjs.com/package/@mcp-b/transports)
+- [Examples](https://github.com/WebMCP-org/examples)

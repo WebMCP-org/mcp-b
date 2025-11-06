@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MCP-B (Browser Model Context Protocol) is an open-source implementation that brings the Model Context Protocol to browsers, enabling web apps to expose tools and context to AI agents.
 
+See docs for reference: [MCP-B Documentation](./mcp-b-docs-for-reference)
+
 ### Project Status
 
 **This is a NEW website rebuild based on a template.** The `oldWebsite` directory contains the current production site. This `newWebsite` directory is a clean Next.js template that serves as the starting point for the redesigned MCP-B website.
@@ -22,9 +24,11 @@ MCP-B (Browser Model Context Protocol) is an open-source implementation that bri
 - MDX for blog content
 - Motion for animations
 - next-themes for dark/light mode
+- **Deployment:** Cloudflare Workers via @opennextjs/cloudflare
 
 ## Development Commands
 
+### Local Development
 ```bash
 # Development server (standard)
 npm run dev
@@ -32,15 +36,33 @@ npm run dev
 # Development server (with Turbopack - faster)
 npm run dev:turbopack
 
-# Production build
-npm run build
-
-# Start production server
-npm run start
-
 # Lint code
 npm run lint
 ```
+
+### Cloudflare Workers Deployment
+This project deploys to **Cloudflare Workers** (not Pages) using OpenNext.
+
+```bash
+# Build for Cloudflare Workers (required before preview/deploy)
+npm run cf:build
+
+# Preview locally with Wrangler
+npm run cf:preview
+# or
+npm run preview
+
+# Deploy to Cloudflare Workers
+npm run cf:deploy
+```
+
+**Note:** The `build` script is required by OpenNext (it runs `next build` internally). Only `npm run start` has been removed - use `cf:preview` instead.
+
+**Deployment Configuration:**
+- `wrangler.toml` - Cloudflare Workers configuration
+- `.dev.vars` - Local development environment variables (not committed)
+- Uses Node.js runtime (not Edge runtime) for full Next.js feature support
+- Deploys to Workers, NOT Cloudflare Pages
 
 **Note:** No test suite is currently configured.
 
