@@ -101,7 +101,7 @@ export default function AboutPage() {
           </div>
         </div>
       </Container>
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Container className="border-divide border-x border-t p-4 py-20 md:px-8 md:py-40">
         <div className="grid grid-cols-1 gap-10 md:gap-20 lg:grid-cols-2">
           <div className="flex flex-col items-start justify-start">
@@ -140,7 +140,7 @@ export default function AboutPage() {
           <InformationBlock />
         </div>
       </Container>
-      <DivideX />
+      {/* <DivideX />
       <Container className="border-divide flex flex-col items-center border-x py-16">
         <Badge text="Core Architecture" />
         <SectionHeading className="mt-4">
@@ -187,7 +187,7 @@ export default function AboutPage() {
           ))}
         </div>
       </Container>
-      <DivideX />
+      <DivideX /> */}
       <Container className="border-divide flex flex-col items-center border-x border-b pb-20">
         <div className="divide-divide border-divide grid grid-cols-1 border-b lg:grid-cols-2 lg:divide-x">
           <div className="flex flex-col items-start justify-start px-4 py-10 md:px-8 md:py-20">
