@@ -25,11 +25,22 @@ export const CoFounderRequirements = () => {
         </li>
         <li className="flex items-start gap-2">
           <span className="text-brand mt-1">•</span>
+          <span>Fullstack Cloudflare knowledge is a big plus</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-brand mt-1">•</span>
           <span>Chill to work with</span>
         </li>
       </ul>
+
+      <p className="mb-4 text-neutral-600 dark:text-neutral-400">
+        <span className="font-medium">The Stack:</span> TypeScript monorepo running on Cloudflare.
+        ElectricSQL for sync, Postgres with Drizzle, tRPC for the API, and a browser extension
+        built with TanStack Router + React.
+      </p>
+
       <p className="text-neutral-600 dark:text-neutral-400">
-        Hit me up on{" "}
+        Interested? Hit me up on{" "}
         <Link
           href="https://www.linkedin.com/in/alex-nahas/"
           target="_blank"
@@ -38,7 +49,16 @@ export const CoFounderRequirements = () => {
         >
           LinkedIn
         </Link>{" "}
-        if you're interested.
+        or{" "}
+        <Link
+          href="https://discord.gg/PGFzevDNqq"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-brand underline hover:no-underline"
+        >
+          Discord
+        </Link>
+        .
       </p>
     </div>
   );
