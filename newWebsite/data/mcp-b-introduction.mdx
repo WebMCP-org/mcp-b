@@ -122,7 +122,7 @@ const server = new McpServer({
 server.tool('sayHello', 'Says hello', {
   name: z.string()
 }, async ({ name }) => ({
-  content: [{ type: 'text', text: `Hello ${name}!` }]
+  content: [{ type: 'text', text: 'Hello ' + name + '!' }]
 }));
 
 await server.connect(new TabServerTransport({ allowedOrigins: ['*'] }));
