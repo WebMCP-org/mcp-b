@@ -16,20 +16,20 @@ import { ModeToggle } from "./mode-toggle";
 
 const items = [
   {
-    title: "Pricing",
-    href: "/pricing",
+    title: "Docs",
+    href: "https://docs.mcp-b.ai/introduction",
   },
   {
-    title: "About",
-    href: "/about",
-  },
-  {
-    title: "Careers",
-    href: "/careers",
+    title: "Playground",
+    href: "/playground",
   },
   {
     title: "Blog",
     href: "/blog",
+  },
+  {
+    title: "Extension",
+    href: "https://chromewebstore.google.com/detail/mcp-bextension/daohopfhkdelnpemnhlekblhnikhdhfa",
   },
 ];
 
@@ -98,14 +98,22 @@ const MobileNav = ({ items }: { items: { title: string; href: string }[] }) => {
                   </motion.div>
                 </Link>
               ))}
-              <div className="mt-4 p-4">
+              <div className="mt-4 flex flex-col gap-2 p-4">
                 <Button
                   onClick={() => setIsOpen(false)}
                   as={Link}
-                  href="/sign-up"
+                  href="https://github.com/WebMCP-org/mcp-b"
                   className="w-full"
                 >
-                  Start building
+                  GitHub
+                </Button>
+                <Button
+                  onClick={() => setIsOpen(false)}
+                  as={Link}
+                  href="/playground"
+                  className="w-full"
+                >
+                  Try Demo
                 </Button>
               </div>
             </div>
@@ -137,8 +145,15 @@ const DesktopNav = ({
       </div>
       <div className="flex items-center gap-2">
         <ModeToggle />
-        <Button as={Link} href="/sign-up">
-          Start building
+        <Button
+          as={Link}
+          href="https://github.com/WebMCP-org/mcp-b"
+          className="hidden lg:flex"
+        >
+          GitHub
+        </Button>
+        <Button as={Link} href="/playground">
+          Try Demo
         </Button>
       </div>
     </div>
@@ -178,8 +193,15 @@ const FloatingNav = ({
       </div>
       <div className="flex items-center gap-2">
         <ModeToggle />
-        <Button as={Link} href="/sign-up">
-          Start building
+        <Button
+          as={Link}
+          href="https://github.com/WebMCP-org/mcp-b"
+          className="hidden sm:flex"
+        >
+          GitHub
+        </Button>
+        <Button as={Link} href="/playground">
+          Try Demo
         </Button>
       </div>
     </motion.div>

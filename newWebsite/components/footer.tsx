@@ -8,59 +8,51 @@ import { SendIcon } from "@/icons/bento-icons";
 export const Footer = () => {
   const product = [
     {
-      title: "Agent Builder",
-      href: "#",
+      title: "Documentation",
+      href: "https://docs.mcp-b.ai/introduction",
     },
     {
-      title: "Simulation",
-      href: "#",
+      title: "Playground",
+      href: "/playground",
     },
     {
-      title: "Integrations",
-      href: "#",
+      title: "Chrome Extension",
+      href: "https://chromewebstore.google.com/detail/mcp-bextension/daohopfhkdelnpemnhlekblhnikhdhfa",
     },
     {
-      title: "Multi Agent",
-      href: "#",
+      title: "Examples",
+      href: "https://github.com/WebMCP-org/examples",
     },
     {
-      title: "Workflow API",
-      href: "#",
+      title: "NPM Packages",
+      href: "https://www.npmjs.com/package/@mcp-b/transports",
     },
   ];
 
   const company = [
     {
-      title: "Sign In",
-      href: "/sign-in",
+      title: "GitHub",
+      href: "https://github.com/WebMCP-org/mcp-b",
     },
     {
       title: "About",
       href: "/about",
     },
     {
+      title: "Blog",
+      href: "/blog",
+    },
+    {
       title: "Contact",
       href: "/contact",
     },
     {
-      title: "Pricing",
-      href: "/pricing",
-    },
-    {
-      title: "Careers",
-      href: "/careers",
-    },
-    {
-      title: "Docs",
-      href: "#",
-    },
-    {
       title: "Changelog",
-      href: "#",
+      href: "https://docs.mcp-b.ai/changelog.md",
     },
     {
       title: "Glossary",
-      href: "#",
+      href: "https://docs.mcp-b.ai/concepts/glossary.md",
     },
   ];
 
@@ -84,9 +76,12 @@ export const Footer = () => {
         <div className="mb-6 sm:col-span-2 md:col-span-4 lg:col-span-3">
           <Logo />
           <SubHeading as="p" className="mt-4 max-w-lg text-left">
-            Manage and simulate agentic workflows
+            W3C standard for making websites AI-accessible. Enable AI agents to
+            interact with your website through structured tools.
           </SubHeading>
-          <Button className="mt-4 mb-8 lg:mb-0">Start building</Button>
+          <Button as={Link} href="/playground" className="mt-4 mb-8 lg:mb-0">
+            Try Demo
+          </Button>
         </div>
         <div className="col-span-1 mb-4 flex flex-col gap-2 md:col-span-1 md:mb-0">
           <p className="text-sm font-medium text-gray-600">Product</p>
@@ -146,12 +141,13 @@ export const Footer = () => {
       </div>
       <div className="my-4 flex flex-col items-center justify-between px-4 pt-8 md:flex-row">
         <p className="text-footer-link text-sm">
-          © 2024 Notus Aceternity Fight Club. All rights reserved.
+          © 2024 MCP-B. All rights reserved.
         </p>
         <div className="mt-4 flex items-center gap-4 md:mt-0">
           <Link
-            href="https://twitter.com"
-            className="text-footer-link transition-colors hover:text-gray-900"
+            href="https://github.com/WebMCP-org/mcp-b"
+            className="text-footer-link transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+            aria-label="GitHub"
           >
             <svg
               width="20"
@@ -163,31 +159,28 @@ export const Footer = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
             </svg>
           </Link>
           <Link
-            href="https://linkedin.com"
-            className="text-footer-link transition-colors hover:text-gray-900"
+            href="https://www.npmjs.com/package/@mcp-b/transports"
+            className="text-footer-link transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+            aria-label="NPM"
           >
             <svg
               width="20"
               height="20"
               viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              fill="currentColor"
             >
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-              <rect width="4" height="12" x="2" y="9" />
-              <circle cx="4" cy="4" r="2" />
+              <path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.664H5.334v-4H3.999v4H1.335V8.667h5.331v5.331zm4 0v1.336H8.001V8.667h5.334v5.332h-2.669v-.001zm12.001 0h-1.33v-4h-1.336v4h-1.335v-4h-1.33v4h-2.671V8.667h8.002v5.331zM10.665 10H12v2.667h-1.335V10z" />
             </svg>
           </Link>
           <Link
-            href="https://instagram.com"
-            className="text-footer-link transition-colors hover:text-gray-900"
+            href="https://chromewebstore.google.com/detail/mcp-bextension/daohopfhkdelnpemnhlekblhnikhdhfa"
+            className="text-footer-link transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+            aria-label="Chrome Extension"
           >
             <svg
               width="20"
@@ -199,9 +192,11 @@ export const Footer = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-              <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="4" />
+              <line x1="21.17" y1="8" x2="12" y2="8" />
+              <line x1="3.95" y1="6.06" x2="8.54" y2="14" />
+              <line x1="10.88" y1="21.94" x2="15.46" y2="14" />
             </svg>
           </Link>
         </div>
