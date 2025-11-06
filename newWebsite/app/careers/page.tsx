@@ -8,14 +8,7 @@ import { SectionHeading } from "@/components/seciton-heading";
 import { SubHeading } from "@/components/subheading";
 import { CoFounderRequirements } from "@/components/careers/requirements";
 import { CoFounderResponsibilities } from "@/components/careers/responsibilities";
-import {
-  BoltIcon,
-  CloudCheckIcon,
-  HeartHandsIcon,
-  ShieldSplitIcon,
-  SparklesIcon,
-  TelescopeIcon,
-} from "@/icons/card-icons";
+import { WhyJoinCoFounder } from "@/components/careers/why-join";
 
 import { getSEOTags } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -56,44 +49,6 @@ export default function CareersPage() {
     },
   ];
 
-  const why = [
-    {
-      title: "Complete Ownership",
-      description:
-        "You will own your work and be able to see the impact of your work on the company.",
-      icon: <CloudCheckIcon className="text-brand size-6" />,
-    },
-    {
-      title: "High-Paced Environment",
-      description:
-        "Move fast and ship quality. We operate at startup velocity with enterprise precision.",
-      icon: <BoltIcon className="text-brand size-6" />,
-    },
-    {
-      title: "Absolute Integrity",
-      description:
-        "We do what we say. Transparency and honesty guide every decision and interaction.",
-      icon: <ShieldSplitIcon className="text-brand size-6" />,
-    },
-    {
-      title: "People-First Culture",
-      description:
-        "Your growth, well-being, and success are fundamental to our mission.",
-      icon: <HeartHandsIcon className="text-brand size-6" />,
-    },
-    {
-      title: "Meaningful Impact",
-      description:
-        "Build technology that transforms how millions of teams work. Your code matters.",
-      icon: <SparklesIcon className="text-brand size-6" />,
-    },
-    {
-      title: "Vision Driven",
-      description:
-        "Join us in reimagining the future of work through autonomous AI systems.",
-      icon: <TelescopeIcon className="text-brand size-4" />,
-    },
-  ];
   return (
     <main>
       <DivideX />
@@ -154,29 +109,38 @@ export default function CareersPage() {
           ))}
         </div>
       </Container>
-      <Container className="border-divide flex flex-col items-center border-x border-b py-16 pb-20">
-        <Badge text="The Role" />
-        <SectionHeading className="mt-4 px-4 text-center">
-          Co-Founder Responsibilities
-        </SectionHeading>
-        <CoFounderResponsibilities />
+      <Container className="border-divide flex flex-col items-center border-x pb-20">
+        <div className="divide-divide border-divide grid grid-cols-1 border-b lg:grid-cols-2 lg:divide-x">
+          <div className="flex flex-col items-start justify-start px-4 py-10 md:px-8 md:py-32">
+            <Badge text="The Role" />
+            <SectionHeading className="mt-4 text-left">
+              Co-Founder <br />
+              Responsibilities
+            </SectionHeading>
+            <SubHeading className="mt-6 mr-auto max-w-md text-left">
+              As a co-founder, you'll wear many hats and shape every aspect of
+              MCP-B's development, from technical architecture to community
+              engagement.
+            </SubHeading>
+          </div>
+          <CoFounderResponsibilities />
+        </div>
       </Container>
-      <Container className="border-divide flex flex-col items-center border-x border-b py-16 pb-20">
-        <Badge text="Why Join" />
-        <SectionHeading className="mt-4 px-4 text-center">
-          Why Join MCP-B as a Co-Founder?
-        </SectionHeading>
-        <div className="mt-12 grid grid-cols-1 gap-10 px-4 md:grid-cols-2 md:px-8 lg:grid-cols-3">
-          {why.map((useCase, index) => (
-            <div
-              key={useCase.title}
-              className="relative z-10 rounded-lg bg-gray-50 p-4 transition duration-200 md:p-5 dark:bg-neutral-800"
-            >
-              <div className="flex items-center gap-2">{useCase.icon}</div>
-              <h3 className="mt-4 mb-2 text-lg font-medium">{useCase.title}</h3>
-              <p className="text-gray-600">{useCase.description}</p>
-            </div>
-          ))}
+      <Container className="border-divide flex flex-col items-center border-x pb-20">
+        <div className="divide-divide border-divide grid grid-cols-1 border-b lg:grid-cols-2 lg:divide-x">
+          <div className="flex flex-col items-start justify-start px-4 py-10 md:px-8 md:py-32">
+            <Badge text="Why Join" />
+            <SectionHeading className="mt-4 text-left">
+              Why Join MCP-B <br />
+              as a Co-Founder?
+            </SectionHeading>
+            <SubHeading className="mt-6 mr-auto max-w-md text-left">
+              Build something meaningful at the intersection of web technology
+              and AI, with complete ownership and the opportunity to shape the
+              future of developer tools.
+            </SubHeading>
+          </div>
+          <WhyJoinCoFounder />
         </div>
       </Container>
 
