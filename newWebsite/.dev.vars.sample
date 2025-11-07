@@ -1,0 +1,15 @@
+# .dev.vars.sample
+# This file is used by Wrangler for local development with Cloudflare Workers
+# Copy this to .dev.vars and fill in your actual values
+# NEVER commit .dev.vars to git (it's in .gitignore)
+
+# Browserbase Configuration (REQUIRED for live demo)
+# Get these from https://www.browserbase.com/
+BROWSERBASE_API_KEY=your_api_key_here
+BROWSERBASE_PROJECT_ID=your_project_id_here
+BROWSERBASE_EXTENSION_ID=your_extension_id_here
+BB_REGION=us-east-1
+
+# Cloudflare Turnstile (OPTIONAL - for abuse protection)
+# Get these from https://dash.cloudflare.com/?to=/:account/turnstile
+TURNSTILE_SECRET_KEY=your_turnstile_secret_key_here
