@@ -10,26 +10,26 @@ import Link from "next/link";
 export const Hero = () => {
   return (
     <Container className="border-divide flex flex-col items-center justify-center border-x px-4 pt-10 pb-10 md:pt-32 md:pb-20">
-      <Badge text="Building the Agentic Web" />
+      <Badge text="Browser-Native MCP" />
       <Heading className="mt-4">
-        Foundational Primitives <br /> for{" "}
-        <span className="text-brand">Agentic Browsers</span>
+        Model Context Protocol <br /> for{" "}
+        <span className="text-brand">the Browser</span>
       </Heading>
 
       <SubHeading className="mx-auto mt-6 max-w-lg">
-        While others build products, we're building the primitives. Working with web standards bodies and browser vendors to create the foundational layer for AI-native browsers. Building UIs for LLMs, not just interfaces with LLMs.
+        Today's AI automation is like using a robot to read your screen and click buttons. MCP-B lets assistants call your site's real functions instead.
       </SubHeading>
 
       <div className="mt-6 flex items-center gap-4">
-        <Button as={Link} href="https://chromewebstore.google.com/detail/mcp-b-extension/daohopfhkdelnpemnhlekblhnikhdhfa">
+        <Button as={Link} href="https://chromewebstore.google.com/detail/mcp-b/daohopfhkdelnpemnhlekblhnikhdhfa">
           Add to Chrome
         </Button>
-        <Button variant="secondary" as={Link} href="https://mcp-ui.mcp-b.ai">
+        <Button variant="secondary" as={Link} href="/mcp-b-playground">
           Try the live demo
         </Button>
       </div>
       <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-        Open Source • W3C-Aligned • Piloted by JPMorgan & Adobe
+        No API keys or OAuth — uses your logged-in session
       </p>
     </Container>
   );
