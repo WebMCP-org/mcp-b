@@ -1,0 +1,12 @@
+# Dependencies installed in root by mistake
+node_modules/
+package.json
+pnpm-lock.yaml
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
