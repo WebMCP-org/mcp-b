@@ -8,6 +8,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { Thread } from './thread';
 import { MCPToolRegistry } from './mcp-tools';
 import { useWebMCPIntegration } from '@/hooks/useWebMCPIntegration';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import {
   WebPreview,
   WebPreviewNavigation,
@@ -107,54 +108,56 @@ export function PlaygroundContent() {
   }, []);
 
   return (
-    <AssistantRuntimeProvider runtime={runtime}>
-      {/* Register MCP tools as assistant tools */}
-      <MCPToolRegistry
-        webMcpTools={webMcpIntegration.webMcpTools}
-        webMcpClients={webMcpIntegration.webMcpClients}
-      />
+    <TooltipProvider>
+      <AssistantRuntimeProvider runtime={runtime}>
+        {/* Register MCP tools as assistant tools */}
+        <MCPToolRegistry
+          webMcpTools={webMcpIntegration.webMcpTools}
+          webMcpClients={webMcpIntegration.webMcpClients}
+        />
 
-      <div className="flex h-full gap-0">
-        {/* Iframe Panel - Left Side */}
-        <div className="flex-1 flex flex-col border-r border-divide">
-          <WebPreview defaultUrl="/embed">
-            <WebPreviewNavigation>
-              <WebPreviewUrl />
-            </WebPreviewNavigation>
-            <WebPreviewBody
-              ref={iframeRef}
-              title="Landing Page Preview"
-            />
-          </WebPreview>
-        </div>
-
-        {/* Chat Panel - Right Side */}
-        <div className="w-[400px] flex flex-col bg-background">
-          {/* Chat Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
-            <div className="flex items-center gap-2">
-              <div
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  isConnected ? 'bg-green-500' : 'bg-red-500'
-                }`}
+        <div className="flex h-full gap-0">
+          {/* Iframe Panel - Left Side */}
+          <div className="flex-1 flex flex-col border-r border-divide">
+            <WebPreview defaultUrl="/embed">
+              <WebPreviewNavigation>
+                <WebPreviewUrl />
+              </WebPreviewNavigation>
+              <WebPreviewBody
+                ref={iframeRef}
+                title="Landing Page Preview"
               />
-              <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
-                {isConnected ? 'Connected' : 'Connecting...'}
-              </span>
-            </div>
-            {isConnected && (
-              <span className="text-xs text-gray-600 dark:text-neutral-400">
-                {webMcpIntegration.webMcpTools.length} tools
-              </span>
-            )}
+            </WebPreview>
           </div>
 
-          {/* Thread */}
-          <div className="flex-1 overflow-hidden">
-            <Thread />
+          {/* Chat Panel - Right Side */}
+          <div className="w-[400px] flex flex-col bg-background">
+            {/* Chat Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
+              <div className="flex items-center gap-2">
+                <div
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    isConnected ? 'bg-green-500' : 'bg-red-500'
+                  }`}
+                />
+                <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
+                  {isConnected ? 'Connected' : 'Connecting...'}
+                </span>
+              </div>
+              {isConnected && (
+                <span className="text-xs text-gray-600 dark:text-neutral-400">
+                  {webMcpIntegration.webMcpTools.length} tools
+                </span>
+              )}
+            </div>
+
+            {/* Thread */}
+            <div className="flex-1 overflow-hidden">
+              <Thread />
+            </div>
           </div>
         </div>
-      </div>
-    </AssistantRuntimeProvider>
+      </AssistantRuntimeProvider>
+    </TooltipProvider>
   );
 }
