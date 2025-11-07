@@ -209,23 +209,35 @@ npm run cf:deploy
 
 ## 🔒 6. Optional: Cloudflare Turnstile (Bot Protection)
 
-**Status:** ⏸️ OPTIONAL - For production abuse protection
+**Status:** ✅ COMPLETE - Ready to enable when needed
 
 **What:** Adds CAPTCHA-like protection to the live demo to prevent abuse.
 
-**Required Steps:**
+**What was implemented:**
+1. ✅ Turnstile script loading in root layout (only loads if site key is configured)
+2. ✅ Turnstile widget rendering in live-browser-demo component
+3. ✅ Token state management and callback handling
+4. ✅ Widget reset logic when session ends
+5. ✅ Backend verification already in place in `/api/browserbase/create-session`
+6. ✅ Environment variable configuration in wrangler.toml and .env.sample
+7. ✅ Comprehensive setup documentation in `TURNSTILE_SETUP.md`
+
+**To enable Turnstile:**
 1. Go to Cloudflare Dashboard → **Turnstile**
 2. Create a new site
 3. Get your **Site Key** and **Secret Key**
 4. Add to environment variables:
-   - Local: `.env.local`
-   - Production: Cloudflare Workers environment variables
-5. The `/api/browserbase/create-session` endpoint already has Turnstile verification code
+   - Local: Add to `.env.local`
+   - Production: Add to Cloudflare Workers environment variables (see `TURNSTILE_SETUP.md`)
+5. Update `wrangler.toml` with your site key
+6. Deploy: `npm run cf:build && npm run cf:deploy`
 
 **When to enable:**
-- After launch if you notice abuse
-- Before public announcement
-- When costs become a concern
+- ✅ Before public announcement (recommended)
+- ✅ After launch if you notice abuse
+- ✅ When costs become a concern
+
+**Documentation:** See `newWebsite/TURNSTILE_SETUP.md` for detailed setup instructions
 
 ---
 

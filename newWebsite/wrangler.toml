@@ -9,7 +9,8 @@ workers_dev = true
 # Environment variables for public keys
 [vars]
 NEXT_PUBLIC_WEBSITE_URL = "https://mcp-b.ai"
-# Add NEXT_PUBLIC_TURNSTILE_SITE_KEY if using Turnstile
+# Uncomment and add your Turnstile site key if using bot protection
+# NEXT_PUBLIC_TURNSTILE_SITE_KEY = "your_turnstile_site_key_here"
 
 # IMPORTANT: Add sensitive environment variables via Cloudflare Dashboard
 # Go to: Workers & Pages → mcp-b → Settings → Variables

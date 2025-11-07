@@ -86,6 +86,16 @@ export const LiveBrowserDemo = () => {
       setSessionId(null);
       setState("idle");
       setInteractive(false);
+      setTurnstileToken(""); // Reset Turnstile token
+
+      // Reset Turnstile widget if available
+      if (typeof window !== "undefined" && (window as any).turnstile) {
+        try {
+          (window as any).turnstile.reset();
+        } catch (e) {
+          console.log("Turnstile reset not available");
+        }
+      }
     }
   }
 
@@ -124,6 +134,19 @@ export const LiveBrowserDemo = () => {
           Experience the MCP-B Chrome extension in action. Start a live browser
           session and interact with AI-enabled websites.
         </SubHeading>
+
+        {/* Turnstile Widget - Only shows if TURNSTILE_SITE_KEY is configured */}
+        {state === "idle" &&
+          process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+            <div className="mt-8 flex justify-center">
+              <div
+                className="cf-turnstile"
+                data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                data-callback="onTurnstileSuccess"
+                data-theme="dark"
+              ></div>
+            </div>
+          )}
 
         {/* Controls */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-3">

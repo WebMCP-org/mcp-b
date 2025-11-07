@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -24,6 +25,13 @@ export default function RootLayout({
             <Footer />
           </main>
         </ThemeProvider>
+        {/* Cloudflare Turnstile Script - Only loads if site key is configured */}
+        {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            strategy="lazyOnload"
+          />
+        )}
       </body>
     </html>
   );
