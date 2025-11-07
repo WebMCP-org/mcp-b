@@ -13,12 +13,22 @@
     "preview": "npx @opennextjs/cloudflare preview"
   },
   "dependencies": {
+    "@assistant-ui/react": "^0.11.37",
+    "@assistant-ui/react-ai-sdk": "^1.1.9",
+    "@mcp-b/global": "^1.1.0",
+    "@mcp-b/react-webmcp": "^0.1.3",
+    "@mcp-b/transports": "^1.1.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@modelcontextprotocol/sdk": "^1.21.0",
     "@next/mdx": "^15.4.6",
+    "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/typography": "^0.5.16",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "ai": "^5.0.89",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.542.0",
@@ -30,7 +40,8 @@
     "react-dom": "19.1.0",
     "react-syntax-highlighter": "^16.1.0",
     "react-use-measure": "^2.1.7",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@opennextjs/cloudflare": "^1.11.0",
