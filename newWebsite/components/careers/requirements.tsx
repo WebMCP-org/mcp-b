@@ -96,7 +96,7 @@ export const CoFounderRequirements = () => {
     >
       <motion.p
         variants={itemVariants}
-        className="mb-4 text-neutral-600 dark:text-neutral-400"
+        className="mb-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-base"
       >
         I've built MCP-B (and pretty much everything else) myself so far. It's been a fun ride,
         but I'm looking for someone smart and cool to help take this to the next level.
@@ -104,7 +104,7 @@ export const CoFounderRequirements = () => {
 
       <motion.p
         variants={itemVariants}
-        className="mb-4 text-neutral-600 dark:text-neutral-400"
+        className="mb-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 sm:text-base"
       >
         Ideal co-founder:
       </motion.p>
@@ -114,34 +114,34 @@ export const CoFounderRequirements = () => {
         className="mb-6 space-y-2 text-neutral-600 dark:text-neutral-400"
       >
         <motion.li variants={itemVariants} className="flex items-start gap-2">
-          <span className="text-brand mt-1">•</span>
-          <span>
+          <span className="text-brand mt-1 shrink-0 text-sm sm:text-base">•</span>
+          <span className="text-sm leading-relaxed sm:text-base">
             <TechLink text="Strong technical chops (web dev, TypeScript, React)" />
           </span>
         </motion.li>
         <motion.li variants={itemVariants} className="flex items-start gap-2">
-          <span className="text-brand mt-1">•</span>
-          <span>Genuinely excited about AI and developer tools</span>
+          <span className="text-brand mt-1 shrink-0 text-sm sm:text-base">•</span>
+          <span className="text-sm leading-relaxed sm:text-base">Genuinely excited about AI and developer tools</span>
         </motion.li>
         <motion.li variants={itemVariants} className="flex items-start gap-2">
-          <span className="text-brand mt-1">•</span>
-          <span>Good at shipping stuff and scaling things</span>
+          <span className="text-brand mt-1 shrink-0 text-sm sm:text-base">•</span>
+          <span className="text-sm leading-relaxed sm:text-base">Good at shipping stuff and scaling things</span>
         </motion.li>
         <motion.li variants={itemVariants} className="flex items-start gap-2">
-          <span className="text-brand mt-1">•</span>
-          <span>
+          <span className="text-brand mt-1 shrink-0 text-sm sm:text-base">•</span>
+          <span className="text-sm leading-relaxed sm:text-base">
             <TechLink text="Fullstack Cloudflare knowledge is a big plus" />
           </span>
         </motion.li>
         <motion.li variants={itemVariants} className="flex items-start gap-2">
-          <span className="text-brand mt-1">•</span>
-          <span>Chill to work with</span>
+          <span className="text-brand mt-1 shrink-0 text-sm sm:text-base">•</span>
+          <span className="text-sm leading-relaxed sm:text-base">Chill to work with</span>
         </motion.li>
       </motion.ul>
 
       <motion.p
         variants={itemVariants}
-        className="mb-4 text-neutral-600 dark:text-neutral-400"
+        className="mb-4 break-words text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-base"
       >
         <span className="font-medium">The Stack:</span>{" "}
         <TechLink text="TypeScript monorepo running on Cloudflare. ElectricSQL for sync, Postgres with Drizzle, tRPC for the API, and a browser extension built with TanStack Router + React." />
@@ -149,7 +149,7 @@ export const CoFounderRequirements = () => {
 
       <motion.p
         variants={itemVariants}
-        className="text-neutral-600 dark:text-neutral-400"
+        className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-base"
       >
         Interested? Hit me up on{" "}
         <Link
