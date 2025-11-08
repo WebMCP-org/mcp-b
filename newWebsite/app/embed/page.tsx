@@ -39,7 +39,7 @@ export default function EmbedPage() {
     description: 'Scroll the landing page to a specific section. Available sections: hero, features, how-it-works, use-cases, benefits, security, faqs, cta',
     inputSchema: {
       section: z.enum(['hero', 'features', 'how-it-works', 'use-cases', 'benefits', 'security', 'faqs', 'cta'])
-        .describe('The section to scroll to'),
+        .describe('The section to scroll to') as any,
     },
     handler: async ({ section }) => {
       setCurrentSection(section);
@@ -75,7 +75,7 @@ export default function EmbedPage() {
     name: 'highlight_hero',
     description: 'Toggle highlighting of the hero section to draw attention to it',
     inputSchema: {
-      enabled: z.boolean().describe('Whether to enable or disable highlighting'),
+      enabled: z.boolean().describe('Whether to enable or disable highlighting') as any,
     },
     handler: async ({ enabled }) => {
       setHeroHighlight(enabled);
@@ -88,7 +88,7 @@ export default function EmbedPage() {
     name: 'show_message',
     description: 'Display a custom message overlay on the landing page',
     inputSchema: {
-      message: z.string().describe('The message to display'),
+      message: z.string().describe('The message to display') as any,
     },
     handler: async ({ message }) => {
       setCustomMessage(message);
