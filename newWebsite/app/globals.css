@@ -22,7 +22,9 @@
   --color-gray-500: #c0c0c0;
   --color-gray-600: #8b8b8b;
 
-  --color-brand: #2563eb; /* blue-600 from old website */
+  --color-brand: #1F5EFF; /* primary blue from docs */
+  --color-brand-light: #4B7BFF; /* light variant from docs */
+  --color-brand-dark: #1449CC; /* dark variant from docs */
   --shadow-aceternity:
     0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02),
     0px 0px 0px 1px rgba(25, 28, 33, 0.08);

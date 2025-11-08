@@ -60,7 +60,7 @@
 </mask>
 <g mask="url(#mask1_546_53)">
 <g filter="url(#filter2_f_546_53)">
-<ellipse cx="569" cy="138.5" rx="14" ry="13" fill="#2563eb"/>
+<ellipse cx="569" cy="138.5" rx="14" ry="13" fill="#1F5EFF"/>
 </g>
 </g>
 <g filter="url(#filter3_di_546_53)">
@@ -305,20 +305,20 @@
 </linearGradient>
 <linearGradient id="paint8_linear_546_53" x1="0" y1="0.5" x2="80" y2="0.5" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EAEDF1"/>
-<stop offset="0.5" stop-color="#2563eb"/>
+<stop offset="0.5" stop-color="#1F5EFF"/>
 <stop offset="1" stop-color="#EAEDF1"/>
 </linearGradient>
 <linearGradient id="paint9_linear_546_53" x1="747.5" y1="172.5" x2="747.5" y2="252.5" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EAEDF1"/>
-<stop offset="0.5" stop-color="#2563eb"/>
+<stop offset="0.5" stop-color="#1F5EFF"/>
 <stop offset="1" stop-color="#EAEDF1"/>
 </linearGradient>
 <linearGradient id="paint10_linear_546_53" x1="0" y1="0.5" x2="60" y2="0.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#2563eb"/>
+<stop stop-color="#1F5EFF"/>
 <stop offset="1" stop-color="#EAEDF1"/>
 </linearGradient>
 <linearGradient id="paint11_linear_546_53" x1="556.5" y1="105.5" x2="556.5" y2="137.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#2563eb"/>
+<stop stop-color="#1F5EFF"/>
 <stop offset="1" stop-color="#EAEDF1"/>
 </linearGradient>
 <linearGradient id="paint12_linear_546_53" x1="878.459" y1="84.1774" x2="889.231" y2="88.695" gradientUnits="userSpaceOnUse">
