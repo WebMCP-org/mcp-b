@@ -5,10 +5,13 @@ import { AssistantRuntimeProvider } from '@assistant-ui/react';
 import { useChatRuntime, AssistantChatTransport } from '@assistant-ui/react-ai-sdk';
 import { IframeParentTransport } from '@mcp-b/transports';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { Cloud, Layout } from 'lucide-react';
 import { Thread } from './thread';
 import { MCPToolRegistry } from './mcp-tools';
 import { useWebMCPIntegration } from '@/hooks/useWebMCPIntegration';
+import { UIResourceProvider } from '@/contexts/UIResourceContext';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { countToolsBySource } from '@/lib/mcp-utils';
 import {
   WebPreview,
   WebPreviewNavigation,
@@ -107,57 +110,69 @@ export function PlaygroundContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const toolCounts = countToolsBySource(webMcpIntegration.webMcpTools);
+
   return (
     <TooltipProvider>
-      <AssistantRuntimeProvider runtime={runtime}>
-        {/* Register MCP tools as assistant tools */}
-        <MCPToolRegistry
-          webMcpTools={webMcpIntegration.webMcpTools}
-          webMcpClients={webMcpIntegration.webMcpClients}
-        />
+      <UIResourceProvider>
+        <AssistantRuntimeProvider runtime={runtime}>
+          {/* Register MCP tools as assistant tools */}
+          <MCPToolRegistry
+            webMcpTools={webMcpIntegration.webMcpTools}
+            webMcpClients={webMcpIntegration.webMcpClients}
+          />
 
-        <div className="flex h-full gap-0">
-          {/* Iframe Panel - Left Side */}
-          <div className="flex-1 flex flex-col border-r border-divide">
-            <WebPreview defaultUrl="/embed">
-              <WebPreviewNavigation>
-                <WebPreviewUrl />
-              </WebPreviewNavigation>
-              <WebPreviewBody
-                ref={iframeRef}
-                title="Landing Page Preview"
-              />
-            </WebPreview>
-          </div>
+          <div className="flex h-full gap-0">
+            {/* Iframe Panel - Left Side */}
+            <div className="flex-1 flex flex-col border-r border-divide">
+              <WebPreview defaultUrl="/embed">
+                <WebPreviewNavigation>
+                  <WebPreviewUrl />
+                </WebPreviewNavigation>
+                <WebPreviewBody ref={iframeRef} title="Landing Page Preview" />
+              </WebPreview>
+            </div>
 
-          {/* Chat Panel - Right Side */}
-          <div className="w-[400px] flex flex-col bg-background">
-            {/* Chat Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
-              <div className="flex items-center gap-2">
-                <div
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    isConnected ? 'bg-green-500' : 'bg-red-500'
-                  }`}
-                />
-                <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
-                  {isConnected ? 'Connected' : 'Connecting...'}
-                </span>
+            {/* Chat Panel - Right Side */}
+            <div className="w-[400px] flex flex-col bg-background">
+              {/* Chat Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      isConnected ? 'bg-green-500' : 'bg-red-500'
+                    }`}
+                  />
+                  <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
+                    {isConnected ? 'Connected' : 'Connecting...'}
+                  </span>
+                </div>
+                {isConnected && (
+                  <div className="flex items-center gap-2">
+                    {toolCounts.webmcp > 0 && (
+                      <div className="flex items-center gap-1 text-xs text-green-700 dark:text-green-300 bg-green-500/10 px-2 py-1 rounded-md border border-green-500/20">
+                        <Layout className="h-3 w-3" />
+                        <span>{toolCounts.webmcp}</span>
+                      </div>
+                    )}
+                    {toolCounts.remote > 0 && (
+                      <div className="flex items-center gap-1 text-xs text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2 py-1 rounded-md border border-blue-500/20">
+                        <Cloud className="h-3 w-3" />
+                        <span>{toolCounts.remote}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-              {isConnected && (
-                <span className="text-xs text-gray-600 dark:text-neutral-400">
-                  {webMcpIntegration.webMcpTools.length} tools
-                </span>
-              )}
-            </div>
 
-            {/* Thread */}
-            <div className="flex-1 overflow-hidden">
-              <Thread />
+              {/* Thread */}
+              <div className="flex-1 overflow-hidden">
+                <Thread />
+              </div>
             </div>
           </div>
-        </div>
-      </AssistantRuntimeProvider>
+        </AssistantRuntimeProvider>
+      </UIResourceProvider>
     </TooltipProvider>
   );
 }

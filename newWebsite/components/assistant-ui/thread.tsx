@@ -21,6 +21,7 @@ import {
 import { type FC } from 'react';
 
 import { MarkdownText } from '@/components/assistant-ui/markdown-text';
+import { ToolFallback } from '@/components/assistant-ui/tool-fallback';
 import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -196,7 +197,14 @@ const AssistantMessage: FC = () => {
   return (
     <MessagePrimitive.Root className="relative grid w-full max-w-[var(--thread-max-width)] grid-cols-[auto_auto_1fr] grid-rows-[auto_1fr] py-2.5 sm:py-4">
       <div className="text-foreground col-span-2 col-start-2 row-start-1 my-1 max-w-[calc(var(--thread-max-width)*0.8)] text-sm leading-6 sm:my-1.5 sm:text-base sm:leading-7">
-        <MessagePrimitive.Content components={{ Text: MarkdownText }} />
+        <MessagePrimitive.Content
+          components={{
+            Text: MarkdownText,
+            tools: {
+              Fallback: ToolFallback,
+            },
+          }}
+        />
         <MessageError />
       </div>
 
