@@ -1,15 +1,11 @@
 ---
 title: "Getting Started with MCP-B"
 description: "A quick start guide to implementing MCP-B in your web application"
-image: "/blog/smaller.gif"
 date: "2025-02-01"
-authorName: "Alex Nahas"
-authorSrc: "/avatars/alex.png"
+authorName: "Mike"
 ---
 
-# Getting Started with MCP-B
-
-Welcome! If you've read about MCP-B's architecture, you're probably eager to start building. This guide will walk you through setting up your first MCP-B powered website.
+Welcome! If you've read about [MCP-B's architecture](/blog/mcp-b-introduction), you're probably eager to start building. This guide will walk you through setting up your first MCP-B powered website.
 
 ## What You'll Build
 
@@ -31,90 +27,163 @@ Before starting, make sure you have:
 
 ## Step 1: Project Setup
 
-First, let's create a new project. MCP-B works with any modern web framework, but we'll use **Next.js** for this example:
+First, let's create a new project. MCP-B works with any modern web framework, but we'll use **TanStack Start** for this example:
 
-```bash
-# Create a new Next.js project
-npx create-next-app@latest my-mcp-app
+<CodeBlock language="bash" code={`# Create a new project
+pnpm create @tanstack/start
 
 # Navigate to your project
 cd my-mcp-app
 
 # Install MCP-B dependencies
-npm install @modelcontextprotocol/sdk @mcp-b/transports zod
-```
+pnpm add @modelcontextprotocol/sdk`} />
 
 ## Step 2: Define Your MCP Tools
 
 Create a file for your MCP server definition. This is where you'll define what tools your website exposes:
 
-```typescript
-// src/services/mcp.ts
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { TabServerTransport } from '@mcp-b/transports';
-import { z } from 'zod';
+<CodeBlock language="typescript" code={`// src/services/mcp.ts
+import { Server } from '@modelcontextprotocol/sdk/server/index.js'
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 
 // Create the MCP server
-export const mcpServer = new McpServer({
-  name: 'my-app-mcp',
-  version: '1.0.0',
-});
+export const mcpServer = new Server(
+  {
+    name: 'my-app-mcp',
+    version: '1.0.0',
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+)
 
 // Define your first tool
-mcpServer.tool('get_greeting', 'Get a friendly greeting', {
-  name: z.string().describe('Name to greet')
-}, async ({ name }) => ({
-  content: [{
-    type: 'text',
-    text: 'Hello, ' + name + '! Welcome to MCP-B.'
-  }]
-}));
+mcpServer.setRequestHandler('tools/list', async () => {
+  return {
+    tools: [
+      {
+        name: 'get_greeting',
+        description: 'Get a friendly greeting',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              description: 'Name to greet',
+            },
+          },
+          required: ['name'],
+        },
+      },
+    ],
+  }
+})
 
-// Connect the server with Tab Transport
-await mcpServer.connect(new TabServerTransport({
-  allowedOrigins: ['*']
-}));
-```
+// Implement the tool
+mcpServer.setRequestHandler('tools/call', async (request) => {
+  if (request.params.name === 'get_greeting') {
+    const name = request.params.arguments?.name
+    return {
+      content: [
+        {
+          type: 'text',
+          text: \`Hello, \${name}! Welcome to MCP-B.\`,
+        },
+      ],
+    }
+  }
+  throw new Error(\`Unknown tool: \${request.params.name}\`)
+})`} />
 
 ## Step 3: Expose MCP to the Browser
 
-Now let's make your tools available in your application:
+Now let's make your tools available through `window.mcp`:
 
-```typescript
-// app/layout.tsx or your entry point
-'use client';
+<CodeBlock language="typescript" code={`// src/main.tsx or your entry point
+import { mcpServer } from './services/mcp'
 
-import { useEffect } from 'react';
-import { mcpServer } from './services/mcp';
+// Expose the MCP server on window
+declare global {
+  interface Window {
+    mcp: typeof mcpServer
+  }
+}
 
-export default function RootLayout({ children }) {
-  useEffect(() => {
-    // Server will automatically connect via Tab Transport
-    console.log('MCP Server initialized');
-  }, []);
+window.mcp = mcpServer
+
+// Continue with your normal React app setup
+// ...`} />
+
+## Step 4: Add a Chat Interface
+
+MCP-B really shines when you add a chat interface. You can use **@assistant-ui/react** for a quick setup:
+
+<CodeBlock language="bash" code={`pnpm add @assistant-ui/react`} />
+
+Then create a simple chat component:
+
+<CodeBlock language="typescript" code={`// src/components/Chat.tsx
+import { Thread } from '@assistant-ui/react'
+
+export function Chat() {
+  return (
+    <div className="fixed bottom-4 right-4 w-96 h-[600px]">
+      <Thread />
+    </div>
+  )
+}`} />
+
+## Step 5: Connect Everything Together
+
+In your main app component, tie it all together:
+
+<CodeBlock language="typescript" code={`// src/App.tsx
+import { Chat } from './components/Chat'
+import { AssistantRuntimeProvider } from '@assistant-ui/react'
+import { useAssistantMCP } from './hooks/useAssistantMCP'
+
+export function App() {
+  const runtime = useAssistantMCP()
 
   return (
-    <html>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
+    <AssistantRuntimeProvider runtime={runtime}>
+      <div className="min-h-screen">
+        <header>
+          <h1>My MCP-B App</h1>
+        </header>
 
-## Step 4: Test Your Setup
+        <main>
+          {/* Your app content */}
+        </main>
+
+        <Chat />
+      </div>
+    </AssistantRuntimeProvider>
+  )
+}`} />
+
+## Step 6: Test Your Setup
 
 Start your development server:
 
-```bash
-npm run dev
-```
+<CodeBlock language="bash" code={`pnpm dev`} />
 
-Open your browser and:
+Open your browser console and verify MCP is available:
 
-1. Install the MCP-B extension from the Chrome Web Store
-2. Visit your application (http://localhost:3000)
-3. Click the MCP-B extension icon
-4. You should see your `get_greeting` tool available!
+<CodeBlock language="javascript" code={`// In browser console
+console.log(window.mcp)
+// Should show your MCP server object
+
+// Try calling your tool
+window.mcp.request({
+  method: 'tools/call',
+  params: {
+    name: 'get_greeting',
+    arguments: { name: 'World' }
+  }
+})`} />
 
 ## Common Patterns
 
@@ -122,73 +191,50 @@ Open your browser and:
 
 As your app grows, you'll want to add more tools. Here's a pattern for organizing them:
 
-```typescript
-// Add a todo tool
-mcpServer.tool('create_todo', 'Create a new todo', {
-  text: z.string().describe('Todo text'),
-  priority: z.enum(['low', 'medium', 'high']).optional()
-}, async ({ text, priority }) => {
-  // Your todo creation logic here
-  return {
-    content: [{
-      type: 'text',
-      text: 'Created todo: ' + text + ' with priority ' + (priority || 'medium')
-    }]
-  };
-});
-```
+<CodeBlock language="typescript" code={`// src/services/mcp/tools/todos.ts
+export const todoTools = [
+  {
+    name: 'list_todos',
+    description: 'List all todos',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+    },
+  },
+  {
+    name: 'create_todo',
+    description: 'Create a new todo',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        text: { type: 'string' },
+      },
+      required: ['text'],
+    },
+  },
+]
+
+// Then import and use in your main MCP setup`} />
 
 ### Error Handling
 
 Always wrap your tool implementations with proper error handling:
 
-```typescript
-mcpServer.tool('risky_operation', 'A tool that might fail', {
-  // schema
-}, async (params) => {
+<CodeBlock language="typescript" code={`mcpServer.setRequestHandler('tools/call', async (request) => {
   try {
     // Your tool logic here
-    return {
-      content: [{ type: 'text', text: 'Success!' }]
-    };
   } catch (error) {
     return {
-      content: [{
-        type: 'text',
-        text: 'Error: ' + (error instanceof Error ? error.message : 'Unknown error')
-      }],
-      isError: true
-    };
+      content: [
+        {
+          type: 'text',
+          text: \`Error: \${error instanceof Error ? error.message : 'Unknown error'}\`,
+        },
+      ],
+      isError: true,
+    }
   }
-});
-```
-
-## Dynamic Tool Registration
-
-MCP-B supports dynamic tool updates. Tools can be added or removed based on application state:
-
-```typescript
-// Component that registers tools when mounted
-function ShoppingCartTools({ cartId }) {
-  useEffect(() => {
-    const tool = mcpServer.tool('checkout', 'Checkout the cart', {
-      paymentMethod: z.enum(['credit', 'debit', 'paypal'])
-    }, async ({ paymentMethod }) => {
-      // Process checkout
-      return {
-        content: [{ type: 'text', text: 'Order created!' }]
-      };
-    });
-
-    // Cleanup when component unmounts
-    return () => {
-      // Tool is automatically removed
-    };
-  }, [cartId]);
-
-  return null;
-}
-```
+})`} />
 
 ## Next Steps
 
@@ -196,37 +242,40 @@ Congratulations! You now have a working MCP-B setup. Here's what to explore next
 
 1. **Add Real Functionality**: Replace the greeting tool with actual app features
 2. **State Management**: Connect your tools to your app's state (React Context, Zustand, etc.)
-3. **Persistence**: Add a database for storing data
-4. **Security**: Add authentication and authorization to your tools
-5. **Deploy**: Deploy your application to production
+3. **Persistence**: Add a database (we recommend Drizzle + PostgreSQL)
+4. **Deploy**: Deploy to Cloudflare Workers for a fast, global edge deployment
+5. **Security**: Add authentication and authorization to your tools
 
 ## Troubleshooting
 
-### Tools not showing in extension
+### "window.mcp is undefined"
+
+Make sure you're exposing the MCP server before your React app tries to use it. The exposure should happen in your main entry file.
+
+### Tools not showing in chat
 
 Verify that:
-1. The MCP-B extension is installed and enabled
-2. Your Tab Transport is properly initialized
+1. Your `tools/list` handler is returning the correct format
+2. The tool names match between `list` and `call` handlers
 3. Check the browser console for any errors
-4. Ensure `allowedOrigins` includes your domain
 
 ### TypeScript errors with MCP SDK
 
 Ensure you have the latest types:
 
-```bash
-npm install -D @types/node
-```
+<CodeBlock language="bash" code={`pnpm add -D @types/node`} />
 
 ## Resources
 
 - [MCP Specification](https://spec.modelcontextprotocol.io/)
-- [MCP-B Documentation](https://mcp-b.ai/docs)
-- [Example Applications](https://github.com/WebMCP-org/examples)
+- [Example Apps](https://github.com/WebMCP-org/examples)
 - [Community Discord](https://discord.gg/mcp-b)
+- [Full Documentation](/docs)
 
 ## Conclusion
 
 You've now built your first MCP-B application! The beauty of this architecture is that you can progressively enhance it—start simple and add complexity as needed. Every tool you add makes your app more powerful and more accessible to AI assistants.
+
+Ready to go deeper? Check out our [Security Best Practices](/blog/security-best-practices) guide next.
 
 Happy building! 🚀
