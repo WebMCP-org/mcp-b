@@ -172,11 +172,11 @@ function MyComponent() {
       <div className="flex flex-col items-center px-4 md:px-8">
         <Badge text="Quick Start" />
         <SectionHeading className="mt-4">
-          Production-Ready in 50 Lines
+          AI-Accessible in ~50 Lines
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-2xl text-center">
-          The same implementation running at JPMorgan and Adobe. Add our SDK, register your tools, and you're live. No build changes, no infrastructure deployment.
+          Include the MCP-B polyfill and register your tools using navigator.modelContext. The same approach running in production at JPMorgan and Adobe. No server deployment, no build changes.
         </SubHeading>
 
         {/* Step 1: Polyfill Installation */}
@@ -375,15 +375,15 @@ function MyComponent() {
                 Framework Agnostic
               </h4>
               <p className="mt-2 text-sm text-neutral-400">
-                Works with React, Vue, Svelte, or vanilla JS. The same API everywhere. No framework lock-in.
+                Works with React, Vue, Svelte, or vanilla JavaScript. Same navigator.modelContext API everywhere. Zero framework dependencies.
               </p>
             </div>
             <div className="border border-neutral-800 bg-neutral-900 p-4">
               <h4 className="font-semibold text-white">
-                Inspired W3C Standard
+                MCP-B → WebMCP Standard
               </h4>
               <p className="mt-2 text-sm text-neutral-400">
-                Our navigator.modelContext API design inspired the WebMCP W3C standardization effort. Standards-based and future-proof.
+                Our blog post about MCP-B inspired the WebMCP W3C standard. This navigator.modelContext API is the foundation of that standardization effort.
               </p>
             </div>
           </div>

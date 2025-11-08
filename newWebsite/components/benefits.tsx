@@ -25,52 +25,52 @@ import { VerticalLine } from "./common/vertical-line";
 export const Benefits = () => {
   const benefits = [
     {
-      title: "100x Faster Execution",
+      title: "100x Faster Than UI Automation",
       description:
-        "Milliseconds vs 10-20 seconds. Direct tool calls eliminate UI automation overhead, screen parsing, and multiple LLM round-trips. Proven in production at JPMorgan.",
+        "Milliseconds vs 10-20 seconds. Direct protocol-based tool calls eliminate screen parsing, element location, and multiple LLM reasoning loops. Validated at JPMorgan.",
       icon: <RocketIcon className="text-brand size-6" />,
     },
     {
-      title: "Zero Auth Complexity",
+      title: "Zero Auth Overhead",
       description:
-        "Uses existing browser sessions—no OAuth flows, no API keys, no credential management. AI agents work with the same permissions as the logged-in user.",
+        "Leverages existing browser sessions automatically. No OAuth implementation, no API key management, no separate credential flow. Agents use the user's authenticated context.",
       icon: <ShieldIcon className="text-brand size-6" />,
     },
     {
-      title: "50 Lines to AI-Ready",
+      title: "~50 Lines of Code",
       description:
-        "Add a lightweight SDK and register your tools. That's it. No server deployment, no new infrastructure, no framework lock-in. Works with React, Vue, or vanilla JS.",
+        "Include MCP-B SDK, register your tools with schemas, done. No backend deployment, no infrastructure changes, no framework dependencies. Works everywhere JavaScript runs.",
       icon: <RealtimeSyncIcon className="text-brand size-6" />,
     },
     {
-      title: "Protocol-Level Innovation",
+      title: "MCP in the Browser",
       description:
-        "We invented the browser-as-MCP-server pattern. Websites become first-class AI participants through structured tool protocols instead of fragile UI automation.",
+        "MCP-B brings Anthropic's Model Context Protocol to browser environments. Websites become MCP servers, exposing structured tools instead of relying on brittle DOM selectors.",
       icon: <ScreenCogIcon className="text-brand size-6" />,
     },
     {
-      title: "Enterprise Security",
+      title: "Browser Security Model",
       description:
-        "Built on browser security primitives. User consent for every action, transparent audit trails, and origin validation. Deployed in regulated industries.",
+        "Built on standard browser security primitives. User consent for tool execution, transparent audit trails, same-origin policy enforcement. Production-proven in regulated industries.",
       icon: <ShieldIcon className="text-brand size-6" />,
     },
     {
-      title: "Standards Leadership",
+      title: "Inspired WebMCP Standard",
       description:
-        "Our work inspired the WebMCP W3C standard. Full compatibility with Anthropic's Model Context Protocol means your tools work across all MCP clients.",
+        "Our blog post about MCP-B sparked the WebMCP W3C standardization effort. Full MCP compatibility means tools work across Claude, custom agents, and any MCP client.",
       icon: <GraphIcon className="text-brand size-6" />,
     },
   ];
   return (
     <Container className="border-divide relative overflow-hidden border-x px-4 py-20 md:px-8">
       <div className="relative flex flex-col items-center">
-        <Badge text="The MCP-B Advantage" />
+        <Badge text="Why MCP-B" />
         <SectionHeading className="mt-4">
-          First-Mover Infrastructure
+          Protocol-Level Advantages
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          As pioneers of browser-native AI protocols, we've built the proven primitives that power enterprise deployments. Our approach is faster, simpler, and more secure than alternatives.
+          MCP-B brings Anthropic's Model Context Protocol to browsers with a production-ready implementation. Faster, simpler, and more reliable than UI automation approaches.
         </SubHeading>
       </div>
       <div className="mt-20 grid grid-cols-1 gap-4 md:grid-cols-3">

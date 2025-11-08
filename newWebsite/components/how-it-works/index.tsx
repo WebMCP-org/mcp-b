@@ -23,25 +23,25 @@ type Tab = {
 export const HowItWorks = () => {
   const tabs = [
     {
-      title: "Define Your Tools",
+      title: "1. Define Your Tools",
       description:
-        "Add ~50 lines of code to register JavaScript functions with JSON schemas. Your website becomes an MCP server—AI agents can discover and call your tools through structured protocols.",
+        "Add the MCP-B SDK and register JavaScript functions with JSON schemas using navigator.modelContext. Your website becomes an MCP server that AI agents can discover and interact with.",
       icon: FirstIcon,
       id: "tools",
       skeleton: <DesignYourWorkflowSkeleton />,
     },
     {
-      title: "Install Extension",
+      title: "2. Install Extension",
       description:
-        "Our Chrome extension injects an MCP client into the page. It automatically discovers your tools and makes them available to any MCP-compatible AI assistant.",
+        "The MCP-B Chrome extension bridges your browser tools to AI assistants. It discovers registered tools and makes them available to Claude, custom agents, and any MCP client.",
       icon: SecondIcon,
       id: "extension",
       skeleton: <ConnectYourTooklsSkeleton />,
     },
     {
-      title: "AI Agents Execute",
+      title: "3. Agents Execute",
       description:
-        "Agents call your tools instantly through the browser's existing session. No API keys, no OAuth, no latency. Deterministic execution in milliseconds, not seconds.",
+        "AI agents call your tools through MCP protocol using the browser's authenticated session. Direct function invocation—milliseconds vs seconds, deterministic vs probabilistic.",
       icon: ThirdIcon,
       id: "execute",
       skeleton: <DeployAndScaleSkeleton />,
@@ -65,10 +65,10 @@ export const HowItWorks = () => {
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center pt-16">
         <Badge text="How it works" />
-        <SectionHeading className="mt-4">Three Steps to Production</SectionHeading>
+        <SectionHeading className="mt-4">Three Steps to AI-Accessible</SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          Our battle-tested approach works with any framework and requires no infrastructure changes. The same implementation trusted by JPMorgan and Adobe.
+          MCP-B works with any JavaScript framework and requires zero infrastructure changes. Add the SDK, define tools, and you're live. Used in production by JPMorgan and Adobe.
         </SubHeading>
         {/* Desktop Tabs */}
         <div className="border-divide divide-divide mt-16 hidden w-full grid-cols-2 divide-x border-t lg:grid">

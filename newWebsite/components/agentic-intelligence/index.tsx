@@ -30,32 +30,32 @@ export const AgenticIntelligence = () => {
   return (
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center py-16">
-        <Badge text="Our Story & Mission" />
+        <Badge text="Our Story" />
         <SectionHeading className="mt-4">
-          From Vision to W3C Standard
+          From Blog Post to W3C Standard
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg px-2">
-          MCP-B pioneered the concept of browser-native AI protocols. Our original research and blog post inspired the WebMCP W3C standardization effort. Now we're building the reference implementation and foundational primitives that bring this vision to life.
+          MCP-B (Model Context Protocol for the Browser) brings Anthropic's Model Context Protocol to web browsers. Our blog post introducing this approach inspired the WebMCP W3C standardization initiative. We're building the production-ready implementation that makes it real.
         </SubHeading>
         <div className="border-divide divide-divide mt-16 grid grid-cols-1 divide-y border-y md:grid-cols-2 md:divide-x">
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>Inspired the Standard</CardTitle>
+              <CardTitle>Blog Post → WebMCP Standard</CardTitle>
             </div>
             <CardDescription>
-              Our pioneering work on browser-native AI protocols inspired the WebMCP W3C standardization initiative. We're now actively collaborating with standards bodies to define how browsers and AI agents communicate.
+              Our blog post introducing MCP-B (Model Context Protocol for the Browser) sparked the WebMCP W3C standardization effort. What started as our implementation became the inspiration for an industry-wide standard.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>Protocol-First Innovation</CardTitle>
+              <CardTitle>MCP in the Browser</CardTitle>
             </div>
             <CardDescription>
-              Moving beyond UI automation to structured tool calling. We invented the patterns that enable AI agents to interact with websites through deterministic APIs instead of probabilistic screen parsing.
+              MCP-B adapts Anthropic's Model Context Protocol for browser environments. Instead of UI automation, AI agents call structured JavaScript functions—deterministic, fast, and reliable.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
@@ -65,10 +65,10 @@ export const AgenticIntelligence = () => {
             <div className="pointer-events-none absolute inset-0 h-full w-full bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px]"></div>
             <div className="flex items-center gap-2">
               <NativeIcon />
-              <CardTitle>Reference Implementation</CardTitle>
+              <CardTitle>Production-Ready Implementation</CardTitle>
             </div>
             <CardDescription>
-              Building the production-grade implementation of our vision. The MCP-B extension and SDK demonstrate how browser-native AI protocols work in practice, validated by JPMorgan and Adobe deployments.
+              The MCP-B Chrome extension and SDK bring this protocol to life. Deploy AI-accessible websites with ~50 lines of code. Battle-tested at JPMorgan and Adobe in production environments.
             </CardDescription>
             <NativeToolsIntegrationSkeleton />
           </Card>
@@ -77,28 +77,28 @@ export const AgenticIntelligence = () => {
           <Card>
             <div className="flex items-center gap-2">
               <FingerprintIcon />
-              <CardTitle>Thought Leadership</CardTitle>
+              <CardTitle>Open Source</CardTitle>
             </div>
             <CardDescription>
-              From blog post to W3C standard. Our research and vision-setting continue to guide the evolution of browser-AI interaction patterns across the industry.
+              MCP-B is fully open source. Built transparently with the community. The code that inspired a W3C standard is available for everyone to use, study, and contribute to.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <RealtimeSyncIcon />
-              <CardTitle>Enterprise-Proven</CardTitle>
+              <CardTitle>Enterprise Scale</CardTitle>
             </div>
             <CardDescription>
-              Trusted by Fortune 500 companies for production AI agent deployments. Our primitives are battle-tested at scale with JPMorgan's and Adobe's most demanding use cases.
+              Deployed in production at JPMorgan and Adobe. Proven at enterprise scale with Fortune 500 security, compliance, and performance requirements.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <SDKIcon />
-              <CardTitle>Ecosystem Builder</CardTitle>
+              <CardTitle>MCP Compatible</CardTitle>
             </div>
             <CardDescription>
-              Enabling the next generation of AI-native applications. Our open-source tools and standards work create the foundation that thousands of products will build upon.
+              Full compatibility with Anthropic's Model Context Protocol. Tools you define with MCP-B work across all MCP clients—Claude, custom agents, and more.
             </CardDescription>
           </Card>
         </div>
