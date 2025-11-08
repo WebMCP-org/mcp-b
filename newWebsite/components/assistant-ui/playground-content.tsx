@@ -142,11 +142,11 @@ export function PlaygroundContent() {
                   mobileView === 'chat' ? 'hidden md:flex' : 'flex'
                 )}
               >
-                <WebPreview defaultUrl="/embed">
+                <WebPreview defaultUrl="/api/proxy/live-tools">
                   <WebPreviewNavigation>
                     <WebPreviewUrl />
                   </WebPreviewNavigation>
-                  <WebPreviewBody ref={iframeRef} title="Landing Page Preview" />
+                  <WebPreviewBody ref={iframeRef} title="Live Tool Examples" />
                 </WebPreview>
               </div>
 
