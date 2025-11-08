@@ -28,6 +28,19 @@ export default function RootLayout({
               filter: 'saturate(110%)',
             }}
           />
+          {/* Decorative gradient blobs/splotches */}
+          <div
+            aria-hidden
+            className="pointer-events-none fixed -top-48 left-1/4 h-[32rem] w-[32rem] bg-gradient-to-br from-[#1F5EFF]/20 to-[#4B7BFF]/15 rounded-full blur-3xl z-0"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none fixed -bottom-48 right-1/3 h-[36rem] w-[36rem] bg-gradient-to-br from-[#4B7BFF]/15 to-[#1F5EFF]/20 rounded-full blur-3xl z-0"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none fixed top-1/2 -left-32 h-[28rem] w-[28rem] bg-gradient-to-br from-[#1F5EFF]/15 to-[#1449CC]/10 rounded-full blur-3xl z-0"
+          />
           <main className="relative z-10 h-full bg-transparent antialiased">
             <Navbar />
             {children}
