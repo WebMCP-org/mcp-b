@@ -56,11 +56,15 @@ const timelineItems: TimelineItem[] = [
     links: [
       {
         label: "View on Hacker News →",
-        href: "https://news.ycombinator.com/item?id=45622604",
+        href: "https://news.ycombinator.com/item?id=44515403",
       },
       {
-        label: "Original Repository →",
+        label: "Original MCP-B Repo (900+ stars) →",
         href: "https://github.com/MiguelsPizza/WebMCP",
+      },
+      {
+        label: "Viral LinkedIn Post →",
+        href: "https://www.linkedin.com/posts/ivandj_mcp-b-is-turning-any-website-into-an-ai-controllable-activity-7349075617830637570-NA0x/",
       },
     ],
   },
@@ -137,6 +141,10 @@ const timelineItems: TimelineItem[] = [
       </svg>
     ),
     links: [
+      {
+        label: "Connect on LinkedIn →",
+        href: "https://www.linkedin.com/in/alex-nahas",
+      },
       {
         label: "WebMCP Organization →",
         href: "https://github.com/WebMCP-org",
