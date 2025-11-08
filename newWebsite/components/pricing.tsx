@@ -33,7 +33,7 @@ export const Pricing = () => {
         <SectionHeading className="mt-4">
           Simple and Feasible Pricing
         </SectionHeading>
-        <div className="relative mt-8 flex items-center gap-4 rounded-xl bg-gray-50 p-2 dark:bg-neutral-800">
+        <div className="relative mt-8 flex items-center gap-4 rounded-xl border border-gray-200 bg-gray-50 p-2 dark:border-white/10 dark:bg-zinc-950/40">
           <Scale className="opacity-50" />
           {tabs.map((tab) => (
             <button
