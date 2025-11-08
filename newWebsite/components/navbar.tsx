@@ -24,8 +24,8 @@ const items = [
     href: "/playground",
   },
   {
-    title: "Live Demo",
-    href: "/mcp-b-playground",
+    title: "About",
+    href: "/about",
   },
   {
     title: "Blog",
