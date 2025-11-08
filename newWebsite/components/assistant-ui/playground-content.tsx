@@ -8,10 +8,12 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { Cloud, Layout } from 'lucide-react';
 import { Thread } from './thread';
 import { MCPToolRegistry } from './mcp-tools';
+import { MobileViewToggle, type MobileView } from './mobile-view-toggle';
 import { useWebMCPIntegration } from '@/hooks/useWebMCPIntegration';
 import { UIResourceProvider } from '@/contexts/UIResourceContext';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { countToolsBySource } from '@/lib/mcp-utils';
+import { cn } from '@/lib/utils';
 import {
   WebPreview,
   WebPreviewNavigation,
@@ -24,6 +26,7 @@ const IFRAME_SOURCE_ID = 'embed-iframe';
 
 export function PlaygroundContent() {
   const [isConnected, setIsConnected] = useState(false);
+  const [mobileView, setMobileView] = useState<MobileView>('iframe');
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const transportRef = useRef<IframeParentTransport | null>(null);
 
@@ -122,52 +125,74 @@ export function PlaygroundContent() {
             webMcpClients={webMcpIntegration.webMcpClients}
           />
 
-          <div className="flex h-full gap-0">
-            {/* Iframe Panel - Left Side */}
-            <div className="flex-1 flex flex-col border-r border-divide">
-              <WebPreview defaultUrl="/embed">
-                <WebPreviewNavigation>
-                  <WebPreviewUrl />
-                </WebPreviewNavigation>
-                <WebPreviewBody ref={iframeRef} title="Landing Page Preview" />
-              </WebPreview>
+          <div className="flex flex-col h-full">
+            {/* Mobile View Toggle - Only visible on mobile */}
+            <div className="md:hidden px-3 py-2 border-b border-divide bg-background">
+              <MobileViewToggle view={mobileView} onViewChange={setMobileView} />
             </div>
 
-            {/* Chat Panel - Right Side */}
-            <div className="w-[400px] flex flex-col bg-background">
-              {/* Chat Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
-                <div className="flex items-center gap-2">
-                  <div
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      isConnected ? 'bg-green-500' : 'bg-red-500'
-                    }`}
-                  />
-                  <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
-                    {isConnected ? 'Connected' : 'Connecting...'}
-                  </span>
-                </div>
-                {isConnected && (
-                  <div className="flex items-center gap-2">
-                    {toolCounts.webmcp > 0 && (
-                      <div className="flex items-center gap-1 text-xs text-green-700 dark:text-green-300 bg-green-500/10 px-2 py-1 rounded-md border border-green-500/20">
-                        <Layout className="h-3 w-3" />
-                        <span>{toolCounts.webmcp}</span>
-                      </div>
-                    )}
-                    {toolCounts.remote > 0 && (
-                      <div className="flex items-center gap-1 text-xs text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2 py-1 rounded-md border border-blue-500/20">
-                        <Cloud className="h-3 w-3" />
-                        <span>{toolCounts.remote}</span>
-                      </div>
-                    )}
-                  </div>
+            {/* Main Content Area */}
+            <div className="flex flex-1 h-full overflow-hidden">
+              {/* Iframe Panel */}
+              <div
+                className={cn(
+                  'flex flex-col border-r border-divide',
+                  // Mobile: show/hide based on mobileView
+                  'w-full md:w-auto md:flex-1',
+                  mobileView === 'chat' ? 'hidden md:flex' : 'flex'
                 )}
+              >
+                <WebPreview defaultUrl="/embed">
+                  <WebPreviewNavigation>
+                    <WebPreviewUrl />
+                  </WebPreviewNavigation>
+                  <WebPreviewBody ref={iframeRef} title="Landing Page Preview" />
+                </WebPreview>
               </div>
 
-              {/* Thread */}
-              <div className="flex-1 overflow-hidden">
-                <Thread />
+              {/* Chat Panel */}
+              <div
+                className={cn(
+                  'flex flex-col bg-background',
+                  // Mobile: full width, Desktop: fixed 400px
+                  'w-full md:w-[400px]',
+                  mobileView === 'iframe' ? 'hidden md:flex' : 'flex'
+                )}
+              >
+                {/* Chat Header */}
+                <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        isConnected ? 'bg-green-500' : 'bg-red-500'
+                      }`}
+                    />
+                    <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
+                      {isConnected ? 'Connected' : 'Connecting...'}
+                    </span>
+                  </div>
+                  {isConnected && (
+                    <div className="flex items-center gap-2">
+                      {toolCounts.webmcp > 0 && (
+                        <div className="flex items-center gap-1 text-xs text-green-700 dark:text-green-300 bg-green-500/10 px-2 py-1 rounded-md border border-green-500/20">
+                          <Layout className="h-3 w-3" />
+                          <span>{toolCounts.webmcp}</span>
+                        </div>
+                      )}
+                      {toolCounts.remote > 0 && (
+                        <div className="flex items-center gap-1 text-xs text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2 py-1 rounded-md border border-blue-500/20">
+                          <Cloud className="h-3 w-3" />
+                          <span>{toolCounts.remote}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Thread */}
+                <div className="flex-1 overflow-hidden">
+                  <Thread />
+                </div>
               </div>
             </div>
           </div>
