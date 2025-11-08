@@ -12,12 +12,12 @@ export const Hero = () => {
     <Container className="border-divide flex flex-col items-center justify-center border-x px-4 pt-10 pb-10 md:pt-32 md:pb-20">
       <Badge text="Building the Agentic Web" />
       <Heading className="mt-4">
-        Foundational Primitives <br /> for{" "}
-        <span className="text-brand">Agentic Browsers</span>
+        Turn Any Website Into <br /> an{" "}
+        <span className="text-brand">MCP Server</span>
       </Heading>
 
       <SubHeading className="mx-auto mt-6 max-w-lg">
-        While others build products, we're building the primitives. Working with web standards bodies and browser vendors to create the foundational layer for AI-native browsers. Building UIs for LLMs, not just interfaces with LLMs.
+        Browser-native implementation of the Model Context Protocol. Give AI agents direct access to your web app with ~50 lines of code. No API keys, no OAuth, no complex setup—just uses your existing browser session.
       </SubHeading>
 
       <div className="mt-6 flex items-center gap-4">
