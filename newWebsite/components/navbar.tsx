@@ -28,6 +28,10 @@ const items = [
     href: "/about",
   },
   {
+    title: "Careers",
+    href: "/careers",
+  },
+  {
     title: "Blog",
     href: "/blog",
   },
