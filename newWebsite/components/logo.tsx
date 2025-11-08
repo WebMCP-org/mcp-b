@@ -21,15 +21,17 @@ export const LogoSVG = (props: React.SVGProps<SVGSVGElement>) => {
 
 export const Logo = () => {
   return (
-    <Link href="/" className="flex items-center gap-2">
+    <Link href="/" className="group flex items-center gap-2">
       <Image
         src="/images/logos/logo.png"
         alt="MCP-B Logo"
         width={28}
         height={32}
-        className="shrink-0"
+        className="shrink-0 transition-transform duration-200 group-hover:scale-105"
       />
-      <span className="text-2xl font-medium">MCP-B</span>
+      <span className="bg-gradient-to-r from-neutral-900 to-neutral-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent transition-all duration-200 group-hover:from-neutral-700 group-hover:to-neutral-500 dark:from-white dark:to-neutral-400 dark:group-hover:from-neutral-200 dark:group-hover:to-neutral-300">
+        MCP-B
+      </span>
     </Link>
   );
 };
