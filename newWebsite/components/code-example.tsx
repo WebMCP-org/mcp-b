@@ -172,12 +172,11 @@ function MyComponent() {
       <div className="flex flex-col items-center px-4 md:px-8">
         <Badge text="Quick Start" />
         <SectionHeading className="mt-4">
-          Add AI Capabilities in Minutes
+          Production-Ready in 50 Lines
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-2xl text-center">
-          Include the polyfill and register your tools. No build process, no
-          complex setup.
+          The same implementation running at JPMorgan and Adobe. Add our SDK, register your tools, and you're live. No build changes, no infrastructure deployment.
         </SubHeading>
 
         {/* Step 1: Polyfill Installation */}
@@ -376,17 +375,15 @@ function MyComponent() {
                 Framework Agnostic
               </h4>
               <p className="mt-2 text-sm text-neutral-400">
-                Works with any JavaScript framework or plain HTML. The API is
-                the same everywhere.
+                Works with React, Vue, Svelte, or vanilla JS. The same API everywhere. No framework lock-in.
               </p>
             </div>
             <div className="border border-neutral-800 bg-neutral-900 p-4">
               <h4 className="font-semibold text-white">
-                W3C Standard API
+                Inspired W3C Standard
               </h4>
               <p className="mt-2 text-sm text-neutral-400">
-                Built on navigator.modelContext. Standards-based and
-                future-proof.
+                Our navigator.modelContext API design inspired the WebMCP W3C standardization effort. Standards-based and future-proof.
               </p>
             </div>
           </div>

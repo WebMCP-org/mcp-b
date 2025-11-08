@@ -30,32 +30,32 @@ export const AgenticIntelligence = () => {
   return (
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center py-16">
-        <Badge text="Our Mission" />
+        <Badge text="Our Story & Mission" />
         <SectionHeading className="mt-4">
-          Building the Foundation for Agentic Browsers
+          From Vision to W3C Standard
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg px-2">
-          We're not building another AI product. We're creating the protocol-level primitives that enable the next generation of AI-native web experiences.
+          MCP-B pioneered the concept of browser-native AI protocols. Our original research and blog post inspired the WebMCP W3C standardization effort. Now we're building the reference implementation and foundational primitives that bring this vision to life.
         </SubHeading>
         <div className="border-divide divide-divide mt-16 grid grid-cols-1 divide-y border-y md:grid-cols-2 md:divide-x">
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>W3C Web Standards</CardTitle>
+              <CardTitle>Inspired the Standard</CardTitle>
             </div>
             <CardDescription>
-              Working with web standards bodies to define the protocols browsers will use to communicate with AI agents. Building tomorrow's standards today.
+              Our pioneering work on browser-native AI protocols inspired the WebMCP W3C standardization initiative. We're now actively collaborating with standards bodies to define how browsers and AI agents communicate.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>UIs for LLMs</CardTitle>
+              <CardTitle>Protocol-First Innovation</CardTitle>
             </div>
             <CardDescription>
-              Pioneering new patterns for building user interfaces that AI agents can understand and interact with. Creating the design primitives for the agentic web.
+              Moving beyond UI automation to structured tool calling. We invented the patterns that enable AI agents to interact with websites through deterministic APIs instead of probabilistic screen parsing.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
@@ -65,10 +65,10 @@ export const AgenticIntelligence = () => {
             <div className="pointer-events-none absolute inset-0 h-full w-full bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px]"></div>
             <div className="flex items-center gap-2">
               <NativeIcon />
-              <CardTitle>Browser-Native Primitives</CardTitle>
+              <CardTitle>Reference Implementation</CardTitle>
             </div>
             <CardDescription>
-              Creating the low-level APIs that browsers need to be truly agentic. Working directly with browser vendors on the infrastructure layer that powers AI-native experiences.
+              Building the production-grade implementation of our vision. The MCP-B extension and SDK demonstrate how browser-native AI protocols work in practice, validated by JPMorgan and Adobe deployments.
             </CardDescription>
             <NativeToolsIntegrationSkeleton />
           </Card>
@@ -77,28 +77,28 @@ export const AgenticIntelligence = () => {
           <Card>
             <div className="flex items-center gap-2">
               <FingerprintIcon />
-              <CardTitle>Open Source Foundation</CardTitle>
+              <CardTitle>Thought Leadership</CardTitle>
             </div>
             <CardDescription>
-              Built in the open with transparent development. Creating standards and primitives that everyone can build on top of, not proprietary walled gardens.
+              From blog post to W3C standard. Our research and vision-setting continue to guide the evolution of browser-AI interaction patterns across the industry.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <RealtimeSyncIcon />
-              <CardTitle>Protocol-First Design</CardTitle>
+              <CardTitle>Enterprise-Proven</CardTitle>
             </div>
             <CardDescription>
-              Focused on creating robust, extensible protocols that will stand the test of time. Building the infrastructure layer for the next decade of web experiences.
+              Trusted by Fortune 500 companies for production AI agent deployments. Our primitives are battle-tested at scale with JPMorgan's and Adobe's most demanding use cases.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <SDKIcon />
-              <CardTitle>Vendor Collaboration</CardTitle>
+              <CardTitle>Ecosystem Builder</CardTitle>
             </div>
             <CardDescription>
-              Partnering with browser vendors, web standards groups, and the broader ecosystem to ensure our primitives become the foundation others build on.
+              Enabling the next generation of AI-native applications. Our open-source tools and standards work create the foundation that thousands of products will build upon.
             </CardDescription>
           </Card>
         </div>

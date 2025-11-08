@@ -25,7 +25,7 @@ export const HowItWorks = () => {
     {
       title: "Define Your Tools",
       description:
-        "Add ~50 lines of code to register functions with schemas. Your website becomes an MCP server that AI agents can discover and use.",
+        "Add ~50 lines of code to register JavaScript functions with JSON schemas. Your website becomes an MCP server—AI agents can discover and call your tools through structured protocols.",
       icon: FirstIcon,
       id: "tools",
       skeleton: <DesignYourWorkflowSkeleton />,
@@ -33,7 +33,7 @@ export const HowItWorks = () => {
     {
       title: "Install Extension",
       description:
-        "The MCP-B browser extension injects an MCP client into your page, automatically discovering and registering your tools.",
+        "Our Chrome extension injects an MCP client into the page. It automatically discovers your tools and makes them available to any MCP-compatible AI assistant.",
       icon: SecondIcon,
       id: "extension",
       skeleton: <ConnectYourTooklsSkeleton />,
@@ -41,7 +41,7 @@ export const HowItWorks = () => {
     {
       title: "AI Agents Execute",
       description:
-        "Agents call your tools directly through the extension using your existing browser session. No API keys, no OAuth, instant execution.",
+        "Agents call your tools instantly through the browser's existing session. No API keys, no OAuth, no latency. Deterministic execution in milliseconds, not seconds.",
       icon: ThirdIcon,
       id: "execute",
       skeleton: <DeployAndScaleSkeleton />,
@@ -65,10 +65,10 @@ export const HowItWorks = () => {
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center pt-16">
         <Badge text="How it works" />
-        <SectionHeading className="mt-4">Three Steps to AI-Ready</SectionHeading>
+        <SectionHeading className="mt-4">Three Steps to Production</SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          Browser-native MCP implementation that works with any framework. No configuration, no separate servers, no new authentication flows.
+          Our battle-tested approach works with any framework and requires no infrastructure changes. The same implementation trusted by JPMorgan and Adobe.
         </SubHeading>
         {/* Desktop Tabs */}
         <div className="border-divide divide-divide mt-16 hidden w-full grid-cols-2 divide-x border-t lg:grid">

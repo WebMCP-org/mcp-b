@@ -34,10 +34,10 @@ export const CTA = () => {
     <Container className="border-divide relative flex min-h-60 flex-col items-center justify-center overflow-hidden border-x px-4 py-4 md:min-h-120">
       <CTAOrbit className="absolute inset-x-0 -top-120 mask-b-from-30%" />
       <SectionHeading className="relative z-10 text-center lg:text-6xl">
-        Ready to Get Started?
+        Join the Browser-AI Revolution
       </SectionHeading>
       <p className="relative z-10 mt-4 text-center text-lg text-gray-600 dark:text-gray-400">
-        Install the extension and try our demo app, or integrate MCP-B into your own website.
+        Experience the protocol that inspired the WebMCP standard. Trusted by JPMorgan and Adobe.
       </p>
       <div className="relative z-20 mt-6 flex items-center gap-4">
         <Button as={Link} href="https://chromewebstore.google.com/detail/mcp-b-extension/daohopfhkdelnpemnhlekblhnikhdhfa">

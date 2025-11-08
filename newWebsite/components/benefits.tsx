@@ -25,52 +25,52 @@ import { VerticalLine } from "./common/vertical-line";
 export const Benefits = () => {
   const benefits = [
     {
-      title: "Lightning Fast",
+      title: "100x Faster Execution",
       description:
-        "Execute tasks in milliseconds instead of 10-20 seconds. Direct API calls eliminate the need for UI parsing and multiple LLM invocations.",
+        "Milliseconds vs 10-20 seconds. Direct tool calls eliminate UI automation overhead, screen parsing, and multiple LLM round-trips. Proven in production at JPMorgan.",
       icon: <RocketIcon className="text-brand size-6" />,
     },
     {
-      title: "No Authentication Hassle",
+      title: "Zero Auth Complexity",
       description:
-        "Uses existing browser sessions automatically. No OAuth flows, no API keys to manage, no additional security implementation needed.",
+        "Uses existing browser sessions—no OAuth flows, no API keys, no credential management. AI agents work with the same permissions as the logged-in user.",
       icon: <ShieldIcon className="text-brand size-6" />,
     },
     {
-      title: "Simple Integration",
+      title: "50 Lines to AI-Ready",
       description:
-        "Add ~50 lines of code to make your website AI-ready. Define your tools once and they work with all MCP-compatible assistants.",
+        "Add a lightweight SDK and register your tools. That's it. No server deployment, no new infrastructure, no framework lock-in. Works with React, Vue, or vanilla JS.",
       icon: <RealtimeSyncIcon className="text-brand size-6" />,
     },
     {
-      title: "Browser as MCP Server",
+      title: "Protocol-Level Innovation",
       description:
-        "Websites can expose tools and resources directly to AI agents through a simple JavaScript API.",
+        "We invented the browser-as-MCP-server pattern. Websites become first-class AI participants through structured tool protocols instead of fragile UI automation.",
       icon: <ScreenCogIcon className="text-brand size-6" />,
     },
     {
-      title: "Secure by Default",
+      title: "Enterprise Security",
       description:
-        "Built on browser security primitives with user consent and transparent audit trails for all operations.",
+        "Built on browser security primitives. User consent for every action, transparent audit trails, and origin validation. Deployed in regulated industries.",
       icon: <ShieldIcon className="text-brand size-6" />,
     },
     {
-      title: "Standards-Based",
+      title: "Standards Leadership",
       description:
-        "Implements Anthropic's Model Context Protocol specification for maximum compatibility with AI assistants.",
+        "Our work inspired the WebMCP W3C standard. Full compatibility with Anthropic's Model Context Protocol means your tools work across all MCP clients.",
       icon: <GraphIcon className="text-brand size-6" />,
     },
   ];
   return (
     <Container className="border-divide relative overflow-hidden border-x px-4 py-20 md:px-8">
       <div className="relative flex flex-col items-center">
-        <Badge text="Why Primitives Matter" />
+        <Badge text="The MCP-B Advantage" />
         <SectionHeading className="mt-4">
-          Infrastructure for the Next Era
+          First-Mover Infrastructure
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          By building at the protocol level, we create foundational pieces that enable thousands of products to be built on top. That's the power of primitives.
+          As pioneers of browser-native AI protocols, we've built the proven primitives that power enterprise deployments. Our approach is faster, simpler, and more secure than alternatives.
         </SubHeading>
       </div>
       <div className="mt-20 grid grid-cols-1 gap-4 md:grid-cols-3">
