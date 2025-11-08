@@ -1,6 +1,8 @@
 import { promises as fs } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
+import React from "react";
+import { CodeBlock, InlineCode } from "@/components/code-block";
 
 type FrontMatter = {
   title: string;
@@ -9,6 +11,19 @@ type FrontMatter = {
   image: string;
   authorName?: string;
   authorSrc?: string;
+};
+
+// Custom MDX components for blog posts
+const mdxComponents = {
+  pre: ({ children }: { children: React.ReactNode }) => React.createElement(React.Fragment, null, children),
+  code: (props: any) => {
+    // If it's an inline code (no className), use InlineCode component
+    if (!props.className) {
+      return React.createElement(InlineCode, props);
+    }
+    // Otherwise, it's a code block
+    return React.createElement(CodeBlock, props);
+  },
 };
 
 export const getSingleBlog = async (slug: string) => {
@@ -25,6 +40,7 @@ export const getSingleBlog = async (slug: string) => {
     const { content, frontmatter } = await compileMDX<FrontMatter>({
       source: singleBlog,
       options: { parseFrontmatter: true },
+      components: mdxComponents,
     });
 
     return { content, frontmatter };
