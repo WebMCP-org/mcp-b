@@ -18,7 +18,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="font-primary h-full bg-white [--pattern-fg:var(--color-charcoal-900)]/10 dark:bg-black dark:[--pattern-fg:var(--color-neutral-100)]/30">
         <ThemeProvider attribute="class" defaultTheme="system">
-          <main className="h-full bg-white antialiased dark:bg-black">
+          {/* Global subtle background gradient overlay */}
+          <div
+            aria-hidden
+            className="pointer-events-none fixed inset-0 z-0"
+            style={{
+              background:
+                'radial-gradient(1200px 800px at 15% 0%, hsl(var(--color-brand-hsl) / 0.10), transparent 60%), radial-gradient(900px 600px at 85% 100%, hsl(var(--color-brand-hsl) / 0.08), transparent 60%), radial-gradient(800px 500px at 50% 50%, hsl(var(--color-brand-hsl) / 0.04), transparent 70%)',
+              filter: 'saturate(110%)',
+            }}
+          />
+          <main className="relative z-10 h-full bg-transparent antialiased">
             <Navbar />
             {children}
             <Footer />
