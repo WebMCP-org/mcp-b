@@ -8,6 +8,7 @@ import { ProgressiveBlur } from "@/components/progressive-blur";
 import { SectionHeading } from "@/components/seciton-heading";
 import { SubHeading } from "@/components/subheading";
 import { Testimonials } from "@/components/testimonials";
+import { Timeline } from "@/components/timeline";
 import { careers } from "@/constants/careers";
 import { founders } from "@/constants/founders";
 import { LinkedInIcon } from "@/icons/general";
@@ -116,7 +117,22 @@ export default function AboutPage() {
         </div>
       </Container>
       {/* <Testimonials /> */}
-      <Container className="border-divide border-x border-t p-4 py-20 md:px-8 md:py-40">
+      <DivideX />
+      <Container className="border-divide border-x p-4 py-20 md:px-8 md:py-40">
+        <div className="flex flex-col items-center">
+          <Badge text="Our Journey" />
+          <SectionHeading className="mt-4 text-center">
+            From Idea to W3C Standard
+          </SectionHeading>
+          <SubHeading className="mx-auto mt-6 max-w-2xl px-4 text-center">
+            The path from a single idea to reshaping how AI agents interact with
+            the web—a journey of validation, commitment, and community support.
+          </SubHeading>
+          <Timeline className="mt-16 w-full max-w-5xl" />
+        </div>
+      </Container>
+      <DivideX />
+      <Container className="border-divide border-x p-4 py-20 md:px-8 md:py-40">
         <div className="grid grid-cols-1 gap-10 md:gap-20 lg:grid-cols-2">
           <div className="flex flex-col items-start justify-start">
             <Badge text="How It Works" />
