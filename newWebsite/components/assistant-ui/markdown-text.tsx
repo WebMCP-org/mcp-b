@@ -13,6 +13,7 @@ import { type FC, memo, useState } from 'react';
 import remarkGfm from 'remark-gfm';
 
 import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button';
+import { CodeBlock as AICodeBlock, CodeBlockCopyButton } from '@/components/ai/code-block';
 import { cn } from '@/lib/utils';
 
 const MarkdownTextImpl = () => {
@@ -28,20 +29,14 @@ const MarkdownTextImpl = () => {
 export const MarkdownText = memo(MarkdownTextImpl);
 
 const CodeHeader: FC<CodeHeaderProps> = ({ language, code }) => {
-  const { isCopied, copyToClipboard } = useCopyToClipboard();
-  const onCopy = () => {
-    if (!code || isCopied) return;
-    copyToClipboard(code);
-  };
+  // This component is now handled by the AICodeBlock component
+  // We render the full code block here instead of just the header
+  if (!language || !code) return null;
 
   return (
-    <div className="mt-4 flex items-center justify-between gap-4 rounded-t-lg bg-muted-foreground/15 px-4 py-2 text-sm font-semibold text-foreground dark:bg-muted-foreground/20">
-      <span className="lowercase [&>span]:text-xs">{language}</span>
-      <TooltipIconButton tooltip="Copy" onClick={onCopy}>
-        {!isCopied && <CopyIcon />}
-        {isCopied && <CheckIcon />}
-      </TooltipIconButton>
-    </div>
+    <AICodeBlock code={code} language={language} showLineNumbers={code.split('\n').length > 10}>
+      <CodeBlockCopyButton />
+    </AICodeBlock>
   );
 };
 
@@ -161,15 +156,26 @@ const defaultComponents = memoizeMarkdownComponents({
   sup: ({ className, ...props }) => (
     <sup className={cn('[&>a]:text-xs [&>a]:no-underline', className)} {...props} />
   ),
-  pre: ({ className, ...props }) => (
-    <pre
-      className={cn(
-        'overflow-x-auto !rounded-t-none rounded-b-lg bg-black p-4 text-white',
-        className
-      )}
-      {...props}
-    />
-  ),
+  pre: ({ className, children, ...props }) => {
+    // Check if this is a code block with syntax highlighting
+    // If so, it's already rendered by CodeHeader component, so we return null
+    const isCodeBlock = useIsMarkdownCodeBlock();
+    if (isCodeBlock) {
+      return null; // CodeHeader component handles the full rendering
+    }
+
+    return (
+      <pre
+        className={cn(
+          'overflow-x-auto rounded-lg bg-black p-4 text-white',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </pre>
+    );
+  },
   code: function Code({ className, ...props }) {
     const isCodeBlock = useIsMarkdownCodeBlock();
     return (
