@@ -84,14 +84,44 @@ const ThreadWelcome: FC = () => {
       <div className="flex w-full max-w-[var(--thread-max-width)] flex-col items-center gap-4 pb-6 pt-8 text-center sm:gap-6 sm:pb-8 sm:pt-12 md:gap-8 md:pt-16">
         <div className="space-y-1 sm:space-y-2">
           <h1 className="text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
-            Control the landing page
+            Interact with the live docs
           </h1>
           <p className="text-xs text-muted-foreground sm:text-sm">
-            Try asking to scroll to a section, highlight the hero, or get the page state
+            Try one of these suggestions or ask anything
           </p>
         </div>
+        <ThreadSuggestions />
       </div>
     </ThreadPrimitive.Empty>
+  );
+};
+
+const ThreadSuggestions: FC = () => {
+  const suggestions = [
+    { text: 'What tools are available on this page?', prompt: 'What tools are available on this page?' },
+    { text: 'Search the docs for "browser tools"', prompt: 'Search the documentation for information about browser tools' },
+    { text: 'Show me code examples', prompt: 'Can you show me some code examples from the documentation?' },
+    { text: 'Navigate to getting started', prompt: 'Navigate to the getting started section' },
+  ];
+
+  return (
+    <div className="flex w-full max-w-[var(--thread-max-width)] flex-wrap items-center justify-center gap-2 px-4">
+      {suggestions.map((suggestion, index) => (
+        <ThreadPrimitive.Suggestion
+          key={index}
+          prompt={suggestion.prompt}
+          method="replace"
+          autoSend
+        >
+          <Button
+            variant="secondary"
+            className="h-auto whitespace-normal px-3 py-2 text-xs sm:text-sm text-left hover:bg-primary/10 hover:text-primary transition-colors border border-border/60"
+          >
+            {suggestion.text}
+          </Button>
+        </ThreadPrimitive.Suggestion>
+      ))}
+    </div>
   );
 };
 
