@@ -158,7 +158,17 @@ function MyComponent() {
         {/* Step 1: Polyfill Installation - Side by Side */}
         <div className="mt-12 w-full max-w-6xl">
           <div className="grid gap-8 md:grid-cols-2 md:items-start">
-            {/* Left: Explanation */}
+            {/* Left: Code */}
+            <div>
+              <AICodeBlock
+                code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
+                language={polyfillTab === "iife" ? "html" : "typescript"}
+              >
+                <CodeBlockCopyButton />
+              </AICodeBlock>
+            </div>
+
+            {/* Right: Explanation */}
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-charcoal-900 dark:text-white">
                 Step 1: Include the Polyfill
@@ -174,7 +184,7 @@ function MyComponent() {
                 </code>{" "}
                 API:
               </p>
-              {/* Tab selector on mobile/left side on desktop */}
+              {/* Tab selector on mobile/right side on desktop */}
               <div className="inline-flex border border-neutral-800 bg-neutral-900">
                 <button
                   onClick={() => setPolyfillTab("iife")}
@@ -198,28 +208,36 @@ function MyComponent() {
                 </button>
               </div>
             </div>
-
-            {/* Right: Code */}
-            <div>
-              <AICodeBlock
-                code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
-                language={polyfillTab === "iife" ? "html" : "typescript"}
-              >
-                <CodeBlockCopyButton />
-              </AICodeBlock>
-            </div>
           </div>
         </div>
 
         {/* Step 2: Register Tools - Side by Side */}
         <div className="mt-16 w-full max-w-6xl">
           <div className="grid gap-8 md:grid-cols-2 md:items-start">
-            {/* Left: Explanation */}
+            {/* Left: Code */}
+            <div>
+              <AICodeBlock
+                code={codeTab === "vanilla" ? vanillaCode : reactCode}
+                language={codeTab === "vanilla" ? "javascript" : "typescript"}
+                showLineNumbers
+              >
+                {isToolRegistered && (
+                  <span className="inline-flex items-center gap-1.5 border border-green-800 bg-green-950 px-2 py-0.5 text-xs font-medium text-green-400">
+                    <span className="h-1.5 w-1.5 animate-pulse bg-green-500"></span>
+                    LIVE
+                    {toolCallCount > 0 && ` • ${toolCallCount}`}
+                  </span>
+                )}
+                <CodeBlockCopyButton />
+              </AICodeBlock>
+            </div>
+
+            {/* Right: Explanation */}
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-charcoal-900 dark:text-white">
                 Step 2: Register Your Tools
               </h3>
-              {/* Tab selector on mobile/left side on desktop */}
+              {/* Tab selector on mobile/right side on desktop */}
               <div className="inline-flex border border-neutral-800 bg-neutral-900">
                 <button
                   onClick={() => setCodeTab("vanilla")}
@@ -242,24 +260,6 @@ function MyComponent() {
                   React
                 </button>
               </div>
-            </div>
-
-            {/* Right: Code */}
-            <div>
-              <AICodeBlock
-                code={codeTab === "vanilla" ? vanillaCode : reactCode}
-                language={codeTab === "vanilla" ? "javascript" : "typescript"}
-                showLineNumbers
-              >
-                {isToolRegistered && (
-                  <span className="inline-flex items-center gap-1.5 border border-green-800 bg-green-950 px-2 py-0.5 text-xs font-medium text-green-400">
-                    <span className="h-1.5 w-1.5 animate-pulse bg-green-500"></span>
-                    LIVE
-                    {toolCallCount > 0 && ` • ${toolCallCount}`}
-                  </span>
-                )}
-                <CodeBlockCopyButton />
-              </AICodeBlock>
             </div>
           </div>
 
