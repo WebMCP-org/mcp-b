@@ -6,7 +6,7 @@ import { SectionHeading } from "./seciton-heading";
 import { SubHeading } from "./subheading";
 import { Button } from "./button";
 import Link from "next/link";
-import { GlowingEffect } from "./ui/glowing-effect";
+import { CardSpotlight } from "./ui/card-spotlight";
 
 export const Security = () => {
   const securityFeatures = [
@@ -65,7 +65,7 @@ export const Security = () => {
         </Button>
       </div>
 
-      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         {securityFeatures.map((feature) => (
           <SecurityCard key={feature.title} {...feature} />
         ))}
@@ -81,20 +81,14 @@ const SecurityCard = (props: {
 }) => {
   const { title, description, icon } = props;
   return (
-    <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3">
-      <GlowingEffect
-        spread={40}
-        glow={false}
-        disabled={false}
-        proximity={64}
-        inactiveZone={0.01}
-        borderWidth={2}
-      />
-      <div className="relative z-10 flex h-full flex-col rounded-lg bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:bg-zinc-950/40">
-        <div className="flex items-center gap-2">{icon}</div>
-        <h3 className="mt-4 mb-2 text-lg font-medium">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-400">{description}</p>
-      </div>
-    </div>
+    <CardSpotlight className="h-full">
+      <div className="flex items-center gap-2">{icon}</div>
+      <p className="relative z-20 mt-4 mb-2 text-xl font-bold text-neutral-800 dark:text-white">
+        {title}
+      </p>
+      <p className="relative z-20 text-neutral-600 dark:text-neutral-300">
+        {description}
+      </p>
+    </CardSpotlight>
   );
 };
