@@ -155,106 +155,120 @@ function MyComponent() {
           complex setup.
         </SubHeading>
 
-        {/* Step 1: Polyfill Installation */}
-        <div className="mt-12 w-full max-w-4xl">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white">
-              Step 1: Include the Polyfill
-            </h3>
-            {/* Square, dark toggle - side by side */}
-            <div className="inline-flex border border-neutral-800 bg-neutral-900">
-              <button
-                onClick={() => setPolyfillTab("iife")}
-                className={`px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                  polyfillTab === "iife"
-                    ? "bg-white text-black"
-                    : "text-neutral-400 hover:text-white"
-                }`}
+        {/* Step 1: Polyfill Installation - Side by Side */}
+        <div className="mt-12 w-full max-w-6xl">
+          <div className="grid gap-8 md:grid-cols-2 md:items-start">
+            {/* Left: Explanation */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold text-charcoal-900 dark:text-white">
+                Step 1: Include the Polyfill
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                Add the{" "}
+                <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
+                  @mcp-b/global
+                </code>{" "}
+                polyfill to enable the{" "}
+                <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
+                  navigator.modelContext
+                </code>{" "}
+                API:
+              </p>
+              {/* Tab selector on mobile/left side on desktop */}
+              <div className="inline-flex border border-neutral-800 bg-neutral-900">
+                <button
+                  onClick={() => setPolyfillTab("iife")}
+                  className={`px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
+                    polyfillTab === "iife"
+                      ? "bg-white text-black"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  IIFE
+                </button>
+                <button
+                  onClick={() => setPolyfillTab("esm")}
+                  className={`border-l border-neutral-800 px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
+                    polyfillTab === "esm"
+                      ? "bg-white text-black"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  ESM
+                </button>
+              </div>
+            </div>
+
+            {/* Right: Code */}
+            <div>
+              <AICodeBlock
+                code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
+                language={polyfillTab === "iife" ? "html" : "typescript"}
               >
-                IIFE
-              </button>
-              <button
-                onClick={() => setPolyfillTab("esm")}
-                className={`border-l border-neutral-800 px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                  polyfillTab === "esm"
-                    ? "bg-white text-black"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                ESM
-              </button>
+                <CodeBlockCopyButton />
+              </AICodeBlock>
             </div>
           </div>
-
-          <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Add the{" "}
-            <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
-              @mcp-b/global
-            </code>{" "}
-            polyfill to enable the{" "}
-            <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
-              navigator.modelContext
-            </code>{" "}
-            API:
-          </p>
-
-          <AICodeBlock
-            code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
-            language={polyfillTab === "iife" ? "html" : "typescript"}
-          >
-            <CodeBlockCopyButton />
-          </AICodeBlock>
         </div>
 
-        {/* Step 2: Register Tools */}
-        <div className="mt-12 w-full max-w-4xl">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white">
-              Step 2: Register Your Tools
-            </h3>
-            {/* Square, dark toggle - side by side */}
-            <div className="inline-flex border border-neutral-800 bg-neutral-900">
-              <button
-                onClick={() => setCodeTab("vanilla")}
-                className={`px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                  codeTab === "vanilla"
-                    ? "bg-white text-black"
-                    : "text-neutral-400 hover:text-white"
-                }`}
+        {/* Step 2: Register Tools - Side by Side */}
+        <div className="mt-16 w-full max-w-6xl">
+          <div className="grid gap-8 md:grid-cols-2 md:items-start">
+            {/* Left: Explanation */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold text-charcoal-900 dark:text-white">
+                Step 2: Register Your Tools
+              </h3>
+              {/* Tab selector on mobile/left side on desktop */}
+              <div className="inline-flex border border-neutral-800 bg-neutral-900">
+                <button
+                  onClick={() => setCodeTab("vanilla")}
+                  className={`px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
+                    codeTab === "vanilla"
+                      ? "bg-white text-black"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  Vanilla
+                </button>
+                <button
+                  onClick={() => setCodeTab("react")}
+                  className={`border-l border-neutral-800 px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
+                    codeTab === "react"
+                      ? "bg-white text-black"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  React
+                </button>
+              </div>
+            </div>
+
+            {/* Right: Code */}
+            <div>
+              <AICodeBlock
+                code={codeTab === "vanilla" ? vanillaCode : reactCode}
+                language={codeTab === "vanilla" ? "javascript" : "typescript"}
+                showLineNumbers
               >
-                Vanilla
-              </button>
-              <button
-                onClick={() => setCodeTab("react")}
-                className={`border-l border-neutral-800 px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                  codeTab === "react"
-                    ? "bg-white text-black"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                React
-              </button>
+                {isToolRegistered && (
+                  <span className="inline-flex items-center gap-1.5 border border-green-800 bg-green-950 px-2 py-0.5 text-xs font-medium text-green-400">
+                    <span className="h-1.5 w-1.5 animate-pulse bg-green-500"></span>
+                    LIVE
+                    {toolCallCount > 0 && ` • ${toolCallCount}`}
+                  </span>
+                )}
+                <CodeBlockCopyButton />
+              </AICodeBlock>
             </div>
           </div>
 
-          <AICodeBlock
-            code={codeTab === "vanilla" ? vanillaCode : reactCode}
-            language={codeTab === "vanilla" ? "javascript" : "typescript"}
-            showLineNumbers
-          >
-            {isToolRegistered && (
-              <span className="inline-flex items-center gap-1.5 border border-green-800 bg-green-950 px-2 py-0.5 text-xs font-medium text-green-400">
-                <span className="h-1.5 w-1.5 animate-pulse bg-green-500"></span>
-                LIVE
-                {toolCallCount > 0 && ` • ${toolCallCount}`}
-              </span>
-            )}
-            <CodeBlockCopyButton />
-          </AICodeBlock>
+        </div>
 
-          {/* Info cards - darker, more square */}
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="border border-neutral-800 bg-neutral-900 p-4">
+        {/* Info cards - darker, more square */}
+        <div className="mt-12 w-full max-w-6xl">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="border border-neutral-800 bg-neutral-900 p-6">
               <h4 className="font-semibold text-white">
                 Framework Agnostic
               </h4>
@@ -263,7 +277,7 @@ function MyComponent() {
                 the same everywhere.
               </p>
             </div>
-            <div className="border border-neutral-800 bg-neutral-900 p-4">
+            <div className="border border-neutral-800 bg-neutral-900 p-6">
               <h4 className="font-semibold text-white">
                 W3C Standard API
               </h4>
