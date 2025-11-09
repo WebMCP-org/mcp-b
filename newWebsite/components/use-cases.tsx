@@ -85,7 +85,7 @@ export const UseCases = () => {
                   <Scale />
                 </motion.div>
               )}
-              <div className="relative z-10 rounded-lg border border-gray-200 bg-gray-50 p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
+              <div className="relative z-10 rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
                 <div className="flex items-center gap-2">{useCase.icon}</div>
                 <h3 className="mt-4 mb-2 text-lg font-medium">
                   {useCase.title}
