@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useTheme } from "next-themes";
 
 /**
  * SVG Icon Components
@@ -95,6 +97,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   language: explicitLanguage,
 }) => {
   const [copied, setCopied] = useState(false);
+  const { theme, resolvedTheme } = useTheme();
+  const currentTheme = resolvedTheme || theme;
 
   // Extract language from className (MDX format: "language-typescript")
   const languageFromClass = className?.replace(/^language-/, "") || "text";
@@ -157,7 +161,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       {/* Syntax highlighted code */}
       <SyntaxHighlighter
         language={language}
-        style={oneDark}
+        style={currentTheme === 'dark' ? oneDark : oneLight}
         customStyle={{
           margin: 0,
           borderRadius: 0,
