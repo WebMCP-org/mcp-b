@@ -30,7 +30,13 @@ async function fetchHTML(url: string): Promise<string> {
     });
     return await response.text();
   } catch (error: any) {
-    if (error?.code === 'EAI_AGAIN' || error?.code === 'ENOTFOUND') {
+    // Check for DNS errors in error cause chain
+    const isDNSError = error?.code === 'EAI_AGAIN' ||
+                       error?.code === 'ENOTFOUND' ||
+                       error?.cause?.code === 'EAI_AGAIN' ||
+                       error?.cause?.code === 'ENOTFOUND';
+
+    if (isDNSError) {
       console.log('[Live Tools Proxy] DNS error, falling back to curl');
       const { exec } = await import('child_process');
       const { promisify } = await import('util');

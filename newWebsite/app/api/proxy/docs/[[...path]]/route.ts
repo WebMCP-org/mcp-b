@@ -88,7 +88,13 @@ async function universalFetch(url: string): Promise<{ buffer: ArrayBuffer; conte
     try {
       return await fetchWithFetch(url);
     } catch (error: any) {
-      if (error?.code === 'EAI_AGAIN' || error?.code === 'ENOTFOUND') {
+      // Check for DNS errors in error cause chain
+      const isDNSError = error?.code === 'EAI_AGAIN' ||
+                         error?.code === 'ENOTFOUND' ||
+                         error?.cause?.code === 'EAI_AGAIN' ||
+                         error?.cause?.code === 'ENOTFOUND';
+
+      if (isDNSError) {
         console.log('[Proxy] DNS error, falling back to curl');
         return await fetchWithCurl(url);
       }
