@@ -5,6 +5,7 @@ import { Badge } from "./badge";
 import { SectionHeading } from "./seciton-heading";
 import { SubHeading } from "./subheading";
 import { CodeBlock as AICodeBlock, CodeBlockCopyButton } from "@/components/ai/code-block";
+import { motion } from "motion/react";
 
 
 export const CodeExample = () => {
@@ -155,67 +156,83 @@ function MyComponent() {
           complex setup.
         </SubHeading>
 
-        {/* Step 1: Polyfill Installation - Side by Side */}
-        <div className="mt-12 w-full max-w-6xl">
-          <div className="grid gap-8 md:grid-cols-2 md:items-start">
-            {/* Left: Code */}
-            <div>
+        {/* Horizontal Code Blocks */}
+        <div className="mt-12 w-full max-w-7xl">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {/* Polyfill webMCP */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white">
+                  Polyfill webMCP
+                </h3>
+                <div className="inline-flex border border-neutral-800 bg-neutral-900">
+                  <button
+                    onClick={() => setPolyfillTab("iife")}
+                    className={`px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
+                      polyfillTab === "iife"
+                        ? "bg-white text-black"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    IIFE
+                  </button>
+                  <button
+                    onClick={() => setPolyfillTab("esm")}
+                    className={`border-l border-neutral-800 px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
+                      polyfillTab === "esm"
+                        ? "bg-white text-black"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    ESM
+                  </button>
+                </div>
+              </div>
               <AICodeBlock
                 code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
                 language={polyfillTab === "iife" ? "html" : "typescript"}
               >
                 <CodeBlockCopyButton />
               </AICodeBlock>
-            </div>
+            </motion.div>
 
-            {/* Right: Explanation */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-charcoal-900 dark:text-white">
-                Step 1: Include the Polyfill
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-                Add the{" "}
-                <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
-                  @mcp-b/global
-                </code>{" "}
-                polyfill to enable the{" "}
-                <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
-                  navigator.modelContext
-                </code>{" "}
-                API:
-              </p>
-              {/* Tab selector on mobile/right side on desktop */}
-              <div className="inline-flex border border-neutral-800 bg-neutral-900">
-                <button
-                  onClick={() => setPolyfillTab("iife")}
-                  className={`px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                    polyfillTab === "iife"
-                      ? "bg-white text-black"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  IIFE
-                </button>
-                <button
-                  onClick={() => setPolyfillTab("esm")}
-                  className={`border-l border-neutral-800 px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                    polyfillTab === "esm"
-                      ? "bg-white text-black"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  ESM
-                </button>
+            {/* Declare Your Tools */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white">
+                  Declare Your Tools
+                </h3>
+                <div className="inline-flex border border-neutral-800 bg-neutral-900">
+                  <button
+                    onClick={() => setCodeTab("vanilla")}
+                    className={`px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
+                      codeTab === "vanilla"
+                        ? "bg-white text-black"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    Vanilla
+                  </button>
+                  <button
+                    onClick={() => setCodeTab("react")}
+                    className={`border-l border-neutral-800 px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
+                      codeTab === "react"
+                        ? "bg-white text-black"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    React
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Step 2: Register Tools - Side by Side */}
-        <div className="mt-16 w-full max-w-6xl">
-          <div className="grid gap-8 md:grid-cols-2 md:items-start">
-            {/* Left: Code */}
-            <div>
               <AICodeBlock
                 code={codeTab === "vanilla" ? vanillaCode : reactCode}
                 language={codeTab === "vanilla" ? "javascript" : "typescript"}
@@ -230,43 +247,17 @@ function MyComponent() {
                 )}
                 <CodeBlockCopyButton />
               </AICodeBlock>
-            </div>
-
-            {/* Right: Explanation */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-charcoal-900 dark:text-white">
-                Step 2: Register Your Tools
-              </h3>
-              {/* Tab selector on mobile/right side on desktop */}
-              <div className="inline-flex border border-neutral-800 bg-neutral-900">
-                <button
-                  onClick={() => setCodeTab("vanilla")}
-                  className={`px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                    codeTab === "vanilla"
-                      ? "bg-white text-black"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  Vanilla
-                </button>
-                <button
-                  onClick={() => setCodeTab("react")}
-                  className={`border-l border-neutral-800 px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all ${
-                    codeTab === "react"
-                      ? "bg-white text-black"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  React
-                </button>
-              </div>
-            </div>
+            </motion.div>
           </div>
-
         </div>
 
-        {/* Info cards - darker, more square */}
-        <div className="mt-12 w-full max-w-6xl">
+        {/* Info cards */}
+        <motion.div
+          className="mt-12 w-full max-w-7xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="border border-neutral-800 bg-neutral-900 p-6">
               <h4 className="font-semibold text-white">
@@ -281,14 +272,14 @@ function MyComponent() {
               <h4 className="font-semibold text-white">
                 W3C Standard API
               </h4>
-              <p className="mt-2 text-sm text-neutral-400">
+              <p className="mt-2 text-neutral-400 text-sm">
                 Built on navigator.modelContext. Standards-based and
                 future-proof.
               </p>
             </div>
           </div>
 
-          {/* Try it callout - darker, more angular */}
+          {/* Try it callout */}
           {isToolRegistered && (
             <div className="mt-6 border border-blue-900 bg-blue-950/50 p-4">
               <p className="text-sm text-blue-100">
@@ -300,7 +291,7 @@ function MyComponent() {
               </p>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </Container>
   );
