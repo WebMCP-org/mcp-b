@@ -41,7 +41,7 @@ export const Thread: FC = () => {
         ['--thread-max-width' as string]: 'min(50rem, calc(100vw - 2rem))',
       }}
     >
-      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-gradient-to-b from-background to-background/95 px-3 sm:px-4 pt-3 sm:pt-8">
+      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-3 sm:px-4 pt-3 sm:pt-8">
         <ThreadWelcome />
 
         <ThreadPrimitive.Messages
