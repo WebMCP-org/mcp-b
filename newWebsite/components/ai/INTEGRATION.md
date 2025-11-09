@@ -173,7 +173,7 @@ All implementations use:
 
 To test code blocks:
 
-1. **AI responses**: Visit `/playground` and ask for code generation
+1. **AI responses**: Visit the [live demo](https://mcp-ui.mcp-b.ai) to see AI-generated code
 2. **Blogs**: Visit any blog post with code snippets at `/blog/[slug]`
 3. **Landing page**: View the homepage code examples at `/`
 4. **Demos**: Visit `/code-block-demo` for AI code block examples

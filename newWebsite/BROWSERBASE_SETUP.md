@@ -1,5 +1,9 @@
 # Browserbase Live Extension Setup Guide
 
+> **⚠️ DEPRECATED:** The `/mcp-b-playground` page and Browserbase live demo feature have been removed from this website. For a live demo of MCP-B, please visit [mcp-ui.mcp-b.ai](https://mcp-ui.mcp-b.ai).
+>
+> This documentation is kept for reference purposes only.
+
 This guide walks you through setting up the live browser demo with your MCP-B Chrome extension using Browserbase.
 
 ## Overview
