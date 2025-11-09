@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import * as http from 'http';
+import * as https from 'https';
 
 const execAsync = promisify(exec);
 const DOCS_BASE_URL = 'https://docs.mcp-b.ai';
