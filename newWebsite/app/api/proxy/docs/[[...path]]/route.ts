@@ -2,8 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const DOCS_BASE_URL = 'https://docs.mcp-b.ai';
 
-// Detect runtime environment
-const isEdgeRuntime = typeof EdgeRuntime !== 'undefined' || typeof WebSocketPair !== 'undefined';
+// Detect runtime environment (check for Cloudflare Workers globals)
+const isEdgeRuntime = (() => {
+  try {
+    // @ts-expect-error - EdgeRuntime only exists in Edge runtime
+    return typeof EdgeRuntime !== 'undefined' || typeof WebSocketPair !== 'undefined';
+  } catch {
+    return false;
+  }
+})();
 
 // Fetch-based implementation for Cloudflare Workers / Edge Runtime
 async function fetchWithFetch(url: string): Promise<{ buffer: ArrayBuffer; contentType: string; status: number }> {
