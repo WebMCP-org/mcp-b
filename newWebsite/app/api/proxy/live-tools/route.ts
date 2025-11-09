@@ -1,31 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 
-const execAsync = promisify(exec);
 const DOCS_BASE_URL = 'https://docs.mcp-b.ai';
 
-async function fetchWithCurl(url: string): Promise<string> {
+// Detect runtime environment
+const isEdgeRuntime = typeof EdgeRuntime !== 'undefined' || typeof WebSocketPair !== 'undefined';
+
+async function fetchHTML(url: string): Promise<string> {
+  // For Cloudflare Workers / Edge Runtime, always use fetch
+  if (isEdgeRuntime) {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; MCP-B-Playground/1.0)',
+      },
+      // @ts-ignore - Cloudflare Workers specific
+      cf: {
+        cacheTtl: 300,
+        cacheEverything: true,
+      }
+    });
+    return await response.text();
+  }
+
+  // For Node.js, try fetch first, fallback to curl if DNS issues
   try {
-    const { stdout, stderr } = await execAsync(
-      `curl -s -L -H "User-Agent: Mozilla/5.0 (compatible; MCP-B-Playground/1.0)" "${url}"`,
-      { maxBuffer: 10 * 1024 * 1024 } // 10MB buffer
-    );
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; MCP-B-Playground/1.0)',
+      },
+    });
+    return await response.text();
+  } catch (error: any) {
+    if (error?.code === 'EAI_AGAIN' || error?.code === 'ENOTFOUND') {
+      console.log('[Live Tools Proxy] DNS error, falling back to curl');
+      const { exec } = await import('child_process');
+      const { promisify } = await import('util');
+      const execAsync = promisify(exec);
 
-    if (stderr) {
-      console.warn('[Proxy] curl stderr:', stderr);
+      const { stdout } = await execAsync(
+        `curl -s -L -H "User-Agent: Mozilla/5.0 (compatible; MCP-B-Playground/1.0)" "${url}"`,
+        { maxBuffer: 10 * 1024 * 1024 }
+      );
+      return stdout;
     }
-
-    return stdout;
-  } catch (error) {
-    console.error('[Proxy] curl error:', error);
     throw error;
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
-    let html = await fetchWithCurl(`${DOCS_BASE_URL}/live-tool-examples`);
+    let html = await fetchHTML(`${DOCS_BASE_URL}/live-tool-examples`);
 
     // Get the base URL for the proxy
     const baseUrl = new URL(request.url);
