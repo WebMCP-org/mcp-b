@@ -26,10 +26,9 @@ export default async function BlogsPage() {
       <DivideX />
       <Container className="border-divide flex flex-col items-center border-x pt-10 md:pt-20 md:pb-10">
         <Badge text=" All blogs" />
-        <Heading>Writing for the World</Heading>
+        <Heading>Blog</Heading>
         <SubHeading className="mx-auto mt-2 max-w-sm px-4">
-          At MCP-B, we educate and empower developers to build AI-accessible web applications
-          for the world.
+          Writing about AI-first development, the agentic web, MCP, and browser automation.
         </SubHeading>
         <div className="border-divide divide-divide mt-10 flex w-full flex-col divide-y border-y">
           <GridLayout blogs={allBlogs.slice(0, 3)} />
@@ -97,13 +96,6 @@ const RowLayout = ({ blog }: { blog: any }) => {
           day: "numeric",
         })}
         <div className="mt-2 flex items-center gap-1 md:justify-end">
-          <Image
-            src={blog.authorSrc as string}
-            alt={blog.authorName as string}
-            height={50}
-            width={50}
-            className="size-6 rounded-full"
-          />
           <span className="text-gray-500 dark:text-neutral-400">
             {blog.authorName}
           </span>
