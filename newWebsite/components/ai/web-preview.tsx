@@ -63,7 +63,7 @@ export function WebPreview({
     <WebPreviewContext.Provider value={value}>
       <div
         className={cn(
-          "flex flex-col h-full border-divide border rounded-lg overflow-hidden bg-white dark:bg-neutral-900 shadow-aceternity",
+          "flex flex-col h-full overflow-hidden bg-white dark:bg-neutral-900",
           className
         )}
         {...props}
@@ -86,7 +86,7 @@ export function WebPreviewNavigation({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 px-3 py-2 border-b border-divide bg-gray-50 dark:bg-neutral-800",
+        "flex items-center gap-2 px-3 py-2.5 border-b border-divide bg-gradient-to-r from-gray-50 to-gray-100/50 dark:from-neutral-800 dark:to-neutral-800/80 backdrop-blur-sm",
         className
       )}
       {...props}
@@ -176,7 +176,7 @@ export function WebPreviewUrl({
         onChange={externalOnChange ?? handleChange}
         onKeyDown={externalOnKeyDown ?? handleKeyDown}
         placeholder="Enter URL..."
-        className={cn("h-8 text-sm", className)}
+        className={cn("h-8 text-sm bg-white dark:bg-neutral-900 border-gray-300 dark:border-neutral-700 focus:ring-2 focus:ring-primary/20", className)}
         {...props}
       />
       <WebPreviewNavigationButton

@@ -41,7 +41,7 @@ export const Thread: FC = () => {
         ['--thread-max-width' as string]: 'min(50rem, calc(100vw - 2rem))',
       }}
     >
-      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-3 sm:px-4 pt-3 sm:pt-8">
+      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-gradient-to-b from-background to-background/95 px-3 sm:px-4 pt-3 sm:pt-8">
         <ThreadWelcome />
 
         <ThreadPrimitive.Messages
@@ -242,7 +242,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 };
 
 const Composer: FC = () => (
-  <ComposerPrimitive.Root className="focus-within:border-primary/50 flex w-full flex-wrap items-end rounded-2xl border bg-card/50 backdrop-blur-sm px-2 sm:px-3 shadow-lg transition-all ease-in hover:shadow-xl">
+  <ComposerPrimitive.Root className="focus-within:border-primary/60 focus-within:ring-2 focus-within:ring-primary/10 flex w-full flex-wrap items-end rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm px-2 sm:px-3 shadow-lg transition-all ease-in hover:shadow-xl hover:border-primary/40">
     <ComposerPrimitive.Input
       rows={1}
       autoFocus
@@ -284,7 +284,7 @@ const UserMessage: FC = () => (
   <MessagePrimitive.Root className="grid auto-rows-auto grid-cols-[minmax(60px,1fr)_auto] sm:grid-cols-[minmax(72px,1fr)_auto] gap-y-2 [&:where(>*)]:col-start-2 w-full max-w-[var(--thread-max-width)] py-3 sm:py-4">
     <UserActionBar />
 
-    <div className="bg-primary/10 text-foreground max-w-[calc(var(--thread-max-width)*0.9)] sm:max-w-[calc(var(--thread-max-width)*0.8)] break-words rounded-2xl px-3 sm:px-5 py-2 sm:py-3 col-start-2 row-start-2 border border-primary/20 text-sm sm:text-base">
+    <div className="bg-gradient-to-br from-primary/10 to-primary/5 text-foreground max-w-[calc(var(--thread-max-width)*0.9)] sm:max-w-[calc(var(--thread-max-width)*0.8)] break-words rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 col-start-2 row-start-2 border border-primary/20 shadow-sm text-sm sm:text-base">
       <MessagePrimitive.Content />
     </div>
 
@@ -324,9 +324,9 @@ const EditComposer: FC = () => (
 const AssistantMessage: FC = () => (
   <MessagePrimitive.Root className="grid grid-cols-[auto_auto_1fr] grid-rows-[auto_1fr] relative w-full max-w-[var(--thread-max-width)] py-3 sm:py-4">
     <div className="col-start-1 row-start-1 mr-2 sm:mr-3 mt-1 sm:mt-1.5">
-      <div className="w-8 h-8 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-primary/20 via-primary/15 to-primary/10 border border-primary/30 shadow-sm flex items-center justify-center">
         <svg
-          className="w-4 h-4 sm:w-5 sm:h-5 text-primary"
+          className="w-4 h-4 sm:w-5 sm:h-5 text-primary drop-shadow-sm"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

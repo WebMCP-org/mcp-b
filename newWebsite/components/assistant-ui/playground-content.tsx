@@ -132,13 +132,13 @@ export function PlaygroundContent() {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-1 h-full overflow-hidden">
+            <div className="flex flex-1 h-full overflow-hidden justify-center">
               {/* Iframe Panel */}
               <div
                 className={cn(
                   'flex flex-col border-r border-divide',
                   // Mobile: show/hide based on mobileView
-                  'w-full md:w-auto md:flex-1',
+                  'w-full md:w-auto md:flex-1 md:max-w-3xl lg:max-w-4xl',
                   mobileView === 'chat' ? 'hidden md:flex' : 'flex'
                 )}
               >
@@ -154,34 +154,48 @@ export function PlaygroundContent() {
               <div
                 className={cn(
                   'flex flex-col bg-background',
-                  // Mobile: full width, Desktop: fixed 400px
-                  'w-full md:w-[400px]',
+                  // Mobile: full width, Desktop: fixed 450px
+                  'w-full md:w-[450px] lg:w-[480px]',
                   mobileView === 'iframe' ? 'hidden md:flex' : 'flex'
                 )}
               >
                 {/* Chat Header */}
-                <div className="flex items-center justify-between px-4 py-3 border-b border-divide bg-gray-50 dark:bg-neutral-800">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        isConnected ? 'bg-green-500' : 'bg-red-500'
-                      }`}
-                    />
-                    <span className="text-sm font-medium text-charcoal-700 dark:text-neutral-100">
-                      {isConnected ? 'Connected' : 'Connecting...'}
-                    </span>
+                <div className="flex items-center justify-between px-4 py-3.5 border-b border-divide bg-gradient-to-r from-gray-50 to-gray-100/50 dark:from-neutral-800 dark:to-neutral-800/80 backdrop-blur-sm">
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative">
+                      <div
+                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                          isConnected
+                            ? 'bg-green-500 shadow-lg shadow-green-500/50'
+                            : 'bg-amber-500 animate-pulse'
+                        }`}
+                      />
+                      {isConnected && (
+                        <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-green-500 animate-ping opacity-75" />
+                      )}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold text-charcoal-800 dark:text-neutral-50">
+                        {isConnected ? 'MCP Connected' : 'Connecting...'}
+                      </span>
+                      {isConnected && (
+                        <span className="text-xs text-gray-600 dark:text-neutral-400">
+                          Live tools ready
+                        </span>
+                      )}
+                    </div>
                   </div>
                   {isConnected && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       {toolCounts.webmcp > 0 && (
-                        <div className="flex items-center gap-1 text-xs text-green-700 dark:text-green-300 bg-green-500/10 px-2 py-1 rounded-md border border-green-500/20">
-                          <Layout className="h-3 w-3" />
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-green-700 dark:text-green-300 bg-green-500/10 px-2.5 py-1.5 rounded-lg border border-green-500/20 shadow-sm">
+                          <Layout className="h-3.5 w-3.5" />
                           <span>{toolCounts.webmcp}</span>
                         </div>
                       )}
                       {toolCounts.remote > 0 && (
-                        <div className="flex items-center gap-1 text-xs text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2 py-1 rounded-md border border-blue-500/20">
-                          <Cloud className="h-3 w-3" />
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2.5 py-1.5 rounded-lg border border-blue-500/20 shadow-sm">
+                          <Cloud className="h-3.5 w-3.5" />
                           <span>{toolCounts.remote}</span>
                         </div>
                       )}
