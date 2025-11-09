@@ -373,7 +373,7 @@ export const DeployAndScaleSkeleton = () => {
                   offset + index * -itemHeight,
                   offset + (index + 1) * -itemHeight,
                 ],
-                ["#FFFFFF", "#f17463", "#FFFFFF"],
+                ["#FFFFFF", "#1F5EFF", "#FFFFFF"],
               ),
               borderColor: useTransform(
                 y,
@@ -382,7 +382,7 @@ export const DeployAndScaleSkeleton = () => {
                   offset + index * -itemHeight,
                   offset + (index + 1) * -itemHeight,
                 ],
-                ["#FFFFFF", "#f17463", "#FFFFFF"],
+                ["#FFFFFF", "#1F5EFF", "#FFFFFF"],
               ),
             }}
           >
@@ -570,7 +570,7 @@ const RightSVG = (props: React.SVGProps<SVGSVGElement>) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="white" stopOpacity="0.5" offset="0" />
-          <stop stopColor="#F17463" stopOpacity="1" offset="0.5" />
+          <stop stopColor="#1F5EFF" stopOpacity="1" offset="0.5" />
           <stop stopColor="white" stopOpacity="0" offset="1" />
         </motion.linearGradient>
       </defs>
@@ -628,8 +628,8 @@ const CenterSVG = (props: React.SVGProps<SVGSVGElement>) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="var(--color-line)" stopOpacity="1" offset="0" />
-          <stop stopColor="#F17463" stopOpacity="0.5" offset="0.5" />
-          <stop stopColor="#F17463" stopOpacity="0" offset="1" />
+          <stop stopColor="#1F5EFF" stopOpacity="0.5" offset="0.5" />
+          <stop stopColor="#1F5EFF" stopOpacity="0" offset="1" />
         </motion.linearGradient>
       </defs>
     </motion.svg>

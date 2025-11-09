@@ -52,7 +52,7 @@ export const VerticalLine = (
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="var(--color-line)" />
-          <stop offset="0.5" stopColor="#F17463" />
+          <stop offset="0.5" stopColor="#1F5EFF" />
           <stop offset="1" stopColor="var(--color-line)" />
         </motion.linearGradient>
       </defs>

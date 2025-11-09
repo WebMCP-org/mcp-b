@@ -45,10 +45,10 @@ export const AboutInformationBlock = () => {
           key={useCase.title}
           className="relative h-full"
         >
-          <div className="relative z-10 h-full border border-neutral-200 bg-gray-50 p-4 transition duration-200 hover:border-brand hover:bg-neutral-50 md:p-5 dark:border-neutral-800 dark:bg-neutral-800 dark:hover:border-brand dark:hover:bg-neutral-800/50">
+          <div className="relative z-10 h-full border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:border-brand hover:bg-neutral-50 md:p-5 dark:border-white/10 dark:bg-zinc-950/40 dark:hover:border-brand dark:hover:bg-zinc-950/60">
             <div className="flex items-center gap-2">{useCase.icon}</div>
             <h3 className="mt-4 mb-2 text-base font-medium">{useCase.title}</h3>
-            <p className="text-sm text-gray-600 dark:text-neutral-400">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               {useCase.description}
             </p>
           </div>

@@ -100,7 +100,7 @@ const MiddleCard = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="relative flex min-h-40 flex-col justify-end overflow-hidden rounded-lg bg-gray-50 p-4 md:p-5 dark:bg-neutral-900">
+    <div className="relative flex min-h-40 flex-col justify-end overflow-hidden rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
       <div className="absolute inset-0 bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px] shadow-xl"></div>
 
       <div className="flex items-center justify-center">
@@ -194,10 +194,10 @@ const Card = (props: {
 }) => {
   const { title, description, icon } = props;
   return (
-    <div className="relative z-10 rounded-lg bg-gray-50 p-4 transition duration-200 hover:bg-transparent md:p-5 dark:bg-neutral-800">
+    <div className="relative z-10 rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
       <div className="flex items-center gap-2">{icon}</div>
       <h3 className="mt-4 mb-2 text-lg font-medium">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <p className="text-gray-600 dark:text-gray-400">{description}</p>
     </div>
   );
 };
