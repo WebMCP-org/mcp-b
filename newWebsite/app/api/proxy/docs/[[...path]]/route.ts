@@ -30,15 +30,24 @@ export async function GET(
     const contentType = response.headers.get('content-type') || '';
     const body = await response.arrayBuffer();
 
+    // Create response with stripped security headers that prevent iframe embedding
+    const headers = new Headers({
+      'Content-Type': contentType,
+      'Cache-Control': 'public, max-age=300, s-maxage=600',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    });
+
+    // Explicitly ensure these headers are NOT set
+    // (they prevent iframe embedding)
+    headers.delete('X-Frame-Options');
+    headers.delete('Content-Security-Policy');
+    headers.set('Content-Security-Policy', '');
+
     return new NextResponse(body, {
       status: response.status,
-      headers: {
-        'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=300, s-maxage=600',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      },
+      headers,
     });
   } catch (error) {
     console.error('[Docs Proxy] Error:', error);
@@ -72,12 +81,19 @@ export async function POST(
     const contentType = response.headers.get('content-type') || '';
     const responseBody = await response.arrayBuffer();
 
+    const headers = new Headers({
+      'Content-Type': contentType,
+      'Access-Control-Allow-Origin': '*',
+    });
+
+    // Strip iframe-blocking headers
+    headers.delete('X-Frame-Options');
+    headers.delete('Content-Security-Policy');
+    headers.set('Content-Security-Policy', '');
+
     return new NextResponse(responseBody, {
       status: response.status,
-      headers: {
-        'Content-Type': contentType,
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers,
     });
   } catch (error) {
     console.error('[Docs Proxy] POST Error:', error);

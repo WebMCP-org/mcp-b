@@ -142,7 +142,7 @@ export function PlaygroundContent() {
                   mobileView === 'chat' ? 'hidden md:flex' : 'flex'
                 )}
               >
-                <WebPreview defaultUrl="/api/proxy/live-tools">
+                <WebPreview defaultUrl="https://docs.mcp-b.ai/live-tool-examples">
                   <WebPreviewNavigation>
                     <WebPreviewUrl />
                   </WebPreviewNavigation>

@@ -30,13 +30,19 @@ export async function GET(request: NextRequest) {
       `<head><base href="${proxyBase}">`
     );
 
+    const headers = new Headers({
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=300, s-maxage=600',
+      'Access-Control-Allow-Origin': '*',
+    });
+
+    // Strip headers that prevent iframe embedding
+    headers.delete('X-Frame-Options');
+    headers.delete('Content-Security-Policy');
+    headers.set('Content-Security-Policy', '');
+
     return new NextResponse(html, {
-      headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'public, max-age=300, s-maxage=600',
-        'Access-Control-Allow-Origin': '*',
-        'Content-Security-Policy': '',
-      },
+      headers,
     });
   } catch (error) {
     console.error('[Live Tools Proxy] Error:', error);
