@@ -1,23 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 
+const execAsync = promisify(exec);
 const DOCS_BASE_URL = 'https://docs.mcp-b.ai';
+
+async function fetchWithCurl(url: string): Promise<string> {
+  try {
+    const { stdout, stderr } = await execAsync(
+      `curl -s -L -H "User-Agent: Mozilla/5.0 (compatible; MCP-B-Playground/1.0)" "${url}"`,
+      { maxBuffer: 10 * 1024 * 1024 } // 10MB buffer
+    );
+
+    if (stderr) {
+      console.warn('[Proxy] curl stderr:', stderr);
+    }
+
+    return stdout;
+  } catch (error) {
+    console.error('[Proxy] curl error:', error);
+    throw error;
+  }
+}
 
 export async function GET(request: NextRequest) {
   try {
-    const response = await fetch(`${DOCS_BASE_URL}/live-tool-examples`, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; MCP-B-Playground/1.0)',
-      },
-    });
-
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: 'Failed to fetch live tools page' },
-        { status: response.status }
-      );
-    }
-
-    let html = await response.text();
+    let html = await fetchWithCurl(`${DOCS_BASE_URL}/live-tool-examples`);
 
     // Get the base URL for the proxy
     const baseUrl = new URL(request.url);

@@ -1,6 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 
+const execAsync = promisify(exec);
 const DOCS_BASE_URL = 'https://docs.mcp-b.ai';
+
+async function fetchWithCurl(url: string): Promise<{ buffer: Buffer; contentType: string; status: number }> {
+  try {
+    // Use curl with -i to include headers in output
+    const { stdout } = await execAsync(
+      `curl -s -i -L -H "User-Agent: Mozilla/5.0 (compatible; MCP-B-Playground/1.0)" "${url}"`,
+      { maxBuffer: 10 * 1024 * 1024, encoding: 'buffer' }
+    );
+
+    // Parse headers and body
+    const output = stdout.toString('binary');
+    const headerEnd = output.indexOf('\r\n\r\n');
+    const headers = output.substring(0, headerEnd);
+    const body = Buffer.from(output.substring(headerEnd + 4), 'binary');
+
+    // Extract status code
+    const statusMatch = headers.match(/HTTP\/[\d.]+\s+(\d+)/);
+    const status = statusMatch ? parseInt(statusMatch[1]) : 200;
+
+    // Extract content-type
+    const contentTypeMatch = headers.match(/content-type:\s*([^\r\n]+)/i);
+    const contentType = contentTypeMatch ? contentTypeMatch[1].trim() : 'application/octet-stream';
+
+    return { buffer: body, contentType, status };
+  } catch (error) {
+    console.error('[Proxy] curl error:', error);
+    throw error;
+  }
+}
 
 export async function GET(
   request: NextRequest,
@@ -14,21 +46,14 @@ export async function GET(
 
     console.log('[Docs Proxy] Proxying:', targetUrl);
 
-    const response = await fetch(targetUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; MCP-B-Playground/1.0)',
-      },
-    });
+    const { buffer, contentType, status } = await fetchWithCurl(targetUrl);
 
-    if (!response.ok) {
+    if (status < 200 || status >= 300) {
       return NextResponse.json(
         { error: 'Failed to fetch from docs site' },
-        { status: response.status }
+        { status }
       );
     }
-
-    const contentType = response.headers.get('content-type') || '';
-    const body = await response.arrayBuffer();
 
     // Create response with stripped security headers that prevent iframe embedding
     const headers = new Headers({
@@ -45,8 +70,8 @@ export async function GET(
     headers.delete('Content-Security-Policy');
     headers.set('Content-Security-Policy', '');
 
-    return new NextResponse(body, {
-      status: response.status,
+    return new NextResponse(buffer, {
+      status,
       headers,
     });
   } catch (error) {
@@ -58,6 +83,41 @@ export async function GET(
   }
 }
 
+async function postWithNode(url: string, body: Buffer, contentType: string): Promise<{ buffer: Buffer; contentType: string; status: number }> {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const client = url.startsWith('https') ? https : http;
+
+    const options = {
+      hostname: urlObj.hostname,
+      port: urlObj.port,
+      path: urlObj.pathname + urlObj.search,
+      method: 'POST',
+      headers: {
+        'Content-Type': contentType,
+        'Content-Length': body.length,
+        'User-Agent': 'Mozilla/5.0 (compatible; MCP-B-Playground/1.0)',
+      },
+    };
+
+    const req = client.request(options, (res) => {
+      const chunks: Buffer[] = [];
+      res.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
+      res.on('end', () => {
+        resolve({
+          buffer: Buffer.concat(chunks),
+          contentType: res.headers['content-type'] || 'application/json',
+          status: res.statusCode || 500,
+        });
+      });
+    });
+
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
@@ -67,19 +127,10 @@ export async function POST(
     const pathString = path ? path.join('/') : '';
     const targetUrl = `${DOCS_BASE_URL}/${pathString}`;
 
-    const body = await request.arrayBuffer();
+    const body = Buffer.from(await request.arrayBuffer());
+    const requestContentType = request.headers.get('content-type') || 'application/json';
 
-    const response = await fetch(targetUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': request.headers.get('content-type') || 'application/json',
-        'User-Agent': 'Mozilla/5.0 (compatible; MCP-B-Playground/1.0)',
-      },
-      body,
-    });
-
-    const contentType = response.headers.get('content-type') || '';
-    const responseBody = await response.arrayBuffer();
+    const { buffer, contentType, status } = await postWithNode(targetUrl, body, requestContentType);
 
     const headers = new Headers({
       'Content-Type': contentType,
@@ -91,8 +142,8 @@ export async function POST(
     headers.delete('Content-Security-Policy');
     headers.set('Content-Security-Policy', '');
 
-    return new NextResponse(responseBody, {
-      status: response.status,
+    return new NextResponse(buffer, {
+      status,
       headers,
     });
   } catch (error) {
