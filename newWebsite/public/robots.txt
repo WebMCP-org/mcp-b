@@ -1,0 +1,4 @@
+Sitemap: https://mcp-b.ai/sitemap.xml
+
+User-agent: *
+Disallow:
