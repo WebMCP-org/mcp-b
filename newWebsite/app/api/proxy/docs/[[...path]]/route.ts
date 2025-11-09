@@ -15,17 +15,33 @@ async function fetchWithCurl(url: string): Promise<{ buffer: Buffer; contentType
       { maxBuffer: 10 * 1024 * 1024, encoding: 'buffer' }
     );
 
-    // Parse headers and body
+    // Parse headers and body - handle redirect chains by finding the LAST set of headers
     const output = stdout.toString('binary');
-    const headerEnd = output.indexOf('\r\n\r\n');
-    const headers = output.substring(0, headerEnd);
-    const body = Buffer.from(output.substring(headerEnd + 4), 'binary');
 
-    // Extract status code
+    // Split by header/body separator to find all HTTP responses
+    const parts = output.split('\r\n\r\n');
+
+    // Work backwards to find the last HTTP response headers
+    let headers = '';
+    let bodyStartIndex = 0;
+
+    for (let i = parts.length - 1; i >= 0; i--) {
+      // Check if this part contains an HTTP status line
+      if (parts[i].match(/^HTTP\/[\d.]+\s+\d+/m)) {
+        headers = parts[i];
+        // Calculate where the body starts (after all previous parts + their separators)
+        bodyStartIndex = parts.slice(0, i + 1).join('\r\n\r\n').length + 4;
+        break;
+      }
+    }
+
+    const body = Buffer.from(output.substring(bodyStartIndex), 'binary');
+
+    // Extract status code from the last HTTP response
     const statusMatch = headers.match(/HTTP\/[\d.]+\s+(\d+)/);
     const status = statusMatch ? parseInt(statusMatch[1]) : 200;
 
-    // Extract content-type
+    // Extract content-type from the last set of headers
     const contentTypeMatch = headers.match(/content-type:\s*([^\r\n]+)/i);
     const contentType = contentTypeMatch ? contentTypeMatch[1].trim() : 'application/octet-stream';
 
