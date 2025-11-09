@@ -4,13 +4,12 @@ import { Container } from "./container";
 import { Badge } from "./badge";
 import { SectionHeading } from "./seciton-heading";
 import { SubHeading } from "./subheading";
-import { CodeBlock as AICodeBlock, CodeBlockCopyButton } from "@/components/ai/code-block";
+import { CodeBlock } from "@/components/ui/code-block";
 import { motion } from "motion/react";
+import { DevopsIcon, GraphIcon } from "@/icons/card-icons";
 
 
 export const CodeExample = () => {
-  const [polyfillTab, setPolyfillTab] = useState<"esm" | "iife">("iife");
-  const [codeTab, setCodeTab] = useState<"vanilla" | "react">("vanilla");
   const [isToolRegistered, setIsToolRegistered] = useState(false);
   const [toolCallCount, setToolCallCount] = useState(0);
 
@@ -146,14 +145,18 @@ function MyComponent() {
   return (
     <Container className="border-divide border-x py-20">
       <div className="flex flex-col items-center px-4 md:px-8">
-        <Badge text="Quick Start" />
+        <Badge text="MCP-B Quick Start" />
         <SectionHeading className="mt-4">
-          Add AI Capabilities in Minutes
+          Expose MCP tools straight from the browser
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-2xl text-center">
-          Include the polyfill and register your tools. No build process, no
-          complex setup.
+          Drop in{" "}
+          <code className="bg-neutral-900 px-1.5 py-0.5 font-mono text-xs text-white">
+            @mcp-b/global
+          </code>
+          , register typed tools, and let the MCP-B extension advertise them to
+          every MCP-compatible assistant—no new servers or auth flows.
         </SubHeading>
 
         {/* Horizontal Code Blocks */}
@@ -165,39 +168,29 @@ function MyComponent() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="mb-4 flex items-center justify-between">
+              <div className="mb-4">
                 <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white">
                   Polyfill webMCP
                 </h3>
-                <div className="inline-flex border border-neutral-800 bg-neutral-900">
-                  <button
-                    onClick={() => setPolyfillTab("iife")}
-                    className={`px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
-                      polyfillTab === "iife"
-                        ? "bg-white text-black"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                  >
-                    IIFE
-                  </button>
-                  <button
-                    onClick={() => setPolyfillTab("esm")}
-                    className={`border-l border-neutral-800 px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
-                      polyfillTab === "esm"
-                        ? "bg-white text-black"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                  >
-                    ESM
-                  </button>
-                </div>
               </div>
-              <AICodeBlock
-                code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
-                language={polyfillTab === "iife" ? "html" : "typescript"}
-              >
-                <CodeBlockCopyButton />
-              </AICodeBlock>
+              <CodeBlock
+                language="html"
+                filename="Add MCP-B to your app"
+                tabs={[
+                  {
+                    name: "IIFE",
+                    code: iifePolyfill,
+                    language: "html",
+                    highlightLines: [3],
+                  },
+                  {
+                    name: "ESM",
+                    code: esmPolyfill,
+                    language: "typescript",
+                    highlightLines: [1],
+                  },
+                ]}
+              />
             </motion.div>
 
             {/* Declare Your Tools */}
@@ -210,34 +203,6 @@ function MyComponent() {
                 <h3 className="text-lg font-semibold text-charcoal-900 dark:text-white">
                   Declare Your Tools
                 </h3>
-                <div className="inline-flex border border-neutral-800 bg-neutral-900">
-                  <button
-                    onClick={() => setCodeTab("vanilla")}
-                    className={`px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
-                      codeTab === "vanilla"
-                        ? "bg-white text-black"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                  >
-                    Vanilla
-                  </button>
-                  <button
-                    onClick={() => setCodeTab("react")}
-                    className={`border-l border-neutral-800 px-3 py-1 text-xs font-medium uppercase tracking-wider transition-all ${
-                      codeTab === "react"
-                        ? "bg-white text-black"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                  >
-                    React
-                  </button>
-                </div>
-              </div>
-              <AICodeBlock
-                code={codeTab === "vanilla" ? vanillaCode : reactCode}
-                language={codeTab === "vanilla" ? "javascript" : "typescript"}
-                showLineNumbers
-              >
                 {isToolRegistered && (
                   <span className="inline-flex items-center gap-1.5 border border-green-800 bg-green-950 px-2 py-0.5 text-xs font-medium text-green-400">
                     <span className="h-1.5 w-1.5 animate-pulse bg-green-500"></span>
@@ -245,8 +210,25 @@ function MyComponent() {
                     {toolCallCount > 0 && ` • ${toolCallCount}`}
                   </span>
                 )}
-                <CodeBlockCopyButton />
-              </AICodeBlock>
+              </div>
+              <CodeBlock
+                language="javascript"
+                filename="Register your first tool"
+                tabs={[
+                  {
+                    name: "Vanilla",
+                    code: vanillaCode,
+                    language: "javascript",
+                    highlightLines: [1, 7],
+                  },
+                  {
+                    name: "React",
+                    code: reactCode,
+                    language: "typescript",
+                    highlightLines: [1, 3],
+                  },
+                ]}
+              />
             </motion.div>
           </div>
         </div>
@@ -259,22 +241,26 @@ function MyComponent() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="border border-neutral-800 bg-neutral-900 p-6">
-              <h4 className="font-semibold text-white">
+            <div className="rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
+              <div className="flex items-center gap-2">
+                <DevopsIcon className="text-brand size-6" />
+              </div>
+              <h4 className="mt-4 mb-2 text-lg font-medium">
                 Framework Agnostic
               </h4>
-              <p className="mt-2 text-sm text-neutral-400">
-                Works with any JavaScript framework or plain HTML. The API is
-                the same everywhere.
+              <p className="text-gray-600 dark:text-gray-400">
+                Vanilla JS, React, server-rendered apps—if it runs in a tab, it can expose MCP tools to any assistant.
               </p>
             </div>
-            <div className="border border-neutral-800 bg-neutral-900 p-6">
-              <h4 className="font-semibold text-white">
-                W3C Standard API
+            <div className="rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
+              <div className="flex items-center gap-2">
+                <GraphIcon className="text-brand size-6" />
+              </div>
+              <h4 className="mt-4 mb-2 text-lg font-medium">
+                Assistant-ready schemas
               </h4>
-              <p className="mt-2 text-neutral-400 text-sm">
-                Built on navigator.modelContext. Standards-based and
-                future-proof.
+              <p className="text-gray-600 dark:text-gray-400">
+                Define inputs with JSON Schema or zod so LLMs know exactly how to call your tool—no prompt engineering required.
               </p>
             </div>
           </div>
@@ -283,8 +269,9 @@ function MyComponent() {
           {isToolRegistered && (
             <div className="mt-6 border border-blue-900 bg-blue-950/50 p-4">
               <p className="text-sm text-blue-100">
-                <strong className="text-white">Try it now:</strong> This tool is live on this page.
-                Open your AI assistant and say:{" "}
+                <strong className="text-white">Try it now:</strong> This tool is
+                live on this page. Open any MCP-capable assistant (Claude
+                Desktop, Cursor, Continue, etc.) and say:{" "}
                 <code className="bg-blue-950 px-1.5 py-0.5 font-mono text-xs text-blue-200">
                   &quot;Use the getPageInfo tool to get the page title&quot;
                 </code>

@@ -30,32 +30,32 @@ export const AgenticIntelligence = () => {
   return (
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center py-16">
-        <Badge text="Our Mission" />
+        <Badge text="Why MCP-B" />
         <SectionHeading className="mt-4">
-          Building the Foundation for Agentic Browsers
+          Everything you need to run MCP in the browser
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg px-2">
-          We're not building another AI product. We're creating the protocol-level primitives that enable the next generation of AI-native web experiences.
+          MCP-B packages the transports, SDKs, and specification work required to expose real product workflows to assistants—using the browser session you already trust.
         </SubHeading>
         <div className="border-divide divide-divide mt-16 grid grid-cols-1 divide-y border-y md:grid-cols-2 md:divide-x">
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <BrainIcon />
-              <CardTitle>W3C Web Standards</CardTitle>
+              <CardTitle>Extension + Tab transports</CardTitle>
             </div>
             <CardDescription>
-              Working with web standards bodies to define the protocols browsers will use to communicate with AI agents. Building tomorrow's standards today.
+              Bridge Claude Desktop, Cursor, or any MCP client directly to the code already running in your tab. No localhost tunnels or custom daemons.
             </CardDescription>
             <LLMModelSelectorSkeleton />
           </Card>
           <Card className="overflow-hidden mask-b-from-80%">
             <div className="flex items-center gap-2">
               <MouseBoxIcon />
-              <CardTitle>UIs for LLMs</CardTitle>
+              <CardTitle>Interfaces built for LLMs</CardTitle>
             </div>
             <CardDescription>
-              Pioneering new patterns for building user interfaces that AI agents can understand and interact with. Creating the design primitives for the agentic web.
+              Document schemas, tool hints, and UI state so assistants know what can be executed—no brittle scraping or heuristics.
             </CardDescription>
             <TextToWorkflowBuilderSkeleton />
           </Card>
@@ -65,10 +65,10 @@ export const AgenticIntelligence = () => {
             <div className="pointer-events-none absolute inset-0 h-full w-full bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-radial-from-10% [background-size:10px_10px]"></div>
             <div className="flex items-center gap-2">
               <NativeIcon />
-              <CardTitle>Browser-Native Primitives</CardTitle>
+              <CardTitle>navigator.modelContext + SDKs</CardTitle>
             </div>
             <CardDescription>
-              Creating the low-level APIs that browsers need to be truly agentic. Working directly with browser vendors on the infrastructure layer that powers AI-native experiences.
+              Polyfills for <code>navigator.modelContext</code>, React hooks, and helpers for exposing tools/resources directly from your existing UI components.
             </CardDescription>
             <NativeToolsIntegrationSkeleton />
           </Card>
@@ -77,28 +77,28 @@ export const AgenticIntelligence = () => {
           <Card>
             <div className="flex items-center gap-2">
               <FingerprintIcon />
-              <CardTitle>Open Source Foundation</CardTitle>
+              <CardTitle>User-scoped security</CardTitle>
             </div>
             <CardDescription>
-              Built in the open with transparent development. Creating standards and primitives that everyone can build on top of, not proprietary walled gardens.
+              Tools execute inside the signed-in tab, inheriting cookies, CSRF protections, and audit trails your team already enforces.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <RealtimeSyncIcon />
-              <CardTitle>Protocol-First Design</CardTitle>
+              <CardTitle>One protocol, many assistants</CardTitle>
             </div>
             <CardDescription>
-              Focused on creating robust, extensible protocols that will stand the test of time. Building the infrastructure layer for the next decade of web experiences.
+              Any MCP client can connect through the extension, so you integrate once and reach every assistant that speaks MCP.
             </CardDescription>
           </Card>
           <Card>
             <div className="flex items-center gap-2">
               <SDKIcon />
-              <CardTitle>Vendor Collaboration</CardTitle>
+              <CardTitle>Ecosystem partnerships</CardTitle>
             </div>
             <CardDescription>
-              Partnering with browser vendors, web standards groups, and the broader ecosystem to ensure our primitives become the foundation others build on.
+              Built alongside browser vendors, enterprise pilots, and the MCP spec community to stay aligned with emerging standards.
             </CardDescription>
           </Card>
         </div>

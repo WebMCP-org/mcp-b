@@ -8,15 +8,6 @@ import {
   WindowIcon,
 } from "@/icons/bento-icons";
 import { DivideX } from "../divide";
-import {
-  AnthropicLogo,
-  LinearLogo,
-  MetaLogo,
-  NotionLogo,
-  OpenAILogo,
-  SlackLogo,
-  SupabaseLogo,
-} from "@/icons/general";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -26,24 +17,27 @@ import { LogoSVG } from "../logo";
 import { IconBlock } from "../common/icon-block";
 
 export const LLMModelSelectorSkeleton = () => {
-  const models = [
+  const toolSources = [
     {
-      name: "Claude 4 Opus",
-      logo: AnthropicLogo,
-      status: "Unavailable",
-      variant: "danger",
-    },
-    {
-      name: "ChatGPT",
-      logo: OpenAILogo,
-      status: "Connected",
+      name: "shop.example.com",
+      logo: WindowIcon,
+      status: "12 tools",
       variant: "success",
+      toolCount: 12,
     },
     {
-      name: "Llama 3.2",
-      logo: MetaLogo,
+      name: "docs.example.com",
+      logo: WindowIcon,
+      status: "8 tools",
+      variant: "success",
+      toolCount: 8,
+    },
+    {
+      name: "analytics.example.com",
+      logo: WindowIcon,
       status: "Waiting",
       variant: "warning",
+      toolCount: 6,
     },
   ];
   return (
@@ -57,10 +51,10 @@ export const LLMModelSelectorSkeleton = () => {
       >
         <div className="flex w-full items-center justify-between p-2">
           <div className="flex items-center gap-2 font-medium">
-            <OpenAILogo />
-            Open AI
+            <WindowIcon className="h-4 w-4" />
+            Shop Site
           </div>
-          <p className="font-mono text-gray-600">GPT 5</p>
+          <p className="font-mono text-xs text-gray-600 dark:text-gray-400">12 tools</p>
         </div>
         <DivideX />
         <div className="m-2 rounded-sm border border-blue-500 bg-blue-50 px-2 py-0.5 text-blue-500 dark:bg-blue-50/10">
@@ -75,17 +69,17 @@ export const LLMModelSelectorSkeleton = () => {
       <div className="mt-12 flex items-center gap-2">
         <IntegrationsLogo />
         <span className="text-charcoal-700 text-sm font-medium dark:text-neutral-200">
-          All Models
+          Tool Sources
         </span>
         <span className="text-charcoal-700 rounded-lg border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200">
-          69,420
+          26 tools
         </span>
       </div>
       <DivideX className="mt-2" />
-      {models.map((model, index) => (
-        <div className="relative" key={model.name + index}>
+      {toolSources.map((source, index) => (
+        <div className="relative" key={source.name + index}>
           <motion.div
-            key={model.name + index}
+            key={source.name + index}
             className="mt-4 flex items-center justify-between gap-2"
             initial={{ clipPath: "inset(0 100% 0 0)", filter: "blur(10px)" }}
             whileInView={{ clipPath: "inset(0 0% 0 0)", filter: "blur(0px)" }}
@@ -97,24 +91,24 @@ export const LLMModelSelectorSkeleton = () => {
             }}
           >
             <div className="flex items-center gap-2">
-              <model.logo className="h-4 w-4 shrink-0" />
+              <source.logo className="h-4 w-4 shrink-0" />
               <span className="text-charcoal-700 text-sm font-medium dark:text-neutral-200">
-                {model.name}
+                {source.name}
               </span>
             </div>
 
             <div
               className={cn(
                 "rounded-sm border px-2 py-0.5 text-xs",
-                model.variant === "success" &&
+                source.variant === "success" &&
                   "border-emerald-500 bg-emerald-50 text-emerald-500 dark:bg-emerald-50/10",
-                model.variant === "warning" &&
+                source.variant === "warning" &&
                   "border-yellow-500 bg-yellow-50 text-yellow-500 dark:bg-yellow-50/10",
-                model.variant === "danger" &&
+                source.variant === "danger" &&
                   "border-red-500 bg-red-50 text-red-500 dark:bg-red-50/10",
               )}
             >
-              {model.status}
+              {source.status}
             </div>
           </motion.div>
           <motion.div
@@ -189,20 +183,19 @@ export const TextToWorkflowBuilderSkeleton = () => {
   const initialChat = [
     {
       role: "user",
-      content: "Hello, how are you?",
+      content: "Can you scroll to the pricing section?",
     },
     {
       role: "assistant",
-      content: "I'm good, thank you! How can I help you today?",
+      content: "I've scrolled to the pricing section for you. Would you like me to get the details?",
     },
     {
       role: "user",
-      content:
-        "I want to create a workflow that will send an email to all my clients",
+      content: "Yes, get the enterprise plan details",
     },
     {
       role: "assistant",
-      content: "Nah, do it yourself.",
+      content: "The enterprise plan includes custom pricing, unlimited tools, dedicated support, and SSO integration.",
     },
   ];
 
@@ -216,12 +209,12 @@ export const TextToWorkflowBuilderSkeleton = () => {
   const INITIAL_DELAY = 200;
   const MESSAGE_DELAY = 400;
   const RANDOM_MESSAGES = [
-    "Do you really think I was gonna answer?",
-    "I'm not a real assistant, I'm just a skeleton",
-    "Meri ek taang nakli hai, mai hockey ka bohot bada khiladi tha. Ek din Uday bhai ko meri kisi baat pe gussa aagaya aur mere hi hockey se meri taang ke do tukde kar diye. Lekin dil ke bohot ache hain, fauran mujhe hospital le gaye aur ye nakli taang lagwayi",
-    "Mimicking chat here, this isn't real.",
-    "Bro stop.",
-    "Main langotiya jeetu ka mara hua yaar bol rha hoon.",
+    "I've highlighted that section for you.",
+    "Let me search the page for that information.",
+    "I can help you navigate to that section.",
+    "I've retrieved the FAQ answer for you.",
+    "The current theme is set to dark mode.",
+    "I've scrolled to the top of the page.",
   ];
 
   const handleSendMessage = () => {
@@ -424,13 +417,13 @@ export const NativeToolsIntegrationSkeleton = () => {
       <motion.div className="relative mx-auto my-12 hidden h-full max-h-70 min-h-80 max-w-[67rem] grid-cols-2 p-4 lg:grid">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-10">
-            <TextIconBlock icon={<WindowIcon />} text="Meeting Summarizer">
+            <TextIconBlock icon={<WindowIcon />} text="Browser Tab">
               <TopSVG className="absolute top-2 -right-84" />
             </TextIconBlock>
-            <TextIconBlock icon={<CodeIcon />} text="Code Reviewer">
+            <TextIconBlock icon={<CodeIcon />} text="Extension Router">
               <MiddleSVG className="absolute top-2 -right-84" />
             </TextIconBlock>
-            <TextIconBlock icon={<PhoneIcon />} text="Customer Support">
+            <TextIconBlock icon={<PhoneIcon />} text="Desktop Client">
               <BottomSVG className="absolute -right-84 bottom-2" />
             </TextIconBlock>
           </div>
@@ -449,19 +442,19 @@ export const NativeToolsIntegrationSkeleton = () => {
               Connected
             </span>
             <div className="absolute inset-x-0 -top-30 flex h-full flex-col items-center">
-              <IconBlock icon={<NotionLogo className="size-6" />} />
+              <IconBlock icon={<WindowIcon className="size-6" />} />
               <VerticalLine />
               <VerticalLine />
-              <IconBlock icon={<LinearLogo className="size-6" />} />
+              <IconBlock icon={<WindowIcon className="size-6" />} />
             </div>
           </div>
           <div className="2 absolute -top-4 right-30 flex h-full flex-col items-center">
-            <IconBlock icon={<SupabaseLogo className="size-6" />} />
+            <IconBlock icon={<WindowIcon className="size-6" />} />
             <VerticalLine />
-            <IconBlock icon={<SlackLogo className="size-6" />} />
+            <IconBlock icon={<WindowIcon className="size-6" />} />
           </div>
           <RightSideSVG />
-          <IconBlock icon={<OpenAILogo className="size-6" />} />
+          <IconBlock icon={<IntegrationsLogo className="size-6" />} />
         </div>
       </motion.div>
     </>

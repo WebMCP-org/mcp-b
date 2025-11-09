@@ -14,43 +14,44 @@ import {
 } from "@/icons/card-icons";
 import { Scale } from "./scale";
 import { motion } from "motion/react";
+import { GlowingEffect } from "./ui/glowing-effect";
 
 export const UseCases = () => {
   const useCases = [
     {
-      title: "E-Commerce",
+      title: "Customer portals",
       description:
-        "Let AI agents browse products, check inventory, and place orders directly from your online store.",
+        "Agents can check orders, issue refunds, and send updates from the exact flows your customers already use.",
       icon: <WalletIcon className="text-brand size-6" />,
     },
     {
-      title: "Project Management",
+      title: "Operations hubs",
       description:
-        "Enable AI to create tasks, update status, and generate reports from your project management tools.",
+        "Expose triage, approvals, and fulfillment steps so assistants can move work forward inside your internal tools.",
       icon: <DevopsIcon className="text-brand size-6" />,
     },
     {
-      title: "Analytics",
+      title: "Analytics & BI",
       description:
-        "Allow AI to query metrics, generate visualizations, and export data from your analytics dashboards.",
+        "Let LLMs query dashboards, export CSVs, or annotate charts without building a separate API surface.",
       icon: <GraphIcon className="text-brand size-6" />,
     },
     {
-      title: "Customer Support",
+      title: "Support workbenches",
       description:
-        "AI agents can access customer data, create tickets, and update support systems in real-time.",
+        "Assistants create tickets, escalate cases, or summarize threads directly inside Zendesk-style consoles.",
       icon: <PhoneIcon className="text-brand size-6" />,
     },
     {
-      title: "Data Operations",
+      title: "Data operations",
       description:
-        "Automate data queries, transformations, and exports across your database and analytics platforms.",
+        "Automate queries, transformations, and exports across your internal data consoles with full provenance.",
       icon: <DatabaseIcon className="text-brand size-6" />,
     },
     {
-      title: "Supply Chain",
+      title: "Supply chain & field",
       description:
-        "Track shipments, update inventory, and manage logistics through AI-powered automation.",
+        "Track shipments, manage inventory, or kick off field workflows using the authenticated browser session.",
       icon: <TruckIcon className="text-brand size-6" />,
     },
   ];
@@ -58,13 +59,13 @@ export const UseCases = () => {
   return (
     <Container className="border-divide relative overflow-hidden border-x px-4 md:px-8">
       <div className="relative flex flex-col items-center py-20">
-        <Badge text="What Gets Built" />
+        <Badge text="Where MCP-B Fits" />
         <SectionHeading className="mt-4">
-          Enabling the Next Generation
+          Let assistants work inside your existing products
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          When you build the right primitives, entire ecosystems emerge. Here are just some of the experiences our infrastructure enables.
+          When your UI is the MCP server, assistants can drive the same flows your team already trusts—using production permissions, not brittle RPA.
         </SubHeading>
 
         <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
@@ -85,12 +86,22 @@ export const UseCases = () => {
                   <Scale />
                 </motion.div>
               )}
-              <div className="relative z-10 rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
-                <div className="flex items-center gap-2">{useCase.icon}</div>
-                <h3 className="mt-4 mb-2 text-lg font-medium">
-                  {useCase.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">{useCase.description}</p>
+              <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3">
+                <GlowingEffect
+                  spread={40}
+                  glow={false}
+                  disabled={false}
+                  proximity={64}
+                  inactiveZone={0.01}
+                  borderWidth={2}
+                />
+                <div className="relative z-10 flex h-full flex-col rounded-lg bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:bg-zinc-950/40">
+                  <div className="flex items-center gap-2">{useCase.icon}</div>
+                  <h3 className="mt-4 mb-2 text-lg font-medium">
+                    {useCase.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">{useCase.description}</p>
+                </div>
               </div>
             </div>
           ))}

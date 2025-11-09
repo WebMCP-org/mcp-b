@@ -21,56 +21,57 @@ import { OpenAILogo, SlackLogo } from "@/icons/general";
 import { IconBlock } from "./common/icon-block";
 import { HorizontalLine } from "./common/horizontal-line";
 import { VerticalLine } from "./common/vertical-line";
+import { GlowingEffect } from "./ui/glowing-effect";
 
 export const Benefits = () => {
   const benefits = [
     {
-      title: "Lightning Fast",
+      title: "Browser-native MCP server",
       description:
-        "Execute tasks in milliseconds instead of 10-20 seconds. Direct API calls eliminate the need for UI parsing and multiple LLM invocations.",
-      icon: <RocketIcon className="text-brand size-6" />,
-    },
-    {
-      title: "No Authentication Hassle",
-      description:
-        "Uses existing browser sessions automatically. No OAuth flows, no API keys to manage, no additional security implementation needed.",
-      icon: <ShieldIcon className="text-brand size-6" />,
-    },
-    {
-      title: "Simple Integration",
-      description:
-        "Add ~50 lines of code to make your website AI-ready. Define your tools once and they work with all MCP-compatible assistants.",
-      icon: <RealtimeSyncIcon className="text-brand size-6" />,
-    },
-    {
-      title: "Browser as MCP Server",
-      description:
-        "Websites can expose tools and resources directly to AI agents through a simple JavaScript API.",
+        "Expose tools and resources directly from your product with ~50 lines of JavaScript via navigator.modelContext.",
       icon: <ScreenCogIcon className="text-brand size-6" />,
     },
     {
-      title: "Secure by Default",
+      title: "Millisecond execution",
       description:
-        "Built on browser security primitives with user consent and transparent audit trails for all operations.",
+        "Assistants call the same APIs your UI already uses—no screen scraping, no multi-step prompt orchestration.",
+      icon: <RocketIcon className="text-brand size-6" />,
+    },
+    {
+      title: "Use existing auth",
+      description:
+        "Sessions, MFA, and CSRF tokens are inherited from the browser, so you never ship new OAuth flows or API keys.",
       icon: <ShieldIcon className="text-brand size-6" />,
     },
     {
-      title: "Standards-Based",
+      title: "Assistant interoperability",
       description:
-        "Implements Anthropic's Model Context Protocol specification for maximum compatibility with AI assistants.",
+        "Integrate once and every MCP-compatible assistant (Claude, Cursor, Continue, etc.) can use your tools through the extension.",
+      icon: <RealtimeSyncIcon className="text-brand size-6" />,
+    },
+    {
+      title: "Typed schemas & resources",
+      description:
+        "Define JSON Schema or zod inputs, stream resources, and document expectations so LLMs call the right thing the first time.",
       icon: <GraphIcon className="text-brand size-6" />,
+    },
+    {
+      title: "Reuse existing UI logic",
+      description:
+        "Wrap the fetches, validations, and business rules you already have instead of rebuilding them in a bot backend.",
+      icon: <ReuseBrainIcon className="text-brand size-6" />,
     },
   ];
   return (
     <Container className="border-divide relative overflow-hidden border-x px-4 py-20 md:px-8">
       <div className="relative flex flex-col items-center">
-        <Badge text="Why Primitives Matter" />
+        <Badge text="Why MCP-B" />
         <SectionHeading className="mt-4">
-          Infrastructure for the Next Era
+          Benefits of a browser-native MCP runtime
         </SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          By building at the protocol level, we create foundational pieces that enable thousands of products to be built on top. That's the power of primitives.
+          MCP-B lets you turn production web apps into assistant-ready surfaces without inventing new infrastructure, auth, or governance.
         </SubHeading>
       </div>
       <div className="mt-20 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -91,7 +92,7 @@ export const Benefits = () => {
 };
 
 const MiddleCard = () => {
-  const texts = ["Meeting created", "Chat history saved", "You talking to me"];
+  const texts = ["Tool registered", "Agent invoked", "Result synced"];
   const [activeText, setActiveText] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -194,10 +195,20 @@ const Card = (props: {
 }) => {
   const { title, description, icon } = props;
   return (
-    <div className="relative z-10 rounded-lg border border-gray-200 bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:border-white/10 dark:bg-zinc-950/40">
-      <div className="flex items-center gap-2">{icon}</div>
-      <h3 className="mt-4 mb-2 text-lg font-medium">{title}</h3>
-      <p className="text-gray-600 dark:text-gray-400">{description}</p>
+    <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3">
+      <GlowingEffect
+        spread={40}
+        glow={false}
+        disabled={false}
+        proximity={64}
+        inactiveZone={0.01}
+        borderWidth={2}
+      />
+      <div className="relative z-10 flex h-full flex-col rounded-lg bg-white/60 backdrop-blur-sm p-4 transition duration-200 hover:bg-transparent md:p-5 dark:bg-zinc-950/40">
+        <div className="flex items-center gap-2">{icon}</div>
+        <h3 className="mt-4 mb-2 text-lg font-medium">{title}</h3>
+        <p className="text-gray-600 dark:text-gray-400">{description}</p>
+      </div>
     </div>
   );
 };

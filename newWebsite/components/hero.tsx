@@ -10,14 +10,14 @@ import Link from "next/link";
 export const Hero = () => {
   return (
     <Container className="border-divide flex flex-col items-center justify-center border-x px-4 pt-10 pb-10 md:pt-32 md:pb-20">
-      <Badge text="Building the Agentic Web" />
+      <Badge text="Model Context Protocol for Browsers" />
       <Heading className="mt-4">
-        Foundational Primitives <br /> for{" "}
-        <span className="text-brand">Agentic Browsers</span>
+        Turn your website into an MCP server <br /> with{" "}
+        <span className="text-brand">MCP-B</span>
       </Heading>
 
       <SubHeading className="mx-auto mt-6 max-w-lg">
-        While others build products, we're building the primitives. Working with web standards bodies and browser vendors to create the foundational layer for AI-native browsers. Building UIs for LLMs, not just interfaces with LLMs.
+        Register tools with <code>navigator.modelContext</code>, reuse the user's existing session, and let the MCP-B Chrome extension expose everything to Claude, Cursor, or any assistant that speaks MCP—no new backend, no brittle UI automation.
       </SubHeading>
 
       <div className="mt-6 flex items-center gap-4">
@@ -29,7 +29,7 @@ export const Hero = () => {
         </Button>
       </div>
       <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-        Open Source • W3C-Aligned • Piloted by JPMorgan & Adobe
+        Open Source • navigator.modelContext polyfill • Extension + Tab transports
       </p>
     </Container>
   );

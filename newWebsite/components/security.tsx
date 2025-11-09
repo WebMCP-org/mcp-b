@@ -19,10 +19,10 @@ export const Security = () => {
       <Container className="border-divide grid grid-cols-1 border-x bg-gray-100 px-8 py-12 md:grid-cols-2 dark:bg-neutral-900">
         <div>
           <SectionHeading className="text-left">
-            Security That Just Works
+            Security that inherits from the browser
           </SectionHeading>
           <SubHeading as="p" className="mt-4 text-left">
-            MCP-B leverages the browser's existing security model including same-origin policy, user consent, and sandboxed execution. All tool calls use your existing browser sessions with no API keys or OAuth flows needed.
+            MCP-B runs alongside your production UI, so every tool call is protected by the same cookies, MFA, and sandbox rules as the tab itself. Nothing new to harden, no tokens leave the user's machine.
           </SubHeading>
           <Button
             className="mt-4 mb-8 inline-block w-full md:w-auto"
@@ -41,7 +41,7 @@ export const Security = () => {
             </div>
             <div>
               <p className="font-medium">Same-Origin Policy</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Built-in browser isolation</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Assistants only touch what your domain already exposes.</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -52,7 +52,7 @@ export const Security = () => {
             </div>
             <div>
               <p className="font-medium">User Consent</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Explicit approval required</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Extensions must be approved before any tool calls occur.</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -63,7 +63,7 @@ export const Security = () => {
             </div>
             <div>
               <p className="font-medium">Transparent Audit</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">All operations logged</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Every tool execution is logged and attributable per user.</p>
             </div>
           </div>
         </div>

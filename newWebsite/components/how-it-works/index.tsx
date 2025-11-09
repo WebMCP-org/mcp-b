@@ -12,6 +12,7 @@ import {
   DeployAndScaleSkeleton,
   DesignYourWorkflowSkeleton,
 } from "./skeletons";
+import { GlowingEffect } from "../ui/glowing-effect";
 
 type Tab = {
   title: string;
@@ -64,42 +65,51 @@ export const HowItWorks = () => {
   return (
     <Container className="border-divide border-x">
       <div className="flex flex-col items-center pt-16">
-        <Badge text="How it works" />
-        <SectionHeading className="mt-4">Three Steps to AI-Ready</SectionHeading>
+        <Badge text="How MCP-B Works" />
+        <SectionHeading className="mt-4">Ship an MCP server in three steps</SectionHeading>
 
         <SubHeading as="p" className="mx-auto mt-6 max-w-lg">
-          Browser-native MCP implementation that works with any framework. No configuration, no separate servers, no new authentication flows.
+          Register tools with <code>navigator.modelContext</code>, let the MCP-B extension discover them, and have assistants call everything through the user's existing browser session. No extra infrastructure required.
         </SubHeading>
         {/* Desktop Tabs */}
         <div className="border-divide divide-divide mt-16 hidden w-full grid-cols-2 divide-x border-t lg:grid">
           <div className="divide-divide divide-y">
             {tabs.map((tab, index) => (
-              <button
-                key={tab.title}
-                className="group relative flex w-full flex-col items-start overflow-hidden px-12 py-8 hover:bg-gray-100 dark:hover:bg-neutral-800"
-                onClick={() => setActiveTab(tab)}
-              >
-                {tab.id === activeTab.id && (
-                  <Canvas activeTab={tab} duration={2500} />
-                )}
-                {tab.id === activeTab.id && <Loader duration={DURATION} />}
-                <div
-                  className={cn(
-                    "text-charcoal-700 relative z-20 flex items-center gap-2 font-medium dark:text-neutral-100",
-                    activeTab.id !== tab.id && "group-hover:text-brand",
-                  )}
+              <div key={tab.title} className="relative">
+                <GlowingEffect
+                  spread={30}
+                  glow={false}
+                  disabled={false}
+                  proximity={48}
+                  inactiveZone={0.1}
+                  borderWidth={1}
+                />
+                <button
+                  className="group relative flex w-full flex-col items-start overflow-hidden px-12 py-8 hover:bg-gray-100 dark:hover:bg-neutral-800"
+                  onClick={() => setActiveTab(tab)}
                 >
-                  <tab.icon className="shrink-0" /> {tab.title}
-                </div>
-                <p
-                  className={cn(
-                    "relative z-20 mt-2 text-left text-sm text-gray-600 dark:text-neutral-300",
-                    activeTab.id === tab.id && "text-charcoal-700",
+                  {tab.id === activeTab.id && (
+                    <Canvas activeTab={tab} duration={2500} />
                   )}
-                >
-                  {tab.description}
-                </p>
-              </button>
+                  {tab.id === activeTab.id && <Loader duration={DURATION} />}
+                  <div
+                    className={cn(
+                      "text-charcoal-700 relative z-20 flex items-center gap-2 font-medium dark:text-neutral-100",
+                      activeTab.id !== tab.id && "group-hover:text-brand",
+                    )}
+                  >
+                    <tab.icon className="shrink-0" /> {tab.title}
+                  </div>
+                  <p
+                    className={cn(
+                      "relative z-20 mt-2 text-left text-sm text-gray-600 dark:text-neutral-300",
+                      activeTab.id === tab.id && "text-charcoal-700",
+                    )}
+                  >
+                    {tab.description}
+                  </p>
+                </button>
+              </div>
             ))}
           </div>
           <div className="relative h-full max-h-[370px] overflow-hidden bg-[radial-gradient(var(--color-dots)_1px,transparent_1px)] mask-r-from-90% mask-l-from-90% mask-radial-from-20% [background-size:10px_10px]">
@@ -122,16 +132,26 @@ export const HowItWorks = () => {
           {tabs.map((tab, index) => (
             <div
               key={tab.title + "mobile"}
-              className="group relative flex w-full flex-col items-start overflow-hidden px-4 py-4 md:px-12 md:py-8"
+              className="relative"
             >
-              <div className="text-charcoal-700 relative z-20 flex items-center gap-2 font-medium dark:text-neutral-100">
-                <tab.icon className="shrink-0" /> {tab.title}
-              </div>
-              <p className="relative z-20 mt-2 text-left text-sm text-gray-600 dark:text-neutral-300">
-                {tab.description}
-              </p>
-              <div className="relative mx-auto h-80 w-full overflow-hidden mask-t-from-90% mask-r-from-90% mask-b-from-90% mask-l-from-90% sm:h-80 sm:w-160">
-                {tab.skeleton}
+              <GlowingEffect
+                spread={30}
+                glow={false}
+                disabled={false}
+                proximity={48}
+                inactiveZone={0.1}
+                borderWidth={1}
+              />
+              <div className="group relative flex w-full flex-col items-start overflow-hidden px-4 py-4 md:px-12 md:py-8">
+                <div className="text-charcoal-700 relative z-20 flex items-center gap-2 font-medium dark:text-neutral-100">
+                  <tab.icon className="shrink-0" /> {tab.title}
+                </div>
+                <p className="relative z-20 mt-2 text-left text-sm text-gray-600 dark:text-neutral-300">
+                  {tab.description}
+                </p>
+                <div className="relative mx-auto h-80 w-full overflow-hidden mask-t-from-90% mask-r-from-90% mask-b-from-90% mask-l-from-90% sm:h-80 sm:w-160">
+                  {tab.skeleton}
+                </div>
               </div>
             </div>
           ))}

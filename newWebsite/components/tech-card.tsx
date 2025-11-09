@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import React, { useRef } from "react";
 import { DivideX } from "./divide";
 import { cn } from "@/lib/utils";
+import { GlowingEffect } from "./ui/glowing-effect";
 
 const springConfig = {
   stiffness: 300,
@@ -76,37 +77,47 @@ export const Card = ({
       <div className="absolute inset-0 z-10 m-auto h-full w-full rounded-lg border border-(--pattern-fg) bg-white bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed dark:bg-neutral-900"></div>
       <div className="absolute inset-x-0 -top-1.5 mx-auto size-3 rounded-full border-2 border-gray-300 bg-white dark:border-neutral-700 dark:bg-neutral-900"></div>
 
-      <motion.div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          translateX,
-          translateY,
-        }}
-        className="shadow-aceternity relative z-20 flex w-54 shrink-0 flex-col items-start rounded-lg bg-white dark:bg-neutral-900"
-      >
-        <div className="flex w-full items-center justify-between p-2 md:p-4">
-          <div className="flex items-center gap-2 font-medium">
-            {logo}
-            {title}
-          </div>
-          <p className="font-mono text-gray-600">{subtitle}</p>
-        </div>
-        <DivideX />
-        <div
-          className={cn(
-            "m-4 rounded-sm border px-2 py-0.5",
-            tone === "default" &&
-              "border-blue-500 bg-blue-50 text-blue-500 dark:bg-blue-50/10 dark:text-blue-500",
-            tone === "danger" &&
-              "border-orange-500 bg-red-50 text-orange-500 dark:bg-red-50/10 dark:text-red-500",
-            tone === "success" &&
-              "border-neutral-500 bg-neutral-50 text-neutral-500 dark:bg-neutral-50/10 dark:text-neutral-500",
-          )}
+      <div className="relative h-full w-full">
+        <GlowingEffect
+          spread={35}
+          glow={false}
+          disabled={false}
+          proximity={60}
+          inactiveZone={0.05}
+          borderWidth={2}
+        />
+        <motion.div
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            translateX,
+            translateY,
+          }}
+          className="shadow-aceternity relative z-20 flex w-54 shrink-0 flex-col items-start rounded-lg bg-white dark:bg-neutral-900"
         >
-          {cta}
-        </div>
-      </motion.div>
+          <div className="flex w-full items-center justify-between p-2 md:p-4">
+            <div className="flex items-center gap-2 font-medium">
+              {logo}
+              {title}
+            </div>
+            <p className="font-mono text-gray-600">{subtitle}</p>
+          </div>
+          <DivideX />
+          <div
+            className={cn(
+              "m-4 rounded-sm border px-2 py-0.5",
+              tone === "default" &&
+                "border-blue-500 bg-blue-50 text-blue-500 dark:bg-blue-50/10 dark:text-blue-500",
+              tone === "danger" &&
+                "border-orange-500 bg-red-50 text-orange-500 dark:bg-red-50/10 dark:text-red-500",
+              tone === "success" &&
+                "border-neutral-500 bg-neutral-50 text-neutral-500 dark:bg-neutral-50/10 dark:text-neutral-500",
+            )}
+          >
+            {cta}
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

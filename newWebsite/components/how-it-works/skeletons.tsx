@@ -2,9 +2,6 @@
 import {
   AnthropicLogo,
   ForkIcon,
-  MetaLogo,
-  OpenAILogo,
-  SlackLogo,
 } from "@/icons/general";
 import { cn } from "@/lib/utils";
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -20,10 +17,10 @@ export const DesignYourWorkflowSkeleton = () => {
     <div className="mt-12 flex flex-col items-center">
       <div className="relative">
         <Card
-          title="Slack"
-          subtitle="#standups"
-          logo={<SlackLogo />}
-          cta="Connected"
+          title="MCP-B"
+          subtitle="Extension Router"
+          logo={<IntegrationsLogo />}
+          cta="Active"
           tone="default"
         />
         <LeftSVG className="absolute top-12 -left-32" />
@@ -33,26 +30,26 @@ export const DesignYourWorkflowSkeleton = () => {
 
       <div className="mt-12 flex flex-row gap-4.5">
         <Card
-          title="Anthropic"
-          subtitle="Claude 4"
-          logo={<AnthropicLogo />}
-          cta="UI Generator"
-          tone="danger"
+          title="shop.example.com"
+          subtitle="E-commerce"
+          logo={<ForkIcon />}
+          cta="12 tools"
+          tone="success"
           delay={0.2}
         />
         <Card
-          title="Meta"
-          subtitle="Llama 2"
-          logo={<MetaLogo />}
-          cta="Text Generator"
-          tone="default"
+          title="docs.example.com"
+          subtitle="Documentation"
+          logo={<ForkIcon />}
+          cta="8 tools"
+          tone="success"
           delay={0.4}
         />
         <Card
-          title="OpenAI"
-          subtitle="GPT-5"
-          logo={<OpenAILogo />}
-          cta="Code Generator"
+          title="analytics.example.com"
+          subtitle="Analytics"
+          logo={<ForkIcon />}
+          cta="6 tools"
           tone="success"
           delay={0.6}
         />
@@ -62,7 +59,7 @@ export const DesignYourWorkflowSkeleton = () => {
 };
 
 export const ConnectYourTooklsSkeleton = () => {
-  const text = `Write the first and second rule of it using Claude and ChatGPT.`;
+  const text = `Scroll to pricing section and get the enterprise plan details.`;
   const [mounted, setMounted] = useState(false);
   const randomWidth = useMemo(() => Math.random() * 100, [mounted]);
 
@@ -80,14 +77,14 @@ export const ConnectYourTooklsSkeleton = () => {
         transition={{ duration: 0.5 }}
         className="relative h-70 w-60 -translate-x-2 rounded-2xl border-t border-gray-300 bg-white p-4 shadow-2xl md:translate-x-0 dark:border-neutral-700 dark:bg-neutral-900"
       >
-        <div className="absolute -top-4 -right-4 flex h-14 w-14 items-center justify-center rounded-lg bg-white shadow-xl">
+        <div className="absolute -top-4 -right-4 flex h-14 w-14 items-center justify-center rounded-lg bg-white shadow-xl dark:bg-neutral-800">
           <Scale />
-          <OpenAILogo className="relative z-20 h-8 w-8" />
+          <AnthropicLogo className="relative z-20 h-8 w-8" />
         </div>
         <div className="mt-12 flex items-center gap-2">
           <IntegrationsLogo />
           <span className="text-charcoal-700 text-sm font-medium dark:text-neutral-200">
-            Tasks
+            AI Request
           </span>
         </div>
         <DivideX className="mt-2" />
@@ -163,35 +160,35 @@ export const ConnectYourTooklsSkeleton = () => {
         <div className="mt-12 flex items-center gap-2">
           <IntegrationsLogo className="dark:text-neutral-200" />
           <span className="text-charcoal-700 text-xs font-medium md:text-sm dark:text-neutral-200">
-            Integrations
+            Tool Sources
           </span>
           <span className="text-charcoal-700 rounded-lg border border-gray-200 bg-gray-50 px-2 py-0.5 text-xs dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200">
-            200
+            26 tools
           </span>
         </div>
         <DivideX className="mt-2" />
         <div className="mt-4 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <OpenAILogo className="h-4 w-4 shrink-0" />
+            <ForkIcon className="h-4 w-4 shrink-0" />
             <span className="text-charcoal-700 text-xs font-medium md:text-sm dark:text-neutral-200">
-              ChatGPT
+              shop.example.com
             </span>
           </div>
 
-          <div className="rounded-sm border border-blue-500 bg-blue-50 px-2 py-0.5 text-xs text-blue-500">
-            Connected
+          <div className="rounded-sm border border-blue-500 bg-blue-50 px-2 py-0.5 text-xs text-blue-500 dark:bg-blue-50/10">
+            12 tools
           </div>
         </div>
         <div className="mt-4 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <AnthropicLogo className="h-4 w-4 shrink-0" />
+            <ForkIcon className="h-4 w-4 shrink-0" />
             <span className="text-charcoal-700 text-xs font-medium md:text-sm dark:text-neutral-200">
-              Claude 4 Opus
+              docs.example.com
             </span>
           </div>
 
-          <div className="rounded-sm border border-blue-500 bg-blue-50 px-2 py-0.5 text-xs text-blue-500">
-            Connected
+          <div className="rounded-sm border border-blue-500 bg-blue-50 px-2 py-0.5 text-xs text-blue-500 dark:bg-blue-50/10">
+            8 tools
           </div>
         </div>
         <div className="mt-2 flex flex-col">

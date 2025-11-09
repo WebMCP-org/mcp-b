@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { Logo } from "./logo";
 import { Container } from "./container";
 import Link from "next/link";
-import { Button } from "./button";
 import { CloseIcon, HamburgerIcon } from "@/icons/general";
+import { ContactHoverButton } from "./contact-button";
 import {
   AnimatePresence,
   motion,
@@ -20,8 +20,8 @@ const items = [
     href: "https://docs.mcp-b.ai/introduction",
   },
   {
-    title: "Playground",
-    href: "/playground",
+    title: "WebMCP Demo",
+    href: "https://mcp-ui.mcp-b.ai",
   },
   {
     title: "About",
@@ -140,14 +140,11 @@ const MobileNav = ({ items }: { items: { title: string; href: string }[] }) => {
                 </Link>
               ))}
               <div className="mt-4 p-4">
-                <Button
+                <ContactHoverButton
+                  fullWidth
                   onClick={() => setIsOpen(false)}
-                  as={Link}
-                  href="https://docs.mcp-b.ai/quickstart"
-                  className="w-full"
-                >
-                  Get Started
-                </Button>
+                  className="w-full justify-center"
+                />
               </div>
             </div>
           </motion.div>
@@ -211,9 +208,7 @@ const DesktopNav = ({
           </svg>
         </Link>
         <ModeToggle />
-        <Button as={Link} href="https://docs.mcp-b.ai/quickstart">
-          Get Started
-        </Button>
+        <ContactHoverButton />
       </div>
     </div>
   );
@@ -285,9 +280,7 @@ const FloatingNav = ({
           </svg>
         </Link>
         <ModeToggle />
-        <Button as={Link} href="https://docs.mcp-b.ai/quickstart">
-          Get Started
-        </Button>
+        <ContactHoverButton />
       </div>
     </motion.div>
   );

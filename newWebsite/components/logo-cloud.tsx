@@ -43,7 +43,7 @@ export const LogoCloud = () => {
   return (
     <Container className="border-divide border-x">
       <h2 className="py-8 text-center font-mono text-sm tracking-tight text-neutral-500 uppercase dark:text-gray-300">
-        Piloted by JPMorgan and Adobe • Built with Industry-Leading Tech
+        Framework Agnostic • Just JavaScript • Works with Legacy & Modern Apps
       </h2>
       <div className="border-divide grid grid-cols-2 border-t md:grid-cols-4">
         {displayedIndices.map((logoIndex, position) => {
@@ -66,7 +66,7 @@ export const LogoCloud = () => {
               <AnimatePresence initial={false} mode="wait">
                 <motion.div
                   key={logoIndex}
-                  className="group flex min-h-32 items-center justify-center p-4 py-10 grayscale"
+                  className="group flex min-h-32 items-center justify-center p-4 py-10"
                   initial={{
                     y: 100,
                     opacity: 0,
