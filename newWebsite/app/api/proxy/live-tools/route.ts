@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const DOCS_BASE_URL = 'https://docs.mcp-b.ai';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const response = await fetch(`${DOCS_BASE_URL}/live-tool-examples`, {
       headers: {
@@ -19,25 +19,27 @@ export async function GET() {
 
     let html = await response.text();
 
-    // Rewrite relative URLs to absolute URLs pointing to the docs site
-    // This ensures all assets (CSS, JS, fonts, images) load from the original domain
-    // Using negative lookahead (?!\/) to only match single forward slashes (relative URLs)
-    // and avoid matching protocol-relative URLs (//)
-    html = html
-      .replace(/src="\/(?!\/)/g, `src="${DOCS_BASE_URL}/`)
-      .replace(/href="\/(?!\/)/g, `href="${DOCS_BASE_URL}/`)
-      .replace(/url\(\/(?!\/)/g, `url(${DOCS_BASE_URL}/`);
+    // Get the base URL for the proxy
+    const baseUrl = new URL(request.url);
+    const proxyBase = `${baseUrl.protocol}//${baseUrl.host}/api/proxy/docs/`;
+
+    // Inject a base tag to make all relative URLs use the proxy
+    // Insert right after the opening <head> tag
+    html = html.replace(
+      /<head>/i,
+      `<head><base href="${proxyBase}">`
+    );
 
     return new NextResponse(html, {
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'public, max-age=300, s-maxage=600',
-        // Remove CSP headers that might interfere
+        'Access-Control-Allow-Origin': '*',
         'Content-Security-Policy': '',
       },
     });
   } catch (error) {
-    console.error('Proxy error:', error);
+    console.error('[Live Tools Proxy] Error:', error);
     return NextResponse.json(
       { error: 'Failed to proxy request' },
       { status: 500 }

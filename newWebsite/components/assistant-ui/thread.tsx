@@ -112,6 +112,7 @@ const ThreadSuggestions: FC = () => {
           prompt={suggestion.prompt}
           method="replace"
           autoSend
+          asChild
         >
           <Button
             variant="secondary"
