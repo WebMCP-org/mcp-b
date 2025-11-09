@@ -8,10 +8,11 @@ The website uses **three different code block implementations**, each optimized 
 
 ### 1. AI Code Block (`components/ai/code-block.tsx`)
 
-**Purpose**: Syntax-highlighted code blocks for AI assistant responses
+**Purpose**: Syntax-highlighted code blocks for AI assistant responses and interactive demos
 
 **Where it's used**:
 - AI Assistant chat interface (`components/assistant-ui/markdown-text.tsx`)
+- Landing page code examples (`components/code-example.tsx`)
 - AI-generated code responses
 - Demo page (`/code-block-demo`)
 
@@ -72,19 +73,33 @@ const mdxComponents = {
 - CodeExample section on landing page
 
 **Key features**:
+- **Uses AI Code Block component** for rendering
 - Tab switching (IIFE/ESM, Vanilla/React)
 - Live tool registration indicator
-- Custom dark theme styling
-- Decorative terminal-style dots
 - Tool call counter
 - Framework-specific examples
+- Automatic line numbers for longer code
 
-**Why it's separate**:
-This component has unique interactive features that don't fit the standard code block pattern:
-- Dynamic content switching between tabs
-- Real-time "LIVE" status indicator when tools register
-- Custom styling matching the landing page design
-- Special header with tool execution count
+**Implementation**:
+Now uses the shared AI CodeBlock component instead of custom SyntaxHighlighter:
+```tsx
+<AICodeBlock
+  code={polyfillTab === "iife" ? iifePolyfill : esmPolyfill}
+  language={polyfillTab === "iife" ? "html" : "typescript"}
+>
+  <CodeBlockCopyButton />
+</AICodeBlock>
+```
+
+The LIVE indicator is preserved as a child element:
+```tsx
+<AICodeBlock code={code} language="javascript" showLineNumbers>
+  {isToolRegistered && (
+    <span className="...LIVE badge...">LIVE • {toolCallCount}</span>
+  )}
+  <CodeBlockCopyButton />
+</AICodeBlock>
+```
 
 ## Integration Points
 
@@ -120,7 +135,7 @@ MDX components are configured to use the general CodeBlock for syntax highlighti
 
 File: `components/code-example.tsx`
 
-Custom implementation with interactive features. **Does not use** the shared code block components.
+**Uses AI Code Block** for all code rendering. Tab switching and LIVE indicators are preserved as wrapper logic around the AI CodeBlock component.
 
 ## When to Use Which Component
 
@@ -129,14 +144,14 @@ Custom implementation with interactive features. **Does not use** the shared cod
 | AI chat responses | `ai/code-block.tsx` | Clean, modern, optimized for AI output |
 | Blog posts | `code-block.tsx` | Glass morphism matches site design |
 | Documentation | `code-block.tsx` | Consistent with blog styling |
-| Landing page demos | `code-example.tsx` | Interactive features, custom styling |
+| Landing page demos | `ai/code-block.tsx` (via `code-example.tsx`) | Shared styling, tab switching preserved |
 | New AI features | `ai/code-block.tsx` | Designed for AI-generated content |
+| Interactive demos | `ai/code-block.tsx` | Extensible with custom children |
 
 ## Styling Philosophy
 
-- **AI Code Block**: Minimalist, professional, theme-aware
-- **General Code Block**: Artistic with glass morphism and backdrop blur
-- **Landing Page**: Bold, dark, terminal-inspired with interactive elements
+- **AI Code Block**: Minimalist, professional, theme-aware (used in AI responses, landing page, interactive demos)
+- **General Code Block**: Artistic with glass morphism and backdrop blur (used in blogs, documentation)
 
 ## Future Considerations
 
@@ -144,7 +159,8 @@ If you need code highlighting in a new context:
 
 1. **For AI-generated content**: Use `ai/code-block.tsx`
 2. **For static content (blogs, docs)**: Use `code-block.tsx`
-3. **For custom interactive demos**: Create a new component or extend `code-example.tsx`
+3. **For interactive demos with tab switching**: Follow the pattern in `code-example.tsx` - use `ai/code-block.tsx` with state management for content switching
+4. **For custom indicators/badges**: Add them as children of `AICodeBlock` component alongside `CodeBlockCopyButton`
 
 ## Dependencies
 
