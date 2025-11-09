@@ -72,12 +72,12 @@ Container for syntax-highlighted code display.
 
 Copy button with automatic clipboard integration.
 
-| Prop       | Type                     | Default | Description                            |
-| ---------- | ------------------------ | ------- | -------------------------------------- |
-| `onCopy`   | `() => void`             | -       | Callback after successful copy         |
-| `onError`  | `(error: Error) => void` | -       | Error handler for copy failure         |
-| `timeout`  | `number`                 | `2000`  | Duration to show success state (ms)    |
-| `...props` | `ComponentProps<Button>` | -       | Spreads to underlying Button component |
+| Prop          | Type                     | Default | Description                            |
+| ------------- | ------------------------ | ------- | -------------------------------------- |
+| `onCopy`      | `() => void`             | -       | Callback after successful copy         |
+| `onCopyError` | `(error: Error) => void` | -       | Error handler for copy failure         |
+| `timeout`     | `number`                 | `2000`  | Duration to show success state (ms)    |
+| `...props`    | `ComponentProps<Button>` | -       | Spreads to underlying Button component |
 
 ### Usage with Vercel AI SDK
 

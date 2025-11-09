@@ -107,15 +107,15 @@ export function CodeBlock({
 
 // Copy button component
 interface CodeBlockCopyButtonProps
-  extends React.ComponentProps<typeof Button> {
+  extends Omit<React.ComponentProps<typeof Button>, 'onError'> {
   onCopy?: () => void;
-  onError?: (error: Error) => void;
+  onCopyError?: (error: Error) => void;
   timeout?: number;
 }
 
 export function CodeBlockCopyButton({
   onCopy,
-  onError,
+  onCopyError,
   timeout = 2000,
   className,
   ...props
@@ -134,10 +134,10 @@ export function CodeBlockCopyButton({
         setCopied(false);
       }, timeout);
     } catch (error) {
-      onError?.(error as Error);
+      onCopyError?.(error as Error);
       console.error("Failed to copy code:", error);
     }
-  }, [code, onCopy, onError, timeout]);
+  }, [code, onCopy, onCopyError, timeout]);
 
   return (
     <Button
