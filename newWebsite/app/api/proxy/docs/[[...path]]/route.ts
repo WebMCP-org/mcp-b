@@ -88,7 +88,8 @@ export async function GET(
     headers.delete('Content-Security-Policy');
     headers.set('Content-Security-Policy', '');
 
-    return new NextResponse(buffer, {
+    // Convert Buffer to Uint8Array for NextResponse compatibility
+    return new NextResponse(new Uint8Array(buffer), {
       status,
       headers,
     });
@@ -160,7 +161,8 @@ export async function POST(
     headers.delete('Content-Security-Policy');
     headers.set('Content-Security-Policy', '');
 
-    return new NextResponse(buffer, {
+    // Convert Buffer to Uint8Array for NextResponse compatibility
+    return new NextResponse(new Uint8Array(buffer), {
       status,
       headers,
     });
