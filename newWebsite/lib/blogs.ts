@@ -2,7 +2,12 @@ import { promises as fs } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
 import React from "react";
-import { CodeBlock, InlineCode } from "@/components/code-block";
+import { CodeBlock, InlineCode as DefaultInlineCode } from "@/components/code-block";
+import { BlogImage } from "@/components/BlogImage";
+import { MDXCodeBlock } from "@/components/MDXCodeBlock";
+import { NumberedList, InlineCode } from "@/components/NumberedList";
+import { GetInvolvedCallout } from "@/components/GetInvolvedCallout";
+import { Store, ExternalLink } from "lucide-react";
 
 /**
  * Blog post frontmatter type definition
@@ -30,6 +35,17 @@ interface MDXCodeProps {
  * Provides syntax highlighting and professional code styling
  */
 const mdxComponents = {
+  // Blog-specific components
+  BlogImage,
+  CodeBlock: MDXCodeBlock, // For explicit <CodeBlock code="..." language="..." /> usage
+  NumberedList,
+  InlineCode,
+  GetInvolvedCallout,
+
+  // Lucide icons
+  Store,
+  ExternalLink,
+
   // Remove default <pre> wrapper to avoid double wrapping
   pre: ({ children }: { children: React.ReactNode }) =>
     React.createElement(React.Fragment, null, children),
@@ -40,7 +56,7 @@ const mdxComponents = {
 
     // Inline code (no className means no language specified)
     if (!className) {
-      return React.createElement(InlineCode, { children });
+      return React.createElement(DefaultInlineCode, { children });
     }
 
     // Code block with syntax highlighting
