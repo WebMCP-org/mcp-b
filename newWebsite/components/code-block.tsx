@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -98,6 +98,13 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const currentTheme = resolvedTheme || theme;
 
   // Extract language from className (MDX format: "language-typescript")
@@ -159,25 +166,31 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       </div>
 
       {/* Syntax highlighted code */}
-      <SyntaxHighlighter
-        language={language}
-        style={currentTheme === 'dark' ? oneDark : oneLight}
-        customStyle={{
-          margin: 0,
-          borderRadius: 0,
-          fontSize: "0.875rem",
-          background: "transparent",
-          padding: "1.25rem",
-        }}
-        codeTagProps={{
-          style: {
-            fontFamily:
-              'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-          },
-        }}
-      >
-        {code}
-      </SyntaxHighlighter>
+      {mounted ? (
+        <SyntaxHighlighter
+          language={language}
+          style={currentTheme === 'dark' ? oneDark : oneLight}
+          customStyle={{
+            margin: 0,
+            borderRadius: 0,
+            fontSize: "0.875rem",
+            background: "transparent",
+            padding: "1.25rem",
+          }}
+          codeTagProps={{
+            style: {
+              fontFamily:
+                'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+            },
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
+      ) : (
+        <pre className="p-5 text-sm font-mono overflow-x-auto">
+          <code>{code}</code>
+        </pre>
+      )}
     </div>
   );
 };
