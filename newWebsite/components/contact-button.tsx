@@ -24,8 +24,6 @@ export const ContactHoverButton = ({
   onClick,
 }: ContactHoverButtonProps) => {
   const [hovered, setHovered] = useState(false);
-  const rainbowGradient =
-    "conic-gradient(from 0deg, #ff6b6b, #f8c266, #5cf4b5, #5cb8ff, #b07bff, #ff6b6b)";
 
   const containerStyles =
     variant === "light"
@@ -41,6 +39,8 @@ export const ContactHoverButton = ({
 
   return (
     <motion.div
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
@@ -49,29 +49,12 @@ export const ContactHoverButton = ({
         className,
       )}
     >
-      <motion.span
-        aria-hidden
-        className="pointer-events-none absolute -inset-[4px] -z-10 rounded-full opacity-0 transition-opacity duration-200"
-        animate={{ rotate: hovered ? 360 : 0, opacity: hovered ? 1 : 0 }}
-        transition={{
-          rotate: { duration: 6, repeat: hovered ? Infinity : 0, ease: "linear" },
-          opacity: { duration: 0.2 },
-        }}
-        style={{
-          border: "2px solid transparent",
-          backgroundImage: `${rainbowGradient}, linear-gradient(${baseBackground}, ${baseBackground})`,
-          backgroundOrigin: "border-box",
-          backgroundClip: "border-box, padding-box",
-        }}
-      />
       <Link
         href={CONTACT_URL}
         target="_blank"
         rel="noreferrer"
         aria-label="Book time on Alex Nahas’ calendar"
         onClick={onClick}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
         className={cn("inline-flex", fullWidth && "w-full justify-center")}
       >
         <HoverBorderGradient
@@ -82,10 +65,23 @@ export const ContactHoverButton = ({
             containerStyles,
           )}
           className={cn(
-            "flex items-center gap-3 rounded-full px-6 py-2 text-sm font-semibold tracking-tight",
+            "relative flex items-center gap-3 overflow-hidden rounded-full px-6 py-2 text-sm font-semibold tracking-tight",
             innerStyles,
           )}
         >
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 w-1/3 min-w-[80px] rounded-full bg-gradient-to-r from-transparent via-white/60 to-transparent dark:via-neutral-200/50"
+            animate={{
+              x: hovered ? ["-120%", "120%"] : "-130%",
+              opacity: hovered ? 1 : 0,
+            }}
+            transition={{
+              duration: hovered ? 1.4 : 0.2,
+              ease: "easeInOut",
+              repeat: hovered ? Infinity : 0,
+            }}
+          />
           <span className="tracking-tight">Contact Me</span>
           <ArrowUpRight className="size-4" />
         </HoverBorderGradient>
